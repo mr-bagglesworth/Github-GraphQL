@@ -1,15 +1,20 @@
 // React
 import React from "react";
 
-// Apollo
+// authorisation / login details
+import { login } from "../config/githubLogin";
+import { username, password } from "../config/config";
+
+// apollo
 import { ApolloProvider } from "react-apollo";
 import ApolloClient, { createNetworkInterface } from "apollo-client";
+// trying to update to apollo 2.0+
+// - doesn't like it, trouble getting authentication to work correctly
+// import { createHttpLink, HttpLink } from "apollo-link-http";
+// import { setContext } from "apollo-link-context";
+// import { InMemoryCache } from "apollo-cache-inmemory";
 
-// Auth
-import { login } from "./githubLogin";
-import { username, password } from "./config";
-
-// App.Components
+// Components
 import Search from "./Search";
 import Repository from "./Repository";
 
@@ -21,6 +26,7 @@ const networkInterface = createNetworkInterface(
   "https://api.github.com/graphql"
 );
 
+// add login token
 networkInterface.use([
   {
     applyMiddleware(req, next) {
@@ -38,6 +44,29 @@ networkInterface.use([
 const client = new ApolloClient({
   networkInterface
 });
+// console.log(client);
+
+// new version
+// const httpLink = createHttpLink({
+//   uri: "https://api.github.com/graphql"
+// });
+// const middlewareLink = setContext(() => ({
+//   headers: {
+//     authorization: `Bearer ${TOKEN}` || null
+//   }
+// }));
+
+// const link = middlewareLink.concat(httpLink);
+
+// const client = new ApolloClient({
+//   link: new HttpLink({ uri: link })
+// });
+// console.log(client);
+
+// const client = new ApolloClient({
+//   link: new HttpLink({ uri: "https://api.github.com/graphql" }),
+//   cache: new InMemoryCache()
+// });
 
 // App
 export default class App extends React.Component {
@@ -73,7 +102,11 @@ export default class App extends React.Component {
   render() {
     // Log in state
     if (!this.state.login) {
-      return <p>Please login to Github with your details in config.js...</p>;
+      return (
+        <div className="container">
+          <p>Please enter your details in config.js to login to Github...</p>
+        </div>
+      );
     }
 
     // render components based on state:

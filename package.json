@@ -2,24 +2,43 @@
   "name": "GraphqlTest",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "^1.0.11"
-  },
-  "dependencies": {
-    "apollo-client": "^1.9.1",
-    "base-64": "^0.1.0",
-    "graphql-tag": "^2.4.2",
-    "react": "^15.6.1",
-    "react-apollo": "^1.4.14",
-    "react-dom": "^15.6.1"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest --watch --noStackTrace",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "./node_modules/react-scripts/config/eslint.js"
-  }
+  "dependencies": {
+    "apollo-boost": "^0.3.1",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^1.9.1",
+    "apollo-link-context": "^1.0.15",
+    "apollo-link-http": "^1.5.12",
+    "base-64": "^0.1.0",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.4.2",
+    "react": "next",
+    "react-dom": "next",
+    "react-apollo": "^1.4.16",
+    "styled-components": "^4.1.3"
+  },
+  "devDependencies": {
+    "jest": "23.6.0",
+    "react-scripts": "^2.1.8",
+    "react-testing-library": "^5.4.4"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

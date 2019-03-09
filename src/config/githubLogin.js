@@ -6,17 +6,6 @@ const config = {
   GITHUB_CLIENT_SECRET: "8f77dcfd6a807cff38ac558400c859f240806071"
 };
 
-// - my personal app details are as follows:
-// - called GraphQL Test - an oAuth application
-// Client ID
-// f45c78716cd39cafc47f
-// Client Secret
-// 370d55cc54d7c88b91633565f2394495365d5802
-// const config = {
-//   GITHUB_CLIENT_ID: "f45c78716cd39cafc47f",
-//   GITHUB_CLIENT_SECRET: "370d55cc54d7c88b91633565f2394495365d5802"
-// };
-
 const AUTH_URL_PATH = "https://api.github.com/authorizations";
 
 export function login(name, pwd) {
