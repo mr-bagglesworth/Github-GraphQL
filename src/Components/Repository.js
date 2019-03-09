@@ -1,15 +1,20 @@
 // React
 import React from "react";
 
+// styles
+import { BasicRepo } from "./styles/containers";
+// LargeRepo
 // GraphQL
 import gql from "graphql-tag";
 import { Query, graphql } from "react-apollo";
+import { dateFormat } from "../utils/utils";
 
 // 1. search individual repository once it is selected
 // - retrieve more info that the list or repos doesn't display
 const GetRepositoryInfoQuery = gql`
   query GetRepositoryIssues($name: String!, $login: String!) {
     repositoryOwner(login: $login) {
+      avatarUrl
       repository(name: $name) {
         name
         description
@@ -88,8 +93,37 @@ class Repository extends React.Component {
     watchers: 0
   };
 
-  componentDidUpdate() {
-    console.log(this.props.data);
+  // componentDidUpdate() {
+  //   console.log(this.props.data);
+  // const {
+  //   description,
+  //   url,
+  //   sshUrl,
+  //   createdAt,
+  //   updatedAt,
+  //   primaryLanguage,
+  //   stargazers,
+  //   watchers
+  // } = this.props.data.repositoryOwner.repository;
+  // // should only log once, when the data has been retrieved
+  // // console.log(primaryLanguage);
+  // this.setState({
+  //   login: this.props.login,
+  //   name: this.props.name,
+  // description,
+  // url,
+  // sshUrl,
+  // createdAt,
+  // updatedAt,
+  // primaryLanguage: primaryLanguage.name,
+  // color: primaryLanguage.color,
+  //   stargazers: stargazers.totalCount,
+  //   watchers: watchers.totalCount
+  // });
+  // }
+
+  // https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
+  componentWillReceiveProps(newProps) {
     const {
       description,
       url,
@@ -99,17 +133,20 @@ class Repository extends React.Component {
       primaryLanguage,
       stargazers,
       watchers
-    } = this.props.data.repositoryOwner.repository;
-    // should only log once, when the data has been retrieved
-    // console.log(primaryLanguage);
+    } = newProps.data.repositoryOwner.repository;
+
+    const { avatarUrl } = newProps.data.repositoryOwner;
+
+    // states;
     this.setState({
       login: this.props.login,
       name: this.props.name,
+      avatarUrl,
       description,
       url,
       sshUrl,
-      createdAt,
-      updatedAt,
+      createdAt: dateFormat(createdAt),
+      updatedAt: dateFormat(updatedAt),
       primaryLanguage: primaryLanguage.name,
       color: primaryLanguage.color,
       stargazers: stargazers.totalCount,
@@ -117,32 +154,39 @@ class Repository extends React.Component {
     });
   }
 
-  // https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
-  // componentWillReceiveProps(newProps) {
-  // console.log(newProps.data);
-  // DRY
-  // const repo = newProps.data.repositoryOwner.repository;
-
-  // states
-  // this.setState({
-  //   login: this.props.login,
-  //   name: this.props.name,
-  //   stargazers: repo.stargazers.totalCount,
-  //   watchers: repo.watchers.totalCount
-  // });
-  // }
-
   render() {
-    return (
-      <div>
-        <p>render and individual repository once it has been selected...</p>
-        <h2>
-          {this.state.login}/{this.state.name}
-        </h2>
+    const showRepo = this.props.loading ? (
+      `Loading repository...`
+    ) : (
+      <BasicRepo color={this.state.color}>
+        <div>
+          <img src={this.state.avatarUrl} alt={this.state.name} />
+        </div>
         <ul>
+          <li>
+            <h2>
+              {this.state.login}/{this.state.name}
+            </h2>
+          </li>
+          <li>{this.state.description}</li>
+          <li>
+            <a href={this.state.url}>Link to repo</a>
+          </li>
+          <li>Created: {this.state.createdAt}</li>
+          <li>Updated: {this.state.updatedAt}</li>
+          <li>
+            main language: {this.state.primaryLanguage}
+            <span className="dot" />
+          </li>
           <li>stargazers: {this.state.stargazers.toLocaleString()}</li>
           <li>watchers: {this.state.watchers.toLocaleString()}</li>
         </ul>
+      </BasicRepo>
+    );
+    return (
+      <div className="container">
+        <p>render and individual repository once it has been selected...</p>
+        {showRepo}
       </div>
     );
   }
@@ -150,3 +194,4 @@ class Repository extends React.Component {
 
 const RepositoryWithInfo = withInfo(Repository);
 export default RepositoryWithInfo;
+// export default Repository;

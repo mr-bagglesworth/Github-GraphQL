@@ -9,12 +9,19 @@ import React from "react";
 // allow the user to enter their search terms here
 // - autocomplete for name search
 // - dropdown with repo list after user entered name
+
+// this should be a class component
+// - keep state
+// - affect state in app.js, which triggers api calls, and populates components:
+// - Repository
+// - UserDetails
+// - UserRepos
 const Search = props => {
   return (
-    <div>
-      <h1>GraphQL Test</h1>
-      <p>Trying out the Github GraphQL API for the first time</p>
-      <div>
+    <div className="container">
+      <h1>Github GraphQL API</h1>
+      <p>Search Github users and their repositories with GraphQL API</p>
+      <form>
         <div>
           <label htmlFor="username">Username</label>
           <input id="username" type="text" />
@@ -28,7 +35,7 @@ const Search = props => {
           <label htmlFor="userdetails">Get User's Repositories</label>
           <input type="radio" name="repodetails" id="repodetails" />
         </div>
-      </div>
+      </form>
     </div>
   );
 };
