@@ -3,7 +3,7 @@ import React from "react";
 
 // styles
 import { BasicRepo } from "./styles/containers";
-// LargeRepo
+
 // GraphQL
 import gql from "graphql-tag";
 import { Query, graphql } from "react-apollo";
@@ -137,7 +137,6 @@ class Repository extends React.Component {
 
     const { avatarUrl } = newProps.data.repositoryOwner;
 
-    // states;
     this.setState({
       login: this.props.login,
       name: this.props.name,

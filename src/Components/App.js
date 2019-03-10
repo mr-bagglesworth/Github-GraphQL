@@ -16,6 +16,8 @@ import ApolloClient, { createNetworkInterface } from "apollo-client";
 
 // Components
 import Search from "./Search";
+import UserDetails from "./UserDetails";
+import RepoList from "./RepoList";
 import Repository from "./Repository";
 
 // Global.Auth
@@ -72,10 +74,10 @@ const client = new ApolloClient({
 export default class App extends React.Component {
   state = {
     login: false,
+    username: "", //"mr-bagglesworth"// populate on user click from suggestions. Breaks if username not valid
+    searchType: "userdetails", //"userdetails" // populate on radio button click, this is the default, alternate = repodetails
     suggestions: [], // populate on type ahead
-    username: "mr-bagglesworth", // populate on user click from suggestions. Breaks if username not valid
-    searchType: "userdetails", // populate on radio button click, this is the default, alternate = repodetails
-    selectedRepo: "Beginner-Sass-Workshop" // populate on user click of results item, triggers api call
+    selectedRepo: "" //"Beginner-Sass-Workshop" // populate on user click of results item, triggers api call
   };
 
   componentDidMount() {
@@ -89,15 +91,36 @@ export default class App extends React.Component {
       this.setState({ login: true });
     });
   }
+  // componentDidUpdate(prevProps, newProps) {
+  //   console.log("app update");
+  // }
 
   routeForRepository(login, name) {
     return {
       title: `${login}/${name}`,
-      component: Repository,
+      // component: Repository,
       login,
       name
     };
   }
+
+  // converts state into a variable for use in graphql query
+  // - gets passed in as props.data.variables
+  routeForUser(username) {
+    // console.log("user route in app.js ", username);
+    return {
+      login: username
+    };
+  }
+
+  // form submit, 2 options:
+  // 1. user details
+  // 2. user's repos
+  formSubmit = formDetails => {
+    // console.log(formDetails); // should get the state from Search.js
+    const { username, searchType } = formDetails;
+    this.setState({ username, searchType });
+  };
 
   render() {
     // Log in state
@@ -105,22 +128,45 @@ export default class App extends React.Component {
       return (
         <div className="container">
           <p>Please enter your details in config.js to login to Github...</p>
+          <p>...Either that or your internet is down</p>
         </div>
       );
     }
 
     // render components based on state:
-    // - suggestions empty, show search
+    // - username && searchType === "userdetails" && !selectedRepo
+    // UserDetails.js
+
+    // - username && searchType === "repodetails" && !selectedRepo
+    // RepoList.js
+
+    // - username && selectedRepo
+    // Repository.js
+    const { username, searchType, selectedRepo } = this.state;
+
+    // console.log(username);
+
     return this.state.login ? (
       <ApolloProvider client={client}>
         <div>
-          <Search />
-          <Repository
-            {...this.routeForRepository(
-              this.state.username,
-              this.state.selectedRepo
-            )}
-          />
+          <Search {...this.state} formSubmit={this.formSubmit} />
+
+          {username && searchType === "userdetails" && !selectedRepo && (
+            <UserDetails {...this.routeForUser(this.state.username)} />
+          )}
+
+          {username && searchType === "repodetails" && !selectedRepo && (
+            <RepoList {...this.state} />
+          )}
+
+          {username && selectedRepo && (
+            <Repository
+              {...this.routeForRepository(
+                this.state.username,
+                this.state.selectedRepo
+              )}
+            />
+          )}
         </div>
       </ApolloProvider>
     ) : (

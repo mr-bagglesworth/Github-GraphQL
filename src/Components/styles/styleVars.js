@@ -5,7 +5,9 @@ const styleVars = {
     off_white: "#eee",
     lightGrey: "#f7f7f7",
     midGrey: "#d8d8d8",
+    grey: "grey",
     blue: "#0348a3",
+    lightBlue: "#0469ee",
     yellow: "#fcbc00"
   },
   spacing: {
@@ -25,6 +27,9 @@ const styleVars = {
   fontWeight: {
     light: "400",
     med: "600"
+  },
+  fontName: {
+    main: '"Signika Negative", sans-serif'
   },
   boxShadow: {
     out: "-0.125rem 0.25rem 1.5rem rgba(0, 0, 0, 0.25)",
