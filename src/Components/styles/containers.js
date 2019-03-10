@@ -2,8 +2,11 @@
 import styled from "styled-components";
 import styleVars from "./styleVars";
 
-const { colors, spacing, fontSize, fontWeight, boxShadow, border } = styleVars;
+const { colors, spacing, boxShadow, border } = styleVars;
 
+// not basic repo though
+// - basic repo will be one column, and will not change depending upon size
+// - think verkstedt tech test
 const BasicRepo = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,6 +64,7 @@ const BasicRepo = styled.div`
     background-color: ${props => (props.color ? props.color : "white")};
   }
 `;
+
 export { BasicRepo };
 
 // .repo {

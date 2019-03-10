@@ -1,9 +1,12 @@
+// import client id and secret from config file
+import { clientId, clientSecret } from "../config/config";
+
 const base64 = require("base-64");
 
 // these need to be replaced with my credentials (I think...)
 const config = {
-  GITHUB_CLIENT_ID: "e0b1671ff764de482212",
-  GITHUB_CLIENT_SECRET: "8f77dcfd6a807cff38ac558400c859f240806071"
+  GITHUB_CLIENT_ID: clientId,
+  GITHUB_CLIENT_SECRET: clientSecret
 };
 
 const AUTH_URL_PATH = "https://api.github.com/authorizations";
