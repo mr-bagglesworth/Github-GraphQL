@@ -11,6 +11,9 @@ An example of using Github GraphQL API with Apollo React. An experiment with mak
   `export const password = "your-password";`
 - `npm start` to view the app locally at [http://localhost:3000/](http://localhost:3000/)
 
+generate access token for command line:
+https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
+
 ### Using this app:
 
 Runnable Queries Include:
