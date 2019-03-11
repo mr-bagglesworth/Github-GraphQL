@@ -6,7 +6,7 @@ import { BasicRepo } from "./styles/containers";
 
 // GraphQL
 import gql from "graphql-tag";
-import { Query, graphql } from "react-apollo";
+import { graphql } from "react-apollo"; //Query,
 import { dateFormat } from "../utils/utils";
 
 // 1. search individual repository once it is selected

@@ -1,14 +1,15 @@
 import React from "react";
 
 // GraphQL
+// - pairs a query with a component
+import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { graphql } from "react-apollo";
+
+// utils
 import { dateFormat } from "../utils/utils";
 
-// graphql - pairs a query with a component
-
 // create username query
-const UsernameQuery = gql`
+const USER_QUERY = gql`
   query UsernameQuery($login: String!) {
     user(login: $login) {
       avatarUrl
@@ -31,7 +32,8 @@ const UsernameQuery = gql`
       }
       login
       name
-      pinnedRepositories(first: 10) {
+      pinnedRepositories(first: 100) {
+        totalCount
         edges {
           node {
             name
@@ -40,7 +42,8 @@ const UsernameQuery = gql`
           }
         }
       }
-      repositories(first: 10) {
+      repositories(first: 100) {
+        totalCount
         edges {
           node {
             name
@@ -50,132 +53,88 @@ const UsernameQuery = gql`
         }
       }
       url
+      websiteUrl
     }
   }
 `;
 
-const addUserInfo = graphql(UsernameQuery, {
-  props: ({ data }) => {
-    // 2nd search gets this far, then crashes
-    // - this logs twice per search:
-    // 1st time no user property, 2nd time has user property
+const UserDetails = ({ login }) => (
+  <Query query={USER_QUERY} variables={{ login }}>
+    {({ loading, error, data }) => {
+      // return loading and error first
+      if (loading)
+        return <div className="container">Loading user details...</div>;
+      if (error) return <div className="container">Username not found</div>;
 
-    console.log(data);
-    // loading state
-    if (data.loading) {
-      return { loading: true };
-    }
-    // error state
-    if (data.error) {
-      // console.error(data.error);
-    }
-    // OK state
-    return { data };
-  }
-});
+      // console.log(data);
+      const {
+        avatarUrl,
+        bio,
+        createdAt,
+        email,
+        login,
+        name,
+        url,
+        websiteUrl,
+        followers,
+        following,
+        repositories,
+        pinnedRepositories
+      } = data.user;
 
-// notes on problems
-// - breaks on 2nd search - button click
-// - can't detect any new props in componentWillReceiveProps
-// - changing username state in dev tools, then submitting doesn't fix it
-// --  would suggest that changing app state onChange won't help either
+      // console.log(
+      //   followers,
+      //   following,
+      //   repositories,
+      //   pinnedRepositories,
+      //   websiteUrl
+      // );
 
-// - error can't read property 'user' of undefined would suggest the username
-// ...isn't getting read before the UserDetails component renders
-// -- it is getting read in route for user, however
-
-class UserDetails extends React.Component {
-  state = {
-    loading: true,
-    username: this.props.username
-  };
-
-  // this happens last
-  // - perhaps a reset here will make things work?
-  componentDidUpdate(prevProps) {
-    console.log("prev ", prevProps, "new ", this.props);
-    // (this.props.data.variables.username !== prevProps.data.variables.username)
-    // if (this.props.login !== prevProps.login) {
-    // this.setState({ loading: false });
-    // console.log("componentDidUpdate", this.props.loading, prevProps.loading);
-    // }
-  }
-
-  // can't get user of undefined
-  // - on 2nd search, 1st search is fine
-  componentWillReceiveProps(newProps) {
-    // console.log("this props", this.props.login);
-    // console.log("new props", newProps.data.user.login);
-
-    // if (this.props.login !== newProps.data.user.login) {
-    const {
-      avatarUrl,
-      bio,
-      createdAt,
-      email,
-      login,
-      name,
-      url,
-      followers,
-      following,
-      repositories,
-      pinnedRepositories
-    } = newProps.data.user;
-
-    // const { avatarUrl } = newProps.data.repositoryOwner;
-
-    this.setState({
-      avatarUrl,
-      bio,
-      createdAt: dateFormat(createdAt),
-      email,
-      login,
-      name,
-      url
-    });
-    // }
-  }
-
-  render() {
-    // as with addUserInfo, this logs twice
-    // - 1st time true
-    // - 2nd time undefined
-    // console.log("loading ", this.props.loading);
-
-    const showRepo =
-      this.props.loading && this.state.loading ? (
-        `Loading user details...`
-      ) : (
-        <div>
+      return (
+        <div className="container">
           <div>
-            <img src={this.state.avatarUrl} alt={this.state.name} />
+            <img src={avatarUrl} alt={name} />
           </div>
           <ul>
             <li>
-              <h2>{this.state.name}</h2>
-              <p>- {this.state.login}</p>
+              <h2>
+                <a href={url}>{name}</a>
+              </h2>
+              <p>- {login}</p>
             </li>
-            {this.state.bio && <li>{this.state.bio}</li>}
-            {this.state.email && <li>{this.state.email}</li>}
-            <li>Created account on: {this.state.createdAt}</li>
+            {bio && <li>{bio}</li>}
+            <li>Created account on: {dateFormat(createdAt)}</li>
+            {(followers.totalCount > 0 || following.totalCount > 0) && (
+              <li>
+                {followers.totalCount > 0 &&
+                  `${followers.totalCount} followers`}
+                {following.totalCount > 0 &&
+                  ` ${following.totalCount} following`}
+              </li>
+            )}
+            {(repositories.totalCount > 0 ||
+              pinnedRepositories.totalCount > 0) && (
+              <li>
+                {repositories.totalCount > 0 &&
+                  `${repositories.totalCount} repositories`}
+                {pinnedRepositories.totalCount > 0 &&
+                  ` ${pinnedRepositories.totalCount} pinned repositories`}
+              </li>
+            )}
+            {email && <li>Contact this user on: {email}</li>}
+            {websiteUrl && (
+              <li>
+                <a href={websiteUrl}>User's personal website</a>
+              </li>
+            )}
             <li>
-              <a href={this.state.url}>{this.state.url}</a>
+              <a href={url}>Link to Profile ></a>
             </li>
           </ul>
         </div>
       );
-    return <div className="container">{showRepo}</div>;
-  }
-}
+    }}
+  </Query>
+);
 
-// bind the graphql query to the component
-const UserWithInfo = addUserInfo(UserDetails);
-export default UserWithInfo;
-
-// const UserDetails = (props, username) => {
-//   console.log("user details ", props, username);
-//   // const { username } = props;
-//   // console.log(username, props);
-//   return <div> This is the user details component</div>;
-// };
-// export default UserDetails;
+export default UserDetails;

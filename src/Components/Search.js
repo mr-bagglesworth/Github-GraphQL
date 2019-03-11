@@ -1,24 +1,27 @@
 // React
 import React from "react";
 
+// github username regex
+// - doesn't seem to work, so uninstalled. Left as a temporary reference
+// import githubUsernameRegex from "github-username-regex";
+
 // styles
 import { BasicForm, CustomRadio, FormButton } from "./styles/forms";
 
-// this component needs to trigger state changes in App.js:
+// this component triggers state changes in App.js:
 // - username
 // - suggestions
 // - userdetails or repodetails
 
-// allow the user to enter their search terms here
-// - autocomplete for name search
-// - dropdown with repo list after user entered name
-
-// this should be a class component
-// - keep state
-// - affect state in app.js, which triggers api calls, and populates components:
+// this then triggers api calls, and populates components:
 // - Repository
 // - UserDetails
 // - UserRepos
+
+// users enters their search terms in input field
+// - autocomplete for name search (ideally)
+// --- Might have to search by username onChange, rather than full list of github usernames, however
+// - dropdown with repo list after user entered name
 
 export default class Search extends React.Component {
   state = {
@@ -38,16 +41,15 @@ export default class Search extends React.Component {
     this.setState({ searchType: e.target.id });
   };
 
-  // before an autocomplete, use a button once full details are entered
-  // - pass in function from props, which triggers api calls from app component
-  // - api calls trigger display of different components:
+  // search button to search by:
   // 1. user details
   // 2. user's repos
   // -- if a user's repo is clicked, that triggers the Repository.js component
   handleSearchSubmit = e => {
     e.preventDefault();
     const { username } = this.state;
-    // assuming name in state is a valie github username...
+    // UserDetails component errors if the username isn't found
+    // - githubusername regex didn't work too well on first go
     if (username.length > 2) {
       this.props.formSubmit(this.state);
     } else {
@@ -56,7 +58,6 @@ export default class Search extends React.Component {
   };
 
   render() {
-    // console.log(this.props);
     return (
       <div className="container">
         <h1>Github GraphQL API</h1>
