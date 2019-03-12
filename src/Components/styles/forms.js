@@ -20,16 +20,42 @@ const BasicForm = styled.form`
     flex-direction: column;
     margin-bottom: ${spacing.large};
   }
+  // radio and submit buttons
   > div:nth-child(2) {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    label[for="userdetails"] {
+    // wrap at wider widths
+    @media screen and (min-width: 40rem) {
+      flex-direction: row;
+      align-items: center;
+    }
+    // radio containers
+    label {
       margin-left: 0;
+      margin-bottom: ${spacing.med};
+      @media screen and (min-width: 30rem) {
+        &[for="repodetails"] {
+          margin-left: ${spacing.large};
+          margin-bottom: 0;
+        }
+      }
     }
     // radio button container
     > div:nth-child(1) {
       display: flex;
+      flex-direction: column;
+      margin-bottom: ${spacing.large};
+      @media screen and (min-width: 30rem) {
+        flex-direction: row;
+      }
+      @media screen and (min-width: 40rem) {
+        margin-bottom: 0;
+      }
+    }
+    // submit button container
+    > div:nth-child(2) {
+      align-self: flex-end;
     }
   }
   input[type="text"] {
@@ -97,7 +123,7 @@ const CustomRadio = styled.label`
 const FormButton = styled.input`
   cursor: pointer;
   font-family: ${fontName.main};
-  font-size: ${fontSize.med};
+  font-size: ${fontSize.small};
   padding: ${spacing.med} ${spacing.large};
   background-color: ${colors.blue};
   color: ${colors.white};
@@ -108,6 +134,9 @@ const FormButton = styled.input`
   &:focus {
     outline: none;
     background-color: ${colors.lightBlue};
+  }
+  @media screen and (min-width: 35rem) {
+    font-size: ${fontSize.med};
   }
 `;
 

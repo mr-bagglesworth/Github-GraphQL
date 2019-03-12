@@ -5,7 +5,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --watch --noStackTrace",
+    "test": "jest --watch --silent",
+    "test:coverage": "jest --silent --coverage",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -29,9 +30,7 @@
   "jest": {
     "verbose": true,
     "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
+      "src/**/*.js"
     ]
   },
   "browserslist": [

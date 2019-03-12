@@ -1,41 +1,38 @@
+[![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
+
 # Github GraphQL
+A first foray into using Github GraphQL API with React Apollo
 
-An example of using Github GraphQL API with Apollo React. An experiment with making GraphQL queries in React.
-
-## To get running:
-
+## To get running locally:
 - clone the repository
 - `npm install`
-- create a **config.js** file in the **src** folder with your github username and password in:
-  `export const username = "your-username";`
-  `export const password = "your-password";`
+- go to your github account and [generate a personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
+- create a config file at: 'src/config/config.js' with your access token in:
+  `export const accessToken = "your-access-token-here";`
 - `npm start` to view the app locally at [http://localhost:3000/](http://localhost:3000/)
 
-generate access token for command line:
-https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
+
+![](https://i.imgur.com/IPVxZ7I.png)
+> main search form
+
+![](https://i.imgur.com/bM19p43.png)
+> sample result: user details
+
 
 ### Using this app:
+1. Enter a valid github **Username** in the text input field, then...
+- Search for **User Details** by toggling 'Get User Details' and pressing 'Submit'
+- Search for **User's Repositories** by toggling 'Get User's Repositories' and pressing 'Submit'
 
-Runnable Queries Include:
+2. **In Progress:** Get more details about a **User's Repository**
+- With a list of a user's repositories showing, click on a single repository
+- More information on the clicked repository then displays
+- Option to star the repository
 
-- Get details on user by entering **username**
-- Get details on all of a user's repositories by entering **username**
-- Get details of a particular repository by entering **username**, checking 'Get User's Repositories', and clicking on the **repository name** you want to view
-
-#### Components and todo list
-
-- Repository.js: API call for individual repository
-
-1. update old bits of apollo **stuck**
-2. get working with single query (for repo), hardcoded
-3. autocomplete
-4. user details query
-5. user repos query
-
-**other:**
-
-- linting
+#### Todo:
+- single repo (on repo click)
+- autocomplete (for user name)
+- linting (consistent setup)
 - testing (unit, then integration)
-- code coverage
+- code coverage (jest)
 - CI pipeline
-- add issues (todos) to Github

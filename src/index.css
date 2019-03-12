@@ -141,19 +141,17 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   line-height: 1.6;
 }
 
 h2 {
-  /* font-size: 2.125rem; */
-  font-size: 1.875rem;
+  font-size: 1.375rem;
   line-height: 1.5;
 }
 
 h3 {
-  /* font-size: 1.75rem; */
-  font-size: 1.625rem;
+  font-size: 1.125rem;
   line-height: 1.35;
 }
 
@@ -165,4 +163,25 @@ h3 {
 }
 .container:nth-child(1) {
   margin-bottom: 2rem;
+}
+.container:nth-child(1) h1,
+.container:nth-child(1) p {
+  text-align: center;
+}
+
+/* larger screens */
+@media screen and (min-width: 35rem) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.875rem;
+  }
+  h3 {
+    font-size: 1.625rem;
+  }
+  .container:nth-child(1) h1,
+  .container:nth-child(1) p {
+    text-align: left;
+  }
 }
