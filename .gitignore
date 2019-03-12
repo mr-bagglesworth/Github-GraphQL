@@ -10,8 +10,9 @@ Icon
 # Thumbnails
 ._*
 
-# Dist
+# Dist and build folders
 dist/
+build/
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
@@ -95,5 +96,6 @@ jspm_packages/
 # next.js build output
 .next
 
-config.js
 config/
+config.js
+
