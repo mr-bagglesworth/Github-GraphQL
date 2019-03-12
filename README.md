@@ -1,8 +1,11 @@
+# Github GraphQL
+
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 [![Build Status](https://travis-ci.org/mr-bagglesworth/Github-GraphQL.svg?branch=master)](https://travis-ci.org/mr-bagglesworth/Github-GraphQL)
+[![codecov](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL/branch/master/graph/badge.svg)](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL)
 
-# Github GraphQL
 A first foray into using Github GraphQL API with React Apollo
+View the live app here: [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
 
 ## To get running locally:
 - clone the repository
@@ -31,9 +34,11 @@ A first foray into using Github GraphQL API with React Apollo
 - Option to star the repository
 
 #### Todo:
-- single repo (on repo click)
+- show single repo information (on repo click)
+- more styling
 - autocomplete (for user name)
 - linting (consistent setup)
 - testing (unit, then integration)
-- code coverage (jest)
-- CI pipeline
+- ~~code coverage (Jest)~~
+- ~~CI pipeline (Travis)~~
+- deploy on github pages
