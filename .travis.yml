@@ -4,8 +4,6 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-  - npm install -g codecov
 env:
   global: CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
 after_success:
@@ -13,3 +11,11 @@ after_success:
 script:
   - npm test
   - npm run test:coverage
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  accessToken: $accessToken
+  local_dir: build
+  on:
+    branch: master
