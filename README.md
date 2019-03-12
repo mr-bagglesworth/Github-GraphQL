@@ -5,7 +5,8 @@
 [![codecov](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL/branch/master/graph/badge.svg)](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL)
 
 A first foray into using Github GraphQL API with React Apollo
-View the live app here: [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
+View the live app here:
+[https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
 
 ## To get running locally:
 - clone the repository
