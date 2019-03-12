@@ -1,9 +1,6 @@
 // React
 import React from "react";
 
-// authorisation / login details
-import { accessToken } from "../config/config";
-
 // apollo
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
@@ -15,6 +12,9 @@ import Search from "./Search";
 import UserDetails from "./UserDetails";
 import UserRepos from "./UserRepos";
 import Repository from "./Repository";
+
+// authorisation / login details
+const accessToken = process.env.REACT_APP_GET_ME_IN;
 
 // setup httplink and cache
 const httpLink = new HttpLink({

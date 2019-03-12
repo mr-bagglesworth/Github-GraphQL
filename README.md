@@ -1,4 +1,5 @@
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
+[![Build Status](https://travis-ci.org/mr-bagglesworth/Github-GraphQL.svg?branch=master)](https://travis-ci.org/mr-bagglesworth/Github-GraphQL)
 
 # Github GraphQL
 A first foray into using Github GraphQL API with React Apollo
@@ -7,7 +8,7 @@ A first foray into using Github GraphQL API with React Apollo
 - clone the repository
 - `npm install`
 - go to your github account and [generate a personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
-- create a config file at: 'src/config/config.js' with your access token in:
+- create a config file at: 'src/config/config.js' with your access token in:  
   `export const accessToken = "your-access-token-here";`
 - `npm start` to view the app locally at [http://localhost:3000/](http://localhost:3000/)
 

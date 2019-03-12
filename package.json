@@ -2,19 +2,23 @@
   "name": "GraphqlTest",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mr-bagglesworth.github.io/Github-GraphQL/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --watch --silent",
+    "test": "jest --silent",
+    "test:watch": "jest --silent --watch",
     "test:coverage": "jest --silent --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
     "apollo-link-http": "^1.5.12",
     "base-64": "^0.1.0",
-    "github-username-regex": "^1.0.0",
+    "gh-pages": "^2.0.1",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "react": "next",
