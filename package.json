@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --silent --watch --coverage",
+    "test": "jest --silent",
     "test:watch": "jest --silent --watch",
     "test:coverage": "jest --silent --coverage",
     "eject": "react-scripts eject",
