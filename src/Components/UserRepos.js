@@ -86,9 +86,6 @@ const USER_REPOS_QUERY = gql`
 `;
 
 const UserRepos = ({ login }) => (
-  // console.log("repo list ", props);
-  // return <div>UserRepos not built yet</div>;
-
   <Query query={USER_REPOS_QUERY} variables={{ login }}>
     {({ loading, error, data }) => {
       if (loading)
@@ -97,9 +94,9 @@ const UserRepos = ({ login }) => (
 
       const { repositories, repositoriesContributedTo } = data.user;
 
+      // console.log("repo list ", data);
       // need to pull out the same information from each of the above, more or less
       // - find a way to modularise
-      // console.log(data.user);
 
       return (
         <div className="container">
@@ -120,4 +117,4 @@ const UserRepos = ({ login }) => (
   </Query>
 );
 
-export default UserRepos;
+export { USER_REPOS_QUERY, UserRepos };

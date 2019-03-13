@@ -1,15 +1,15 @@
 import React from "react";
-import Search from "./Search.js";
+import Search from "../Search.js";
 import {
   render,
   fireEvent,
-  cleanup,
-  waitForElement
+  cleanup
+  // waitForElement
 } from "react-testing-library";
 
 describe("Search Component", () => {
   // automatically unmount and cleanup DOM after the test is finished.
-  afterEach(cleanup);
+  // afterEach(cleanup);
 
   // submit button click
   test("submit button click with no username = please enter a valid username message", () => {

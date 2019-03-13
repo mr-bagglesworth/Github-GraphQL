@@ -10,7 +10,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 // Components
 import Search from "./Search";
 import { UserDetails } from "./UserDetails";
-import UserRepos from "./UserRepos";
+import { UserRepos } from "./UserRepos";
 import Repository from "./Repository";
 
 // authorisation / login details
