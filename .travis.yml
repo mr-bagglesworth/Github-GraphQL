@@ -6,6 +6,8 @@ cache:
     - node_modules
 env:
   global: CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
   - npm test
   - npm run test:coverage

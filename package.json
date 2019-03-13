@@ -30,7 +30,8 @@
     "jest": "23.6.0",
     "react-scripts": "^2.1.8",
     "react-test-renderer": "^16.8.4",
-    "react-testing-library": "^5.4.4"
+    "react-testing-library": "^5.4.4",
+    "waait": "^1.0.4"
   },
   "jest": {
     "verbose": true,
