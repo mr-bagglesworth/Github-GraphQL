@@ -14,6 +14,7 @@ import UserRepos from "./UserRepos";
 import Repository from "./Repository";
 
 // authorisation / login details
+console.log(process.env);
 const accessToken = process.env.REACT_APP_GET_ME_IN;
 
 // setup httplink and cache
