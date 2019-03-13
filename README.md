@@ -4,7 +4,8 @@
 [![Build Status](https://travis-ci.org/mr-bagglesworth/Github-GraphQL.svg?branch=master)](https://travis-ci.org/mr-bagglesworth/Github-GraphQL)
 [![codecov](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL/branch/master/graph/badge.svg)](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL)
 
-A first foray into using Github GraphQL API with React Apollo
+A first foray into using Github GraphQL API with React Apollo.
+
 View the live app here:
 
 [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
@@ -43,4 +44,4 @@ View the live app here:
 - testing (unit, then integration)
 - ~~code coverage (Jest)~~
 - ~~CI pipeline (Travis)~~
-- deploy on github pages
+- deploy on github pages (make search function work properly)

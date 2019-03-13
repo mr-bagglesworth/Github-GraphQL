@@ -82,14 +82,6 @@ const UserDetails = ({ login }) => (
         pinnedRepositories
       } = data.user;
 
-      // console.log(
-      //   followers,
-      //   following,
-      //   repositories,
-      //   pinnedRepositories,
-      //   websiteUrl
-      // );
-
       return (
         <div className="container">
           <div>
@@ -137,4 +129,5 @@ const UserDetails = ({ login }) => (
   </Query>
 );
 
-export default UserDetails;
+// export default UserDetails;
+export { USER_QUERY, UserDetails };
