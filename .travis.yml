@@ -1,22 +1,11 @@
-language: node_js
-node_js:
-  - 11.10.1
-cache:
-  directories:
-    - node_modules
-env:
-  global:
-    - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
-    secure: "LJim0GHvyxT/IX0tHz9DOhWKQJY3JQ3t0xLcPF7XIcZJCXW7p5KNqBLeiJUafB/npH0ZCiNizXY41mPF0YVarrjEdW401bv8rg4TY2yeCpIvGy7o7VBQjVwyoEbHagzCzcuO3HpSaRX3A0Xd6FJvzObqDjuhmrzWpC4zxw4SDXRrRT+IJUrFG1+IhcK/AAhq6FklRK6RPKhh2+8s2GJRPpNYotWMIlsSv5Ldugm+xPMBKpkvQI3ViTs7Am+gPtbKwdODLpvuI1OsDknQMQ2bOUNxgjZr2SfTAelvTYaTz6RAfUjWz7cjPCGesiXMY/X5Phtp5eCf3z7rdS+g88ctuU4LgTjpepLDnFABmVvsPlVgCQSrxJP9pUHKiY0DG0raatIj3kLFt4U6hLNddScXalI2NQNhlS9dcTRttaFAVGM5oyl8sT8O44w368mblpgU8DFr8U1AnXLlKxV/86cOOvRigdmpHvLxN6DDY134ctMst+YsLzMQPU8NpW54/JhRutMSCgNv298LQGVbP1CZXFD0yTNiRtP9E0Wl1AgA63JkOhJ+/9ckcSBREuVvheaZswb2v9MHUafPflEBxEfbiRT7GCzUdAsanDcHf17ntD3nUjCGxQnGnMjEs5dnZnSTyKivk7OEew4Y2KsvCDwoM5LI8ePt+cQXjvWTuIxTRz8="
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+# Ruby is our language as asciidoctor is a ruby gem.
+lang: ruby
+before_install:
+  - sudo apt-get install pandoc
+  - gem install asciidoctor
 script:
-  - npm test
-  - npm run test:coverage
-  - npm run build
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: build
-  on:
-    branch: master
+  - make
+after_success:
+  - .travis/push.sh
+env:
+  global: "LJim0GHvyxT/IX0tHz9DOhWKQJY3JQ3t0xLcPF7XIcZJCXW7p5KNqBLeiJUafB/npH0ZCiNizXY41mPF0YVarrjEdW401bv8rg4TY2yeCpIvGy7o7VBQjVwyoEbHagzCzcuO3HpSaRX3A0Xd6FJvzObqDjuhmrzWpC4zxw4SDXRrRT+IJUrFG1+IhcK/AAhq6FklRK6RPKhh2+8s2GJRPpNYotWMIlsSv5Ldugm+xPMBKpkvQI3ViTs7Am+gPtbKwdODLpvuI1OsDknQMQ2bOUNxgjZr2SfTAelvTYaTz6RAfUjWz7cjPCGesiXMY/X5Phtp5eCf3z7rdS+g88ctuU4LgTjpepLDnFABmVvsPlVgCQSrxJP9pUHKiY0DG0raatIj3kLFt4U6hLNddScXalI2NQNhlS9dcTRttaFAVGM5oyl8sT8O44w368mblpgU8DFr8U1AnXLlKxV/86cOOvRigdmpHvLxN6DDY134ctMst+YsLzMQPU8NpW54/JhRutMSCgNv298LQGVbP1CZXFD0yTNiRtP9E0Wl1AgA63JkOhJ+/9ckcSBREuVvheaZswb2v9MHUafPflEBxEfbiRT7GCzUdAsanDcHf17ntD3nUjCGxQnGnMjEs5dnZnSTyKivk7OEew4Y2KsvCDwoM5LI8ePt+cQXjvWTuIxTRz8="
