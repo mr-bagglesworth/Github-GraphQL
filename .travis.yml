@@ -15,7 +15,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  REACT_APP_GET_ME_IN: $_GET_ME_IN
+  REACT_APP_GET_ME_IN: $REACT_APP_GET_ME_IN
   local_dir: build
   on:
     branch: master
