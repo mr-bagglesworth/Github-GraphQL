@@ -17,7 +17,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  REACT_APP_GET_ME_IN: $REACT_APP_GET_ME_IN
+  github-token: $GITHUB_TOKEN
   local_dir: build
   on:
     branch: master
