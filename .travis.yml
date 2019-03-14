@@ -1,22 +1,23 @@
 language: node_js
 node_js:
-- 11.10.1
+  - 11.10.1
 cache:
   directories:
-  - node_modules
+    - node_modules
 env:
   global:
-  - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
-  - secure: WBPp4UXcZwKJCocUkgoGTOAfmmWQMR8auk1oobYWJqZJJLtn0byYxJyTJc73ZYcx8fBYCaC0R/ghjOsksc4SG9vzzVGrpF/lJhDm47ij+lRzmf9dFWKXAKESFLnUBK3PmUKI/QsvKPKFyBcOneAH+JVnarRHS+x4c9Iw6gwULAXzC7Y4+Jqhqxbnf5E51YUydPWb5yUhiBacl5YTjd9jsb/E2597MfHCNY2KIkdI+dKAlO5CvVIz+qVnl9eGwnW5Wrpa4SIT4T+Fh1qh8rRCjWm+Ri2Fw3ElFQ4sO10W5brXA18UGoyJ2AcKsYvxS/Gmh/8l2S0v0c4UhFHd29muFhKL4Ery2Ew1a0b4FCG14ZLgL8ZCCjXhb7tx0yJYzQl/ELd2n5MNMHtN42BfMv6uZ5eDXdlR1DWPY5C088WauV6b4wKbjlludROpMTVbF8Cp5zmTUWgdalayMmYkga/eNZ+/IjHQfGy/L/6HLZMWYd7tPx4JymNoiDnVctOCTh7oYMEmJFHE+/bHYdvLm7CNGDUZEq7ajHJDE2r/CSgds8EMjAcZ9qgf5A8XZI6n/Zr9RvB8cORtrpArmGeAbNA94/apdUMgPF8yp20ZBE0qyTFt6vROKfCnHigKIzyyizMXBrpQMA9SkyiNWi+sMiEcAb/WL2Hz/y1s/fZspm1ZQ9I=
+    - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+    - secure: WBPp4UXcZwKJCocUkgoGTOAfmmWQMR8auk1oobYWJqZJJLtn0byYxJyTJc73ZYcx8fBYCaC0R/ghjOsksc4SG9vzzVGrpF/lJhDm47ij+lRzmf9dFWKXAKESFLnUBK3PmUKI/QsvKPKFyBcOneAH+JVnarRHS+x4c9Iw6gwULAXzC7Y4+Jqhqxbnf5E51YUydPWb5yUhiBacl5YTjd9jsb/E2597MfHCNY2KIkdI+dKAlO5CvVIz+qVnl9eGwnW5Wrpa4SIT4T+Fh1qh8rRCjWm+Ri2Fw3ElFQ4sO10W5brXA18UGoyJ2AcKsYvxS/Gmh/8l2S0v0c4UhFHd29muFhKL4Ery2Ew1a0b4FCG14ZLgL8ZCCjXhb7tx0yJYzQl/ELd2n5MNMHtN42BfMv6uZ5eDXdlR1DWPY5C088WauV6b4wKbjlludROpMTVbF8Cp5zmTUWgdalayMmYkga/eNZ+/IjHQfGy/L/6HLZMWYd7tPx4JymNoiDnVctOCTh7oYMEmJFHE+/bHYdvLm7CNGDUZEq7ajHJDE2r/CSgds8EMjAcZ9qgf5A8XZI6n/Zr9RvB8cORtrpArmGeAbNA94/apdUMgPF8yp20ZBE0qyTFt6vROKfCnHigKIzyyizMXBrpQMA9SkyiNWi+sMiEcAb/WL2Hz/y1s/fZspm1ZQ9I=
 after_success:
-- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
-- npm test
-- npm run test:coverage
-- npm run build
+  - npm test
+  - npm run test:coverage
+  - npm run build
 deploy:
   provider: pages
   skip_cleanup: true
+  github_token: $github_token
   local_dir: build
   on:
     branch: master
