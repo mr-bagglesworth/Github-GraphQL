@@ -9,10 +9,11 @@ import gql from "graphql-tag";
 // import { dateFormat } from "../utils/utils";
 
 // create user repos query
+// previously first: 100
 const USER_REPOS_QUERY = gql`
   query UserreposQuery($login: String!) {
     user(login: $login) {
-      repositories(first: 100) {
+      repositories(first: 10) {
         totalCount
         edges {
           node {
