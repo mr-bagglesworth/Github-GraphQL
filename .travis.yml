@@ -7,9 +7,7 @@ cache:
 env:
   global:
     - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
-    - secure: VvAsiKTjH/bNJR0POYFgv00NhHJQvoxU8O7/9iqy22roKa39i7kgj32DKeQIXgEBPzaTKC/jDouHPfmJaJ+zMhqgFkLUxf36g3Iy2a4r1Y9Gwuews2ZDEKIjsy6pDSKCHX7W7+OGe6k9AqiSnhIOpiOfeXty0VZZdNI6pwzEXQojQo7fXEE1EXcMRUvIqws3bSxLNLYxRY6xghIMqEU5MtExw4xCkq4/IjaJBfcO/3L95hk6d3tt4cpoj6N+oTJ6mZDIUKtV7xrZiXz7pzywbdxWjODI2gkHDvqYQRyXI8C6jF2j0O6yhhNwJkJxk2CdOGIbkqJ3iA4GRyn3283Au5O6fhi4LJALhviefkMvXJ8vdJ/aT3/KO5YYCwHGmZXAFAA1vpMHY37Ygk57wzBhn0se0SAcHhwpUZ2ie+kW34dyZWvksuzFNvWV+qvvSITNejmmkm5l5N+I+aKnJsW0iCUyBl+NLbrw0M4UwYbqa/rflOifKww/AJqMU+ODciYxAcaJt01+3fuiZHyfEBPUiWOtGPo6sk0JGJRlyxPsFF7xk1NOopZxYh8P6kxTVztjUd9z4ysoATfqkdQr+wszjrEzHWP9RhZfTrWHpcO9yv43KYWQuYL6YqzbcV1fOBT5Ff+kygd+0E1JpVS+bwC7Mj3yS3jAUasoyHtLcZMCaYU=
-before_install:
-  - composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
+    secure: "LJim0GHvyxT/IX0tHz9DOhWKQJY3JQ3t0xLcPF7XIcZJCXW7p5KNqBLeiJUafB/npH0ZCiNizXY41mPF0YVarrjEdW401bv8rg4TY2yeCpIvGy7o7VBQjVwyoEbHagzCzcuO3HpSaRX3A0Xd6FJvzObqDjuhmrzWpC4zxw4SDXRrRT+IJUrFG1+IhcK/AAhq6FklRK6RPKhh2+8s2GJRPpNYotWMIlsSv5Ldugm+xPMBKpkvQI3ViTs7Am+gPtbKwdODLpvuI1OsDknQMQ2bOUNxgjZr2SfTAelvTYaTz6RAfUjWz7cjPCGesiXMY/X5Phtp5eCf3z7rdS+g88ctuU4LgTjpepLDnFABmVvsPlVgCQSrxJP9pUHKiY0DG0raatIj3kLFt4U6hLNddScXalI2NQNhlS9dcTRttaFAVGM5oyl8sT8O44w368mblpgU8DFr8U1AnXLlKxV/86cOOvRigdmpHvLxN6DDY134ctMst+YsLzMQPU8NpW54/JhRutMSCgNv298LQGVbP1CZXFD0yTNiRtP9E0Wl1AgA63JkOhJ+/9ckcSBREuVvheaZswb2v9MHUafPflEBxEfbiRT7GCzUdAsanDcHf17ntD3nUjCGxQnGnMjEs5dnZnSTyKivk7OEew4Y2KsvCDwoM5LI8ePt+cQXjvWTuIxTRz8="
 after_success:
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
@@ -19,7 +17,6 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $REACT_APP_GET_ME_IN
   local_dir: build
   on:
     branch: master
