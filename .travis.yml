@@ -1,22 +1,23 @@
 language: node_js
 node_js:
-- 11.10.1
+  - 11.10.1
 cache:
   directories:
-  - node_modules
+    - node_modules
 env:
   global:
-  - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
-  - secure: zf1DRNc4MJA4IwzelY3VCAa/xBqXxlVgDfhSHJ01ACj28Z95kfAXsi3Ncfq1OEJbC/kuAlb5UGtXdoR2AEp2XaOHSTgVFmK7VS019SkNO1XSUQjgbAKkKovbgeTu3vy0oSmQcrLnKza529Cah4QiQnprnyc+5VgDIeZ4dtR/m2Xt9AjtCievYPTmcounxKiO36M5sw/lUyFqYhlHqChNzHGXM6zvwNcdVhEzCGt47mllw3mQ46IeZ9NaMKk1aNlo+2tXJbby1TAWtZ6Ck17npdJ5kGgg8QilgY0k9DGvP2hSIEoKfj4KS955lLwVCimXl260yfe6SeIruyoj5y3xWsdhFnmnTxG5Yz2f/FSEfTn5GoX3cB6SNLWGjK9BVLB56AlZpnUa8GogptxhMIpHM8PDbrVmI7d8Z37qH/nMtFWhY14yu+VDZjI1Pgmvs/K6XolSq34cw/h3BlPkorFV+euNljk9wErJDfE73zl2c64zN9Ea8WpjKzwPXagJUJiyEBHh4xMTSFGxVoJTMpEsHCihjvcWgbYIyEgOjHiob23qM9zcDXadBXq4oI5YQBrJoXgYmzoSElZ93nJuryiMOTUe213pzYFDuotcj7v7S5qfsIOiMOP5WVhT05U24UhWoiYZnWYwLYr4ev3HkThx7hGUam3zPCcV4ZOOfrspoyo=
+    - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+    - secure: zf1DRNc4MJA4IwzelY3VCAa/xBqXxlVgDfhSHJ01ACj28Z95kfAXsi3Ncfq1OEJbC/kuAlb5UGtXdoR2AEp2XaOHSTgVFmK7VS019SkNO1XSUQjgbAKkKovbgeTu3vy0oSmQcrLnKza529Cah4QiQnprnyc+5VgDIeZ4dtR/m2Xt9AjtCievYPTmcounxKiO36M5sw/lUyFqYhlHqChNzHGXM6zvwNcdVhEzCGt47mllw3mQ46IeZ9NaMKk1aNlo+2tXJbby1TAWtZ6Ck17npdJ5kGgg8QilgY0k9DGvP2hSIEoKfj4KS955lLwVCimXl260yfe6SeIruyoj5y3xWsdhFnmnTxG5Yz2f/FSEfTn5GoX3cB6SNLWGjK9BVLB56AlZpnUa8GogptxhMIpHM8PDbrVmI7d8Z37qH/nMtFWhY14yu+VDZjI1Pgmvs/K6XolSq34cw/h3BlPkorFV+euNljk9wErJDfE73zl2c64zN9Ea8WpjKzwPXagJUJiyEBHh4xMTSFGxVoJTMpEsHCihjvcWgbYIyEgOjHiob23qM9zcDXadBXq4oI5YQBrJoXgYmzoSElZ93nJuryiMOTUe213pzYFDuotcj7v7S5qfsIOiMOP5WVhT05U24UhWoiYZnWYwLYr4ev3HkThx7hGUam3zPCcV4ZOOfrspoyo=
 after_success:
-- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
-- npm test
-- npm run test:coverage
-- npm run build
+  - npm test
+  - npm run test:coverage
+  - npm run build
 deploy:
   provider: pages
   skip_cleanup: true
+  REACT_APP_GET_ME_IN: $REACT_APP_GET_ME_IN
   local_dir: build
   on:
     branch: master
