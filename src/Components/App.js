@@ -15,6 +15,7 @@ import Repository from "./Repository";
 
 // authorisation / login details
 const accessToken = process.env.REACT_APP_GET_ME_IN;
+console.log(accessToken);
 
 // setup httplink and cache
 const httpLink = new HttpLink({
