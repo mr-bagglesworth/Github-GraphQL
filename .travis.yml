@@ -11,16 +11,10 @@ after_success:
   - git config --global user.name "mr-bagglesworth"
   - git config --global user.email "mr-bagglesworth@users.noreply.github.com"
   - git remote rm origin
-  - git remote add origin https://mr-bagglesworth:${GH_TOKEN}@github.com/mr-bagglesworth/Github-GraphQL.git
+  - git remote add origin https://mr-bagglesworth:${REACT_APP_GET_ME_IN}@github.com/mr-bagglesworth/Github-GraphQL.git
   - npm run deploy
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
   - npm test
   - npm run test:coverage
   - npm run build
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: build
-  on:
-    branch: master
