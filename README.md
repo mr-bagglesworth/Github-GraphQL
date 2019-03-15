@@ -4,7 +4,8 @@
 [![Build Status](https://travis-ci.org/mr-bagglesworth/Github-GraphQL.svg?branch=master)](https://travis-ci.org/mr-bagglesworth/Github-GraphQL)
 [![codecov](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL/branch/master/graph/badge.svg)](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL)
 
-A first foray into using Github GraphQL API with React Apollo
+A first foray into using Github GraphQL API with React Apollo.
+
 View the live app here:
 
 [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
@@ -14,7 +15,7 @@ View the live app here:
 - `npm install`
 - go to your github account and [generate a personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 - create an `.env.local` file in the root, with your access token in the following format:  
-  `REACT_APP_GET_ME_IN = 'your-token-here'`
+  `REACT_APP_GET_ME_IN=your-token-here`. Note that your token does not require quotes around it
 - `npm start` to view the app locally at [http://localhost:3000/](http://localhost:3000/)
 
 
@@ -38,9 +39,9 @@ View the live app here:
 #### Todo:
 - show single repo information (on repo click)
 - more styling
-- autocomplete (for user name)
-- linting (consistent setup)
+- autocomplete (for user name. Look into the feasibility of this more)
+- linting (customise the setup a little bit more)
 - testing (unit, then integration)
-- ~~code coverage (Jest)~~
+- ~~code coverage (with Jest, Codecov, and commands in .travis.yml)~~
 - ~~CI pipeline (Travis)~~
-- deploy on github pages
+- ~~deploy on github pages (making search function work properly required env variable encruption with Travis cli)~~

@@ -1,19 +1,25 @@
 language: node_js
 node_js:
-  - "11.10.1"
+- 11.10.1
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
-  global: CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+  global:
+  - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+  - secure: OjESbmBLeovfU5VA2z6968mPG38SOk1ltdgg+7SrGX41eYZwNZY+Ui5zTHuZdCRKDlQNJ1iyBGEfpaGclJwoki8uRMQCAUIlj2c4ki6pQ0RQXam2MLTz5OGa2wwFT4SqD7mmwwbqzND4XrS2xiAOT+gkEpSzI1hIig/za1/0nqImHzP6HtKjSP2VdS19oTMGtD4iN7JTYHSlfC/rEu6eXJl9rJBsiqY+gVdJGdOGopQ/AiKvzXUol92dQtVZzp+QfZw2cAoB3Y7pA+o+5jJSigM8Edla+doy8RKROd3Ldv+4jK8+k4bqv8PvXLKRReAMSZL1Jfez0Av3hgTYq0IMkuG6Pb6pu+qOVGuDd5DAurGUzysE7n7SebpqhCBg7VEFnUggnU1m2CZ8O4LbBBc1WuhoID0ANEqZ2FpyQOessXcKRPaW9TzZ5LMX0S6vQTo3qGUi1AoK0gf+Wvu5jmNCqFy6Ehh7RTpGxFQVqbtmXxMjbZBdEfOfrpicOZ0fwebuFyzQBIneskVwWpyjScXnCXTC0HHBEK/PrwcNN/SSWSv+MBB4H71EoVBXFZiOB7s1aEKsxT0T1NzxVGJQ6UwBc5bYhiSThGz/mWeysP+u+lL8VTfrZ1yiCcAwo8p41K/n9nYbfV3zasObVAObTLCKAYATBQP2b7OMjf3uozCuqu0=
+before_install:
+- composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
+after_success:
+- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
-  - npm test
-  - npm run test:coverage
-  - npm run build
+- npm test
+- npm run test:coverage
+- npm run build
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $github_token
+  github_token: secure
   local_dir: build
   on:
     branch: master
