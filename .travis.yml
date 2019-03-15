@@ -7,14 +7,19 @@ cache:
 env:
   global:
     - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+    - secure: "AjAvWDnE9cCvkSirrlCXhuNUTs0i3u6YZC0XnN+GzAgiM7TADHKyZl0gySVxXVrrpIPbtlmdNj40nDAQrylJ/EQyYLEY+qrEBS+uNDWN7vJxGu53DxkaBKUa9uzxmdVDPuzigTwQotFTQoZcfV3UibvpV2sGsnD99B7B0uuZP6P6kZXtV1FBCDdVGffXZTUtboeoff0FqhJCTTAonS8tCxqM+qNDNEMa1aXLeDM0LG7RdKxV9NQZbS81ScWl4Q6LCODnVsQXr8Z5JHqaH4Im9n12ch13L7C1TsYKGC/G1NitoTxM6lpLT4BcQYoR1bMqRSm8DPr+pEkqHQCr5fLv4bOONusVGoFwL132gv1IwtcWwKZizY/oKA3mY4R3vDEXNtQ3864MxmlUoZ7vpxAvTgCupTAXyb3fy7h+iiEcSIWgQNkBuUZSdHwA3+O8OA60H8SaeY/rBr5y73j7HLXX2fuNqacJq2fa0R9hFtS+ibjG0ZI1m5skjSgjn8JUsLYqQfZLsXm9kkO6gjJfpjoPnZLvuucl3Fna5dHkcyhDf37WgmwR6BzLzoemaW8p92PRqV6Cyb75jfvFPVL1G2Eh4cPf9p9XUaxH83xiX+P9hzFY0O+s4ok7jQs4NrmPezPBZZvxMHZmJPt1KsOMWDOYUed9ZPa6xfpXsjHrODVpntY="
+before_install:
+  - composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
 after_success:
-  - git config --global user.name "mr-bagglesworth"
-  - git config --global user.email "mr-bagglesworth@users.noreply.github.com"
-  - git remote rm origin
-  - git remote add origin https://mr-bagglesworth:${REACT_APP_GET_ME_IN}@github.com/mr-bagglesworth/Github-GraphQL.git
-  - npm run deploy
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
   - npm test
   - npm run test:coverage
   - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master
