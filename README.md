@@ -9,6 +9,7 @@ A first foray into using Github GraphQL API with React Apollo.
 View the live app here:
 
 [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
+> please note that the search currently only works locally, with the below instructions. See [Todo](#todo)
 
 ## To get running locally:
 - clone the repository
@@ -45,3 +46,4 @@ View the live app here:
 - ~~code coverage (with Jest, Codecov, and commands in .travis.yml)~~
 - ~~CI pipeline (Travis)~~
 - ~~deploy on github pages~~ (making search function work properly on gh-pages is tricky)
+    - having trouble deploying with secret environment variables to github pages. They get added to the bundle.
