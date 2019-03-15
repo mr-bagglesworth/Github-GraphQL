@@ -1,27 +1,17 @@
 // React
 import React from "react";
 
-// github username regex
-// - doesn't seem to work, so uninstalled. Left as a temporary reference
-// import githubUsernameRegex from "github-username-regex";
-
 // styles
 import { BasicForm, CustomRadio, FormButton } from "./styles/forms";
 
-// this component triggers state changes in App.js:
-// - username
-// - suggestions
-// - userdetails or repodetails
-
-// this then triggers api calls, and populates components:
+// Search.js triggers api calls, and populates components, based on its state:
 // - Repository
 // - UserDetails
 // - UserRepos
 
-// users enters their search terms in input field
-// - autocomplete for name search (ideally)
-// --- Might have to search by username onChange, rather than full list of github usernames, however
-// - dropdown with repo list after user entered name
+// possible autocomplete (name search):
+// - search by username onChange
+// - search based on text input val
 
 export default class Search extends React.Component {
   state = {
@@ -41,17 +31,14 @@ export default class Search extends React.Component {
     this.setState({ searchType: e.target.id });
   };
 
-  // search button to search by:
-  // 1. user details
-  // 2. user's repos
-  // -- if a user's repo is clicked, that triggers the Repository.js component
+  // Submit passes triggers different search types in other components
   handleSearchSubmit = e => {
     e.preventDefault();
     const { username } = this.state;
-    // UserDetails component errors if the username isn't found
-    // - githubusername regex didn't work too well on first go
+
+    // githubusername regex didn't work too well, make username +2 characters
     if (username.length > 2) {
-      this.props.formSubmit(this.state);
+      this.props.searchSubmit(this.state);
     } else {
       this.setState({ formError: true });
     }

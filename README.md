@@ -9,7 +9,7 @@ A first foray into using Github GraphQL API with React Apollo.
 View the live app here:
 
 [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
-> please note that the search currently only works locally, with the below instructions. See [Todo](#todo)
+> please note that to search on Github Pages, you must login to Github first. See [Todo](#todo)
 
 ## To get running locally:
 - clone the repository
@@ -46,4 +46,7 @@ View the live app here:
 - ~~code coverage (with Jest, Codecov, and commands in .travis.yml)~~
 - ~~CI pipeline (Travis)~~
 - ~~deploy on github pages~~ (making search function work properly on gh-pages is tricky)
-    - having trouble deploying with secret environment variables to github pages. They get added to the bundle.
+    - Deploying while keeping personal access token out of bundle seems to be impossible
+    - Github sees this and immediately revokes the token
+    - Solution: make the user log in to Github, app creates an access token, which allows them to search
+    - [issue #17 with more details](https://github.com/mr-bagglesworth/Github-GraphQL/issues/17)

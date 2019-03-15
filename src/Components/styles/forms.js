@@ -58,7 +58,8 @@ const BasicForm = styled.form`
       align-self: flex-end;
     }
   }
-  input[type="text"] {
+  input[type="text"],
+  input[type="password"] {
     font-family: ${fontName.main};
     font-size: ${fontSize.small};
     padding: ${spacing.med};
