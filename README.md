@@ -44,4 +44,4 @@ View the live app here:
 - testing (unit, then integration)
 - ~~code coverage (with Jest, Codecov, and commands in .travis.yml)~~
 - ~~CI pipeline (Travis)~~
-- ~~deploy on github pages (making search function work properly required env variable encruption with Travis cli)~~
+- ~~deploy on github pages~~ (making search function work properly on gh-pages is tricky)
