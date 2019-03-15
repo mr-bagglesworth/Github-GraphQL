@@ -1,25 +1,25 @@
 language: node_js
 node_js:
-- 11.10.1
+  - 11.10.1
 cache:
   directories:
-  - node_modules
+    - node_modules
 env:
   global:
-  - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
-  - secure: OjESbmBLeovfU5VA2z6968mPG38SOk1ltdgg+7SrGX41eYZwNZY+Ui5zTHuZdCRKDlQNJ1iyBGEfpaGclJwoki8uRMQCAUIlj2c4ki6pQ0RQXam2MLTz5OGa2wwFT4SqD7mmwwbqzND4XrS2xiAOT+gkEpSzI1hIig/za1/0nqImHzP6HtKjSP2VdS19oTMGtD4iN7JTYHSlfC/rEu6eXJl9rJBsiqY+gVdJGdOGopQ/AiKvzXUol92dQtVZzp+QfZw2cAoB3Y7pA+o+5jJSigM8Edla+doy8RKROd3Ldv+4jK8+k4bqv8PvXLKRReAMSZL1Jfez0Av3hgTYq0IMkuG6Pb6pu+qOVGuDd5DAurGUzysE7n7SebpqhCBg7VEFnUggnU1m2CZ8O4LbBBc1WuhoID0ANEqZ2FpyQOessXcKRPaW9TzZ5LMX0S6vQTo3qGUi1AoK0gf+Wvu5jmNCqFy6Ehh7RTpGxFQVqbtmXxMjbZBdEfOfrpicOZ0fwebuFyzQBIneskVwWpyjScXnCXTC0HHBEK/PrwcNN/SSWSv+MBB4H71EoVBXFZiOB7s1aEKsxT0T1NzxVGJQ6UwBc5bYhiSThGz/mWeysP+u+lL8VTfrZ1yiCcAwo8p41K/n9nYbfV3zasObVAObTLCKAYATBQP2b7OMjf3uozCuqu0=
+    - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+    - secure: "Tq9LnonteZMoeYslQizQx9bc+FeSHzM6L+0xqALNTaqMZzg3HODTkZN3BBrxQWi1aQKEQNkVYJ3X37lFl9kYcu15MQOVU3/jNwYgRqK+mhoa2Sjo1EIcyqTHFkZcyLZmqwQ4qhOeTOz5J6hnXU7NQZMX65WTAfT2wBiDTsiCD6vadFlAk7CRQDXuPHqJhWfM57w08nWFXISxgwsrOFBKJPJp9ur8Ht2d/iWId1v8p69RUzPgoTIllxcmhUvTT4oZWoDwPZZfIhFDXVWdr5STrmZ6iaThh3o6vcMiBabP1VZjEiDpd+1bHgkjy1WhkcPaG6ushMWc+Rzolcie4PtrpxXMyRYSTNN554nyEJXfmsqY1/KN9rINKFMCYmDNG99X+1kBh5YCJMQSWH8+2TxkP8zo9iLsgaDbQzL4MbxZhjPXO0H1rkaRUB2wmcb1hBTP55YbI+KsKW2mt/jrauWJb1Jv3ZWT+RSL3cZ6m6Kx0GP9ngjIEzuZMCeIok4SHrpwz826qT2JgS/LW5yuTdGKih2E40EMXLWb2rUEygaKvlyhgTbdxFepbGJ4M2r0b65oL7kdJcF4WHH0WoeQy0JlLIBHA5mhMCOjXZXd2UbRPbtOX2PDNrZ1ZQkUXHuU02BUvEZc+4WtlXM/KhderHTfKxY55LyDiUO1+n8pVekCbws="
 before_install:
-- composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
+  - composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
 after_success:
-- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
-- npm test
-- npm run test:coverage
-- npm run build
+  - npm test
+  - npm run test:coverage
+  - npm run build
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: secure
+  github_token: $secure
   local_dir: build
   on:
     branch: master
