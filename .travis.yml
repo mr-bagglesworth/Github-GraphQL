@@ -13,4 +13,9 @@ script:
   - npm test
   - npm run test:coverage
   - npm run build
-  - npm deploy
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: build
+  on:
+    branch: master
