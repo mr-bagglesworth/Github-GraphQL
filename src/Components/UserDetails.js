@@ -66,7 +66,6 @@ const UserDetails = ({ login }) => (
         return <div className="container">Loading user details...</div>;
       if (error) return <div className="container">Username not found</div>;
 
-      // console.log(data);
       const {
         avatarUrl,
         bio,
@@ -81,14 +80,6 @@ const UserDetails = ({ login }) => (
         repositories,
         pinnedRepositories
       } = data.user;
-
-      // console.log(
-      //   followers,
-      //   following,
-      //   repositories,
-      //   pinnedRepositories,
-      //   websiteUrl
-      // );
 
       return (
         <div className="container">
@@ -137,4 +128,4 @@ const UserDetails = ({ login }) => (
   </Query>
 );
 
-export default UserDetails;
+export { USER_QUERY, UserDetails };
