@@ -1,21 +1,21 @@
 language: node_js
 node_js:
-  - 11.10.1
+- 11.10.1
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
   global:
-    - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
-    - secure: VvAsiKTjH/bNJR0POYFgv00NhHJQvoxU8O7/9iqy22roKa39i7kgj32DKeQIXgEBPzaTKC/jDouHPfmJaJ+zMhqgFkLUxf36g3Iy2a4r1Y9Gwuews2ZDEKIjsy6pDSKCHX7W7+OGe6k9AqiSnhIOpiOfeXty0VZZdNI6pwzEXQojQo7fXEE1EXcMRUvIqws3bSxLNLYxRY6xghIMqEU5MtExw4xCkq4/IjaJBfcO/3L95hk6d3tt4cpoj6N+oTJ6mZDIUKtV7xrZiXz7pzywbdxWjODI2gkHDvqYQRyXI8C6jF2j0O6yhhNwJkJxk2CdOGIbkqJ3iA4GRyn3283Au5O6fhi4LJALhviefkMvXJ8vdJ/aT3/KO5YYCwHGmZXAFAA1vpMHY37Ygk57wzBhn0se0SAcHhwpUZ2ie+kW34dyZWvksuzFNvWV+qvvSITNejmmkm5l5N+I+aKnJsW0iCUyBl+NLbrw0M4UwYbqa/rflOifKww/AJqMU+ODciYxAcaJt01+3fuiZHyfEBPUiWOtGPo6sk0JGJRlyxPsFF7xk1NOopZxYh8P6kxTVztjUd9z4ysoATfqkdQr+wszjrEzHWP9RhZfTrWHpcO9yv43KYWQuYL6YqzbcV1fOBT5Ff+kygd+0E1JpVS+bwC7Mj3yS3jAUasoyHtLcZMCaYU=
+  - CODECOV_TOKEN=7ab7e761-055f-4ed0-bbbd-69d02d25faec
+  - secure: OjESbmBLeovfU5VA2z6968mPG38SOk1ltdgg+7SrGX41eYZwNZY+Ui5zTHuZdCRKDlQNJ1iyBGEfpaGclJwoki8uRMQCAUIlj2c4ki6pQ0RQXam2MLTz5OGa2wwFT4SqD7mmwwbqzND4XrS2xiAOT+gkEpSzI1hIig/za1/0nqImHzP6HtKjSP2VdS19oTMGtD4iN7JTYHSlfC/rEu6eXJl9rJBsiqY+gVdJGdOGopQ/AiKvzXUol92dQtVZzp+QfZw2cAoB3Y7pA+o+5jJSigM8Edla+doy8RKROd3Ldv+4jK8+k4bqv8PvXLKRReAMSZL1Jfez0Av3hgTYq0IMkuG6Pb6pu+qOVGuDd5DAurGUzysE7n7SebpqhCBg7VEFnUggnU1m2CZ8O4LbBBc1WuhoID0ANEqZ2FpyQOessXcKRPaW9TzZ5LMX0S6vQTo3qGUi1AoK0gf+Wvu5jmNCqFy6Ehh7RTpGxFQVqbtmXxMjbZBdEfOfrpicOZ0fwebuFyzQBIneskVwWpyjScXnCXTC0HHBEK/PrwcNN/SSWSv+MBB4H71EoVBXFZiOB7s1aEKsxT0T1NzxVGJQ6UwBc5bYhiSThGz/mWeysP+u+lL8VTfrZ1yiCcAwo8p41K/n9nYbfV3zasObVAObTLCKAYATBQP2b7OMjf3uozCuqu0=
 before_install:
-  - composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
+- composer config --global github-oauth.github.com "$REACT_APP_GET_ME_IN"
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 script:
-  - npm test
-  - npm run test:coverage
-  - npm run build
+- npm test
+- npm run test:coverage
+- npm run build
 deploy:
   provider: pages
   skip_cleanup: true
