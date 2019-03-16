@@ -89,9 +89,8 @@ const USER_REPOS_QUERY = gql`
 const UserRepos = ({ login }) => (
   <Query query={USER_REPOS_QUERY} variables={{ login }}>
     {({ loading, error, data }) => {
-      if (loading)
-        return <div className="container">Loading user's repositories...</div>;
-      if (error) return <div className="container">Username not found</div>;
+      if (loading) return <>Loading user's repositories...</>;
+      if (error) return <>Username not found</>;
 
       const { repositories, repositoriesContributedTo } = data.user;
 
@@ -100,7 +99,7 @@ const UserRepos = ({ login }) => (
       // - find a way to modularise
 
       return (
-        <div className="container">
+        <>
           {(repositories.totalCount > 0 ||
             repositoriesContributedTo.totalCount > 0) && (
             <div>
@@ -112,7 +111,7 @@ const UserRepos = ({ login }) => (
                 } repositories contributed to`}
             </div>
           )}
-        </div>
+        </>
       );
     }}
   </Query>

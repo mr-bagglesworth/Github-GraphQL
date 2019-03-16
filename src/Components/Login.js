@@ -4,8 +4,12 @@ import React from "react";
 // login and authentication
 import { githubLogin } from "../utils/githubLogin";
 
+// components
+import LoginText from "./LoginText";
+
 // styles
-import { BasicForm, FormButton } from "./styles/forms";
+import { LoginForm, TextInput } from "./styles/forms";
+import { Button } from "./styles/buttons";
 
 // convert a username and password into a token
 // - use this token to log the user in in app.js
@@ -21,6 +25,8 @@ export default class Login extends React.Component {
   handleInput = e => {
     const items = JSON.parse(JSON.stringify(this.state));
     items[e.target.id] = e.target.value;
+    // reset the error message
+    if (e.target.value.length < 2) items.formError = false;
     this.setState({ ...items });
   };
 
@@ -31,10 +37,12 @@ export default class Login extends React.Component {
     const { username, password } = this.state;
     // lazy check
     // - need an error message if token fails
-    if (username.length > 2 && password.length > 5) {
-      githubLogin(username, password).then(token => {
-        this.props.loginSubmit(token);
-      });
+    if (username.length > 2 && password.length > 4) {
+      githubLogin(username, password)
+        .then(token => {
+          this.props.loginSubmit(token);
+        })
+        .catch(err => this.setState({ formError: true })); // logs bad credentials
     } else {
       this.setState({ formError: true });
     }
@@ -42,26 +50,34 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <BasicForm>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" onChange={this.handleInput} />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" onChange={this.handleInput} />
-        </div>
-        <div>
-          <FormButton
-            type="submit"
-            value="Submit"
-            onClick={e => this.handleLoginSubmit(e)}
-          />
-        </div>
-        {this.state.formError && (
-          <p>Please fill in your details to start searching</p>
-        )}
-      </BasicForm>
+      <>
+        <LoginForm>
+          <div>
+            <label htmlFor="username">Username</label>
+            <TextInput id="username" type="text" onChange={this.handleInput} />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <TextInput
+              id="password"
+              type="password"
+              onChange={this.handleInput}
+            />
+          </div>
+          <div>
+            <Button
+              loginStatus={this.props.loginStatus}
+              type="submit"
+              value="Login"
+              onClick={e => this.handleLoginSubmit(e)}
+            />
+          </div>
+          {this.state.formError && (
+            <p>Your username or password was incorrect. Please try again.</p>
+          )}
+        </LoginForm>
+        <LoginText loginStatus={this.props.loginStatus} />
+      </>
     );
   }
 }

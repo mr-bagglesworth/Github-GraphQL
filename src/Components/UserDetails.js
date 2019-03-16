@@ -62,9 +62,8 @@ const UserDetails = ({ login }) => (
   <Query query={USER_QUERY} variables={{ login }}>
     {({ loading, error, data }) => {
       // return loading and error first
-      if (loading)
-        return <div className="container">Loading user details...</div>;
-      if (error) return <div className="container">Username not found</div>;
+      if (loading) return <>Loading user details...</>;
+      if (error) return <>Username not found</>;
 
       const {
         avatarUrl,
@@ -82,7 +81,7 @@ const UserDetails = ({ login }) => (
       } = data.user;
 
       return (
-        <div className="container">
+        <>
           <div>
             <img src={avatarUrl} alt={name} />
           </div>
@@ -122,7 +121,7 @@ const UserDetails = ({ login }) => (
               <a href={url}>Link to Profile ></a>
             </li>
           </ul>
-        </div>
+        </>
       );
     }}
   </Query>

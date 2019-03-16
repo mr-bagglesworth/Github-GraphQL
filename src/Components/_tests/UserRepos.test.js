@@ -47,8 +47,9 @@ it("UserRepos component without mocks returns loading state", () => {
     </MockedProvider>
   );
 
+  // use tree.children if searching for child components
   const tree = loadingComponent.toJSON();
-  expect(tree.children).toContain("Loading user's repositories...");
+  expect(tree).toContain("Loading user's repositories...");
 });
 
 // error
@@ -75,5 +76,5 @@ it("UserRepos should show error message", async () => {
   await wait(0);
 
   const tree = component.toJSON();
-  expect(tree.children).toContain("Username not found");
+  expect(tree).toContain("Username not found");
 });
