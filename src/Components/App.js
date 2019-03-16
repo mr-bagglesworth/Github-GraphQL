@@ -8,11 +8,16 @@ import { ApolloProvider } from "react-apollo";
 import { graphqlClient } from "../utils/graphqlClient";
 
 // Components
+import Header from "./Header";
 import Login from "./Login";
 import Search from "./Search";
 import { UserDetails } from "./UserDetails";
 import { UserRepos } from "./UserRepos";
 import Repository from "./Repository";
+
+// colour - for background
+import styleVars from "./styles/styleVars";
+const { colors } = styleVars;
 
 /*
 if local
@@ -21,6 +26,13 @@ if local
 if live on github
 - use login form for user
 - enter name and password to create a token
+
+todo
+- restructure to not render header twice
+  - (may just be because it needs to re-render to add login header)
+  - PureComponent and shouldComponentUpdate(), if so
+- token in sessionStorage
+- token encrypted
 */
 
 // App
@@ -37,7 +49,8 @@ export default class App extends React.Component {
   // check the environment out when component mounts
   componentDidMount() {
     // flip this around to test locally
-    if (process.env.NODE_ENV === "development") {
+    // - also try to get a token from local or session storage - if user is logged in
+    if (process.env.NODE_ENV === "development9") {
       this.setState({ login: true, token: process.env.REACT_APP_GET_ME_IN });
     }
   }
@@ -50,16 +63,14 @@ export default class App extends React.Component {
       name
     };
   }
-  routeForUser(username) {
-    return {
-      login: username
-    };
-  }
+
+  logoutSubmit = () => {
+    this.setState({ login: false, token: "" });
+  };
 
   // login submit
   // - sets a token to be entered into graphql client, allowing searches
   loginSubmit = accessToken => {
-    // console.log(accessToken);
     this.setState({ login: true, token: accessToken });
   };
 
@@ -71,64 +82,59 @@ export default class App extends React.Component {
   };
 
   render() {
-    // not logged in
-    if (!this.state.login) {
-      return (
-        <div className="container">
-          <p>
-            Please enter your Github username and password to start searching...
-          </p>
-          <p>
-            - this generates a{" "}
-            <a href="https://github.com/settings/tokens">
-              personal access token
-            </a>
-          </p>
-          <Login loginSubmit={this.loginSubmit} />
-        </div>
-      );
-    }
+    const { login, username, searchType, selectedRepo, token } = this.state;
 
-    // render components based on state:
-
-    // a) login => search
-    // b) search
-
-    // 1. UserDetails.js
-
-    // 2. UserRepos.js
-
-    // 3. Repository.js
-    const { username, searchType, selectedRepo } = this.state;
+    // logged out
+    // - set background gradient to pink
+    const bgGrad = !login ? colors.bgPink : colors.bgBlue;
+    document.body.style.background = `linear-gradient(212deg, ${bgGrad}, white)`;
 
     // logged in
-    if (this.state.login) {
-      // set token on the client
-      const client = graphqlClient(this.state.token);
-      return (
+    // - convert token to graphql client
+    const client = token ? graphqlClient(token) : "";
+
+    // conditional rendering
+    // - based on login status
+    // - if logged in, render result components based on state:
+    // 1. UserDetails.js
+    // 2. UserRepos.js
+    // 3. Repository.js
+    const pageContent = !login ? (
+      <>
+        <p>Enter your Github username and password to start searching.</p>
+        <Login loginSubmit={this.loginSubmit} loginStatus={login} />
+      </>
+    ) : (
+      <>
+        <p>Enter a valid Github username to start searching...</p>
+        <Search
+          {...this.state}
+          searchSubmit={this.searchSubmit}
+          loginStatus={login}
+        />
         <ApolloProvider client={client}>
-          <div>
-            <Search {...this.state} searchSubmit={this.searchSubmit} />
+          {username && searchType === "userdetails" && !selectedRepo && (
+            <UserDetails login={username} />
+          )}
 
-            {username && searchType === "userdetails" && !selectedRepo && (
-              <UserDetails login={this.state.username} />
-            )}
+          {username && searchType === "repodetails" && !selectedRepo && (
+            <UserRepos login={username} />
+          )}
 
-            {username && searchType === "repodetails" && !selectedRepo && (
-              <UserRepos login={this.state.username} />
-            )}
-
-            {username && selectedRepo && (
-              <Repository
-                {...this.routeForRepository(
-                  this.state.username,
-                  this.state.selectedRepo
-                )}
-              />
-            )}
-          </div>
+          {username && selectedRepo && (
+            <Repository {...this.routeForRepository(username, selectedRepo)} />
+          )}
         </ApolloProvider>
-      );
-    }
+      </>
+    );
+
+    // check if Header is rendered twice if props don't change
+    // - look at pure components, and shouldComponentUpdate() if so
+    return (
+      <div className="container">
+        <Header loginStatus={login} logoutSubmit={this.logoutSubmit} />
+        {pageContent}
+      </div>
+    );
   }
 }

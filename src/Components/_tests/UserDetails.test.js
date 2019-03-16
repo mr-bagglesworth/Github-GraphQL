@@ -57,8 +57,9 @@ it("UserDetails component without mocks returns loading state", () => {
     </MockedProvider>
   );
 
+  // use tree.children if searching child elements
   const tree = loadingComponent.toJSON();
-  expect(tree.children).toContain("Loading user details...");
+  expect(tree).toContain("Loading user details...");
 });
 
 // final state
@@ -99,5 +100,5 @@ it("UserDetails should show error message", async () => {
   await wait(0);
 
   const tree = component.toJSON();
-  expect(tree.children).toContain("Username not found");
+  expect(tree).toContain("Username not found");
 });

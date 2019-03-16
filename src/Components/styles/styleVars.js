@@ -2,23 +2,34 @@ const styleVars = {
   colors: {
     black: "black",
     white: "white",
+    // greys
     off_white: "#eee",
     lightGrey: "#f7f7f7",
     midGrey: "#d8d8d8",
     grey: "grey",
+    // blues
     blue: "#0348a3",
     lightBlue: "#0469ee",
-    yellow: "#fcbc00"
+    bgBlue: "#aaf5ff",
+    // reds
+    red: "tomato",
+    darkRed: "#d9391c",
+    yellow: "#fcbc00",
+    // pinks
+    pink: "#c91f6c",
+    lightPink: "#e13ab0",
+    bgPink: "#eb7caf"
   },
   spacing: {
+    xSmall: "0.125rem",
     small: "0.25rem",
     med: "0.5rem",
     large: "1rem",
     xLarge: "2rem"
   },
   fontSize: {
-    xxSmall: "0.85rem",
-    xSmall: "0.95rem",
+    xxSmall: "0.95rem",
+    xSmall: "1.125rem",
     small: "1.25rem",
     med: "1.625rem",
     large: "1.875rem",

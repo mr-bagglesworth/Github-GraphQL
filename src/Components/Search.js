@@ -2,7 +2,8 @@
 import React from "react";
 
 // styles
-import { BasicForm, CustomRadio, FormButton } from "./styles/forms";
+import { SearchForm, TextInput, CustomRadio } from "./styles/forms";
+import { Button } from "./styles/buttons";
 
 // Search.js triggers api calls, and populates components, based on its state:
 // - Repository
@@ -46,50 +47,47 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h1>Github GraphQL API</h1>
-        <p>Search Github users and their repositories with GraphQL API</p>
-        <BasicForm>
+      <SearchForm>
+        <div>
+          <label htmlFor="username">Username</label>
+          <TextInput id="username" type="text" onChange={this.handleUserName} />
+        </div>
+        <div>
           <div>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" onChange={this.handleUserName} />
-          </div>
-          <div>
-            <div>
-              <CustomRadio htmlFor="userdetails">
-                Get User's Details
-                <input
-                  type="radio"
-                  name="userdetails"
-                  id="userdetails"
-                  checked={this.state.searchType === "userdetails"}
-                  onChange={this.handleSearchType}
-                />
-                <span />
-              </CustomRadio>
-              <CustomRadio htmlFor="repodetails">
-                Get User's Repositories
-                <input
-                  type="radio"
-                  name="repodetails"
-                  id="repodetails"
-                  checked={this.state.searchType === "repodetails"}
-                  onChange={this.handleSearchType}
-                />
-                <span />
-              </CustomRadio>
-            </div>
-            <div>
-              <FormButton
-                type="submit"
-                value="Submit"
-                onClick={e => this.handleSearchSubmit(e)}
+            <CustomRadio htmlFor="userdetails">
+              Get User's Details
+              <input
+                type="radio"
+                name="userdetails"
+                id="userdetails"
+                checked={this.state.searchType === "userdetails"}
+                onChange={this.handleSearchType}
               />
-            </div>
+              <span />
+            </CustomRadio>
+            <CustomRadio htmlFor="repodetails">
+              Get User's Repositories
+              <input
+                type="radio"
+                name="repodetails"
+                id="repodetails"
+                checked={this.state.searchType === "repodetails"}
+                onChange={this.handleSearchType}
+              />
+              <span />
+            </CustomRadio>
           </div>
-          {this.state.formError && <p>Please enter a valid username</p>}
-        </BasicForm>
-      </div>
+          <div>
+            <Button
+              loginStatus={this.props.loginStatus}
+              type="submit"
+              value="Submit"
+              onClick={e => this.handleSearchSubmit(e)}
+            />
+          </div>
+        </div>
+        {this.state.formError && <p>Please enter a valid username</p>}
+      </SearchForm>
     );
   }
 }

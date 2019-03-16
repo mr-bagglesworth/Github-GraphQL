@@ -1,12 +1,13 @@
-// get variables
+// forms
+// - form containers, text input, and radios
+// - not including buttons
+
 import styled from "styled-components";
 import styleVars from "./styleVars";
-
 const { colors, spacing, fontName, fontSize, boxShadow } = styleVars;
 
-// all form elements, including buttons
-
-const BasicForm = styled.form`
+// all forms contain inputs wrapped in divs
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin: ${spacing.xLarge} 0;
@@ -15,14 +16,20 @@ const BasicForm = styled.form`
   border-radius: ${spacing.small};
   box-shadow: ${boxShadow.out};
   // rows
-  > div:nth-child(1) {
+  > div {
     display: flex;
     flex-direction: column;
-    margin-bottom: ${spacing.large};
+    margin-top: ${spacing.large};
   }
-  // radio and submit buttons
+  > div:nth-child(1) {
+    margin-top: 0;
+  }
+`;
+
+// search form
+const SearchForm = styled(Form)`
+  // radio and submit container
   > div:nth-child(2) {
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     // wrap at wider widths
@@ -30,18 +37,7 @@ const BasicForm = styled.form`
       flex-direction: row;
       align-items: center;
     }
-    // radio containers
-    label {
-      margin-left: 0;
-      margin-bottom: ${spacing.med};
-      @media screen and (min-width: 30rem) {
-        &[for="repodetails"] {
-          margin-left: ${spacing.large};
-          margin-bottom: 0;
-        }
-      }
-    }
-    // radio button container
+    // radio container
     > div:nth-child(1) {
       display: flex;
       flex-direction: column;
@@ -53,22 +49,43 @@ const BasicForm = styled.form`
         margin-bottom: 0;
       }
     }
-    // submit button container
+    // submit container
     > div:nth-child(2) {
       align-self: flex-end;
     }
   }
-  input[type="text"],
-  input[type="password"] {
-    font-family: ${fontName.main};
-    font-size: ${fontSize.small};
-    padding: ${spacing.med};
-    border: 0.2rem solid ${colors.grey};
-    border-radius: ${spacing.small};
-    &:focus {
-      outline: none;
-      border: 0.2rem solid ${colors.blue};
+  // labels on radios
+  label {
+    margin-left: 0;
+    margin-bottom: ${spacing.med};
+    @media screen and (min-width: 30rem) {
+      &[for="repodetails"] {
+        margin-left: ${spacing.large};
+        margin-bottom: 0;
+      }
     }
+  }
+`;
+
+// login form
+const LoginForm = styled(Form)`
+  // submit container
+  > div:nth-child(3) {
+    align-self: flex-end;
+  }
+`;
+
+// text and password input
+// - div containing label and input
+const TextInput = styled.input`
+  font-family: ${fontName.main};
+  font-size: ${fontSize.small};
+  padding: ${spacing.med};
+  border: 0.2rem solid ${colors.grey};
+  border-radius: ${spacing.small};
+  &:focus {
+    outline: none;
+    border: 0.2rem solid ${colors.blue};
   }
 `;
 
@@ -121,24 +138,4 @@ const CustomRadio = styled.label`
   }
 `;
 
-const FormButton = styled.input`
-  cursor: pointer;
-  font-family: ${fontName.main};
-  font-size: ${fontSize.small};
-  padding: ${spacing.med} ${spacing.large};
-  background-color: ${colors.blue};
-  color: ${colors.white};
-  border: 0;
-  border-radius: ${spacing.small};
-  transition: all ease-in-out 0.3s;
-  &:hover,
-  &:focus {
-    outline: none;
-    background-color: ${colors.lightBlue};
-  }
-  @media screen and (min-width: 35rem) {
-    font-size: ${fontSize.med};
-  }
-`;
-
-export { BasicForm, CustomRadio, FormButton };
+export { Form, SearchForm, LoginForm, TextInput, CustomRadio };

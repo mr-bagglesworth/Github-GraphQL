@@ -2,7 +2,47 @@
 import styled from "styled-components";
 import styleVars from "./styleVars";
 
-const { colors, spacing, boxShadow, border } = styleVars;
+const { colors, spacing, fontSize, boxShadow, border } = styleVars;
+
+// small text
+// - footer on login screen
+const SmallText = styled.div`
+  font-size: ${fontSize.xSmall};
+  color: ${colors.grey};
+  p {
+    margin-bottom: ${spacing.large};
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+    margin-right: ${spacing.xLarge};
+    margin-bottom: ${spacing.large};
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    border-bottom: 0.1rem solid;
+    color: ${props => (props.loginStatus ? colors.blue : colors.pink)};
+    &:hover {
+      color: ${props =>
+        props.loginStatus ? colors.lightBlue : colors.lightPink};
+    }
+    &:focus {
+      color: ${colors.red};
+    }
+    &:nth-child(2) {
+      margin-right: 0;
+    }
+  }
+`;
+
+// header when logged in
+const SmallHeaderText = styled(SmallText)`
+  p {
+    text-align: center;
+    @media screen and (min-width: 35rem) {
+      text-align: right;
+    }
+  }
+`;
 
 // not basic repo though
 // - basic repo will be one column, and will not change depending upon size
@@ -65,7 +105,7 @@ const BasicRepo = styled.div`
   }
 `;
 
-export { BasicRepo };
+export { SmallText, SmallHeaderText, BasicRepo };
 
 // .repo {
 //   &-container {
