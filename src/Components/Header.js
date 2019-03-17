@@ -4,10 +4,6 @@ import React from "react";
 import { SmallHeaderText, HeaderLabel } from "./styles/containers";
 import { TextButton } from "./styles/buttons";
 
-// colour - for h1
-import styleVars from "./styles/styleVars";
-const { colors } = styleVars;
-
 const Header = props => {
   // logoutSubmit could be an optional prop. Look into testing with this
   const { loginStatus, logoutSubmit } = props;
