@@ -49,24 +49,33 @@ export default class Login extends React.Component {
   };
 
   render() {
+    const { loginStatus } = this.props;
     return (
       <>
         <LoginForm>
           <div>
             <label htmlFor="username">Username</label>
-            <TextInput id="username" type="text" onChange={this.handleInput} />
+            <TextInput
+              placeholder="Github Username"
+              id="username"
+              type="text"
+              onChange={this.handleInput}
+              loginStatus={loginStatus}
+            />
           </div>
           <div>
             <label htmlFor="password">Password</label>
             <TextInput
+              placeholder="Github Password"
               id="password"
               type="password"
               onChange={this.handleInput}
+              loginStatus={loginStatus}
             />
           </div>
           <div>
             <Button
-              loginStatus={this.props.loginStatus}
+              loginStatus={loginStatus}
               type="submit"
               value="Login"
               onClick={e => this.handleLoginSubmit(e)}
@@ -76,7 +85,7 @@ export default class Login extends React.Component {
             <p>Your username or password was incorrect. Please try again.</p>
           )}
         </LoginForm>
-        <LoginText loginStatus={this.props.loginStatus} />
+        <LoginText loginStatus={loginStatus} />
       </>
     );
   }

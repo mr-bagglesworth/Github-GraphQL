@@ -1,15 +1,19 @@
 import React from "react";
 
 // styles
-import { SmallHeaderText } from "./styles/containers";
+import { SmallHeaderText, HeaderLabel } from "./styles/containers";
 import { TextButton } from "./styles/buttons";
+
+// colour - for h1
+import styleVars from "./styles/styleVars";
+const { colors } = styleVars;
 
 const Header = props => {
   // logoutSubmit could be an optional prop. Look into testing with this
   const { loginStatus, logoutSubmit } = props;
 
   // This is used to show / hide a logout button for those on github pages
-  const showLogout = loginStatus && process.env.NODE_ENV !== "development9";
+  const showLogout = loginStatus && process.env.NODE_ENV !== "development";
 
   return (
     <>
@@ -23,7 +27,7 @@ const Header = props => {
           </p>
         </SmallHeaderText>
       )}
-      <h1>Github GraphQL API</h1>
+      <HeaderLabel loginStatus={loginStatus}>Github GraphQL API</HeaderLabel>
       <p>Search Github users and their repositories with GraphQL API</p>
     </>
   );
