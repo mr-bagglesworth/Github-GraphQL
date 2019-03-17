@@ -11,6 +11,7 @@ const styleVars = {
     blue: "#0348a3",
     lightBlue: "#0469ee",
     bgBlue: "#aaf5ff",
+    paleBlue: "#eefdff",
     // reds
     red: "tomato",
     darkRed: "#d9391c",
@@ -18,7 +19,8 @@ const styleVars = {
     // pinks
     pink: "#c91f6c",
     lightPink: "#e13ab0",
-    bgPink: "#eb7caf"
+    bgPink: "#eb7caf",
+    palePink: "#fbe4ef"
   },
   spacing: {
     xSmall: "0.125rem",

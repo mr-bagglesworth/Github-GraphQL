@@ -46,11 +46,18 @@ export default class Search extends React.Component {
   };
 
   render() {
+    const { loginStatus } = this.props;
+    const { searchType, formError } = this.state;
     return (
       <SearchForm>
         <div>
           <label htmlFor="username">Username</label>
-          <TextInput id="username" type="text" onChange={this.handleUserName} />
+          <TextInput
+            id="username"
+            type="text"
+            onChange={this.handleUserName}
+            loginStatus={loginStatus}
+          />
         </div>
         <div>
           <div>
@@ -60,7 +67,7 @@ export default class Search extends React.Component {
                 type="radio"
                 name="userdetails"
                 id="userdetails"
-                checked={this.state.searchType === "userdetails"}
+                checked={searchType === "userdetails"}
                 onChange={this.handleSearchType}
               />
               <span />
@@ -71,7 +78,7 @@ export default class Search extends React.Component {
                 type="radio"
                 name="repodetails"
                 id="repodetails"
-                checked={this.state.searchType === "repodetails"}
+                checked={searchType === "repodetails"}
                 onChange={this.handleSearchType}
               />
               <span />
@@ -79,14 +86,14 @@ export default class Search extends React.Component {
           </div>
           <div>
             <Button
-              loginStatus={this.props.loginStatus}
+              loginStatus={loginStatus}
               type="submit"
               value="Submit"
               onClick={e => this.handleSearchSubmit(e)}
             />
           </div>
         </div>
-        {this.state.formError && <p>Please enter a valid username</p>}
+        {formError && <p>Please enter a valid username</p>}
       </SearchForm>
     );
   }

@@ -1,6 +1,12 @@
 import React from "react";
 import Login from "../Login.js";
-import { render, fireEvent } from "react-testing-library";
+import {
+  render,
+  fireEvent,
+  getByTestId,
+  getAllByLabelText,
+  getByPlaceholderText
+} from "react-testing-library";
 
 describe("Login component", () => {
   // login button click

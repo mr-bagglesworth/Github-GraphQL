@@ -85,7 +85,12 @@ const TextInput = styled.input`
   border-radius: ${spacing.small};
   &:focus {
     outline: none;
-    border: 0.2rem solid ${colors.blue};
+    background-color: ${props =>
+      props.loginStatus
+        ? colors.paleBlue
+        : colors.palePink} !important; // override user agent stylesheet
+    border: 0.2rem solid
+      ${props => (props.loginStatus ? colors.blue : colors.pink)};
   }
 `;
 

@@ -20,19 +20,11 @@ import styleVars from "./styles/styleVars";
 const { colors } = styleVars;
 
 /*
-if local
-- use a personal access token (from env file, not committed)
-
-if live on github
-- use login form for user
-- enter name and password to create a token
-
 todo
-- restructure to not render header twice
-  - (may just be because it needs to re-render to add login header)
-  - PureComponent and shouldComponentUpdate(), if so
-- token in sessionStorage
-- token encrypted
+- restructure to not render header twice..
+  - it needs to re-render to add github logout link
+  - PureComponent and shouldComponentUpdate() to check if props have changed
+- encrypt login token
 */
 
 // App
@@ -46,31 +38,47 @@ export default class App extends React.Component {
     selectedRepo: ""
   };
 
-  // check the environment out when component mounts
+  // check the environment, and set the token when component mounts
   componentDidMount() {
-    // flip this around to test locally
-    // - also try to get a token from local or session storage - if user is logged in
-    if (process.env.NODE_ENV === "development9") {
+    // local
+    if (process.env.NODE_ENV === "development") {
       this.setState({ login: true, token: process.env.REACT_APP_GET_ME_IN });
+    }
+    // github
+    // - if the correct token is in sessionStorage, set it
+    else {
+      const tokenKey = Object.keys(sessionStorage).find(item =>
+        item.startsWith("githubGraphQL_")
+      );
+      const token = sessionStorage[tokenKey];
+      if (token) this.setState({ login: true, token });
     }
   }
 
-  // routes - to be removed (probably) replaced by graphql query components
-  routeForRepository(login, name) {
-    return {
-      title: `${login}/${name}`,
-      login,
-      name
-    };
-  }
+  // routes - to be removed and replaced by graphql query components
+  // routeForRepository(login, name) {
+  //   return {
+  //     title: `${login}/${name}`,
+  //     login,
+  //     name
+  //   };
+  // }
 
+  // logout
+  // - remove token from sessionStorage
   logoutSubmit = () => {
+    const tokenKey = Object.keys(sessionStorage).find(item =>
+      item.startsWith("githubGraphQL_")
+    );
+    sessionStorage.removeItem(tokenKey);
     this.setState({ login: false, token: "" });
   };
 
   // login submit
   // - sets a token to be entered into graphql client, allowing searches
+  // - add token to sessionStorage - user won't have to login on page refresh
   loginSubmit = accessToken => {
+    sessionStorage.setItem(`githubGraphQL_${accessToken}`, accessToken);
     this.setState({ login: true, token: accessToken });
   };
 

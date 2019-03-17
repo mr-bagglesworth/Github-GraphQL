@@ -141,7 +141,8 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-family: "Carme", sans-serif;
+  font-size: 2.5rem;
   line-height: 1.6;
 }
 
@@ -172,7 +173,7 @@ h3 {
 /* larger screens */
 @media screen and (min-width: 35rem) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
   h2 {
     font-size: 1.875rem;

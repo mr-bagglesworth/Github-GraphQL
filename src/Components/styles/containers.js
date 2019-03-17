@@ -44,6 +44,22 @@ const SmallHeaderText = styled(SmallText)`
   }
 `;
 
+// - - - -
+// header label
+const HeaderLabel = styled.h1`
+  line-height: 1;
+  display: inline-block;
+  margin-bottom: ${spacing.large};
+  padding: ${spacing.med} ${spacing.large};
+  border-radius: ${spacing.small};
+  transform: skew(-10deg);
+  background-color: white;
+  color: ${props => (props.loginStatus ? colors.blue : colors.pink)};
+  box-shadow: 0.15rem 0.15rem 0.3rem
+    ${props => (props.loginStatus ? colors.blue : colors.pink)};
+`;
+
+// - - - -
 // not basic repo though
 // - basic repo will be one column, and will not change depending upon size
 // - think verkstedt tech test
@@ -105,7 +121,7 @@ const BasicRepo = styled.div`
   }
 `;
 
-export { SmallText, SmallHeaderText, BasicRepo };
+export { SmallText, SmallHeaderText, HeaderLabel, BasicRepo };
 
 // .repo {
 //   &-container {
