@@ -48,7 +48,7 @@ export default class App extends React.Component {
     // - if the correct token is in sessionStorage, set it
     else {
       const tokenKey = Object.keys(sessionStorage).find(item =>
-        item.startsWith("githubGraphQL_")
+        item.startsWith("githubGraphQL")
       );
       const token = sessionStorage[tokenKey];
       if (token) this.setState({ login: true, token });
@@ -68,7 +68,7 @@ export default class App extends React.Component {
   // - remove token from sessionStorage
   logoutSubmit = () => {
     const tokenKey = Object.keys(sessionStorage).find(item =>
-      item.startsWith("githubGraphQL_")
+      item.startsWith("githubGraphQL")
     );
     sessionStorage.removeItem(tokenKey);
     this.setState({ login: false, token: "" });
@@ -78,7 +78,7 @@ export default class App extends React.Component {
   // - sets a token to be entered into graphql client, allowing searches
   // - add token to sessionStorage - user won't have to login on page refresh
   loginSubmit = accessToken => {
-    sessionStorage.setItem(`githubGraphQL_${accessToken}`, accessToken);
+    sessionStorage.setItem(`githubGraphQL`, accessToken);
     this.setState({ login: true, token: accessToken });
   };
 
@@ -106,7 +106,7 @@ export default class App extends React.Component {
     // - if logged in, render result components based on state:
     // 1. UserDetails.js
     // 2. UserRepos.js
-    // 3. Repository.js
+    // 3. Repository.js - might get controlled by UserRepos.js instead
     const pageContent = !login ? (
       <>
         <p>Enter your Github username and password to start searching.</p>

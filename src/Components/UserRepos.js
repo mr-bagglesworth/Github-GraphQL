@@ -5,18 +5,19 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-// utils
-// import { dateFormat } from "../utils/utils";
+// Components
+import SmallRepo from "./SmallRepo";
 
 // create user repos query
 // previously first: 100
 const USER_REPOS_QUERY = gql`
   query UserreposQuery($login: String!) {
     user(login: $login) {
-      repositories(first: 10) {
+      repositories(first: 100) {
         totalCount
         edges {
           node {
+            id
             name
             url
             description
@@ -24,6 +25,7 @@ const USER_REPOS_QUERY = gql`
             pushedAt
             primaryLanguage {
               name
+              color
             }
             stargazers(first: 100) {
               totalCount
@@ -48,6 +50,7 @@ const USER_REPOS_QUERY = gql`
         totalCount
         edges {
           node {
+            id
             name
             url
             description
@@ -55,6 +58,7 @@ const USER_REPOS_QUERY = gql`
             pushedAt
             primaryLanguage {
               name
+              color
             }
             owner {
               url
@@ -98,6 +102,17 @@ const UserRepos = ({ login }) => (
       // need to pull out the same information from each of the above, more or less
       // - find a way to modularise
 
+      // maybe have a toggle between repos authored and repos contributed to
+      // - may make this a class component if so
+      // - only do the first repos query by default, do the contributed query on button click
+
+      // split this into 2 components:
+      // - repo count (1 query)
+      // - repo list (2 queries - repos / contributed)
+
+      // save as favourites locally
+      // mutation: star or watch (or unstar or unwatch) on github (inform the user that their action will do this)
+
       return (
         <>
           {(repositories.totalCount > 0 ||
@@ -110,6 +125,13 @@ const UserRepos = ({ login }) => (
                   repositoriesContributedTo.totalCount
                 } repositories contributed to`}
             </div>
+          )}
+          {repositories.totalCount > 0 && (
+            <ul>
+              {repositories.edges.map(item => (
+                <SmallRepo key={item.node.id} {...item.node} />
+              ))}
+            </ul>
           )}
         </>
       );
