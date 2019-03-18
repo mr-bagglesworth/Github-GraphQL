@@ -1,7 +1,9 @@
 import React from "react";
 
-// unit test the component, I guess
-// - data comes from state in actual component
+/*
+unit tests on the specific component
+integration tests - how they affect other components - e.g. failure message in the Search.js form
+*/
 
 // with a bit of help from here:
 // https://blog.apollographql.com/testing-apollos-query-component-d575dc642e04

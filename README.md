@@ -9,7 +9,7 @@ A first foray into using Github GraphQL API with React Apollo.
 View the live app here:
 
 [https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
-> please note that to search on Github Pages, you must login to Github first. See [Todo](#todo)
+> please note that to use the live version of the app, you must login with your Github account details. This generates a temporary personal access token. See [Todo](#todo)
 
 ## To get running locally:
 - clone the repository

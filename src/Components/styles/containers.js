@@ -44,7 +44,7 @@ const SmallHeaderText = styled(SmallText)`
   }
 `;
 
-// - - - -
+// - - - - - - - - - - -
 // header label
 const HeaderLabel = styled.h1`
   line-height: 1;
@@ -59,7 +59,27 @@ const HeaderLabel = styled.h1`
     ${props => (props.loginStatus ? colors.blue : colors.pink)};
 `;
 
-// - - - -
+// - - - - - - - - - - -
+// blueprint for other repos - perhaps
+const Repo = styled.li`
+  margin-bottom: ${spacing.xLarge};
+  padding: ${spacing.large};
+  background-color: ${colors.white};
+  box-shadow: ${boxShadow.out};
+  border-radius: ${spacing.small};
+  // language colours
+  border-top: ${spacing.large} solid
+    ${props => (props.lang.color ? props.lang.color : "white")};
+  .language {
+    padding: ${spacing.xSmall} ${spacing.small};
+    background-color: ${props =>
+      props.lang.color ? props.lang.color : colors.grey};
+    color: ${props =>
+      props.lang.name === "JavaScript" ? colors.black : colors.white};
+  }
+`;
+
+// - - - - - - - - - - -
 // not basic repo though
 // - basic repo will be one column, and will not change depending upon size
 // - think verkstedt tech test
@@ -121,7 +141,7 @@ const BasicRepo = styled.div`
   }
 `;
 
-export { SmallText, SmallHeaderText, HeaderLabel, BasicRepo };
+export { SmallText, SmallHeaderText, HeaderLabel, Repo, BasicRepo };
 
 // .repo {
 //   &-container {
