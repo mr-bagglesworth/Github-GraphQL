@@ -6,13 +6,9 @@ import { dateFormat } from "../utils/utils";
 
 // styles
 import { Repo } from "./styles/containers";
-import { SmallButton } from "./styles/buttons";
+// import { SmallButton } from "./styles/buttons";
 
-/* structure:
-- though parent structure may change, this can be built out as an independent component
-- simpler query in UserRepos parent component, don't need all this info
-- pass repo id into button click, this will load LargeRepo.js
-    - this will run a query that pulls up more information
+/* 
 
 small repo details + functions (no thumbnails):
 - name
@@ -20,8 +16,9 @@ small repo details + functions (no thumbnails):
 - language and colour
 - stargazers and watchers count
 + expand / more info
-~ to add = say if repo is forked
-~ order date descending
+~ to add = style to say if repo is forked
+~ order date descending / ascending
+~ user thumbnails if group project
 
 large repo details + functions (see tech test)
 - image / avatarUrl
@@ -37,9 +34,11 @@ large repo details + functions (see tech test)
 
 */
 
+// needs to be more versatile - handle single and group projects
 const SmallRepo = props => {
   const {
     createdAt,
+    isFork,
     name,
     primaryLanguage,
     // primaryLanguage: { color },
@@ -48,25 +47,41 @@ const SmallRepo = props => {
     watchers
   } = props;
 
-  //   primaryLanguage can be null, create an object if so
-  const langDetails = primaryLanguage
-    ? { name: primaryLanguage.name, color: primaryLanguage.color }
-    : { name: "N/A", color: null };
-  //   console.log(langDetails);
+  console.log(props);
+
+  //   primaryLanguage can be null
+  const langColor = primaryLanguage ? primaryLanguage.color : null;
+  const langName = primaryLanguage ? primaryLanguage.name : "N/A";
+
+  // collaborators can be null - group projects only
+  // - doesn't like this search in parent component
+  // console.log(collaborators);
+  // collaborators(first: 100) {
+  //   totalCount
+  //   edges {
+  //     node {
+  //       id
+  //       name
+  //       login
+  //       url
+  //     }
+  //   }
+  // }
+  // <SmallButton>Expand +</SmallButton>
 
   return (
-    <Repo lang={langDetails}>
+    <Repo langColor={langColor} langName={langName}>
       <h3>{name}</h3>
       <p>
-        Created: {dateFormat(createdAt)} | Updated: {dateFormat(pushedAt)}
+        Created: {dateFormat(createdAt)} | Updated: {dateFormat(pushedAt)}{" "}
+        {isFork && "| Forked"}
       </p>
       <p>
-        Main Language: <span className="language">{langDetails.name}</span>
+        Main Language: <span className="language">{langName}</span>
       </p>
       <p>
         {stargazers.totalCount} Stargazers | {watchers.totalCount} Watchers
       </p>
-      <SmallButton>Expand +</SmallButton>
     </Repo>
   );
 };

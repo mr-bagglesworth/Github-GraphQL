@@ -60,6 +60,18 @@ const HeaderLabel = styled.h1`
 `;
 
 // - - - - - - - - - - -
+// repo stats
+const Stats = styled.div`
+  margin-bottom: ${spacing.xLarge};
+  > div {
+    margin-bottom: ${spacing.large};
+  }
+  > button {
+    margin-right: ${spacing.xLarge};
+  }
+`;
+
+// - - - - - - - - - - -
 // blueprint for other repos - perhaps
 const Repo = styled.li`
   margin-bottom: ${spacing.xLarge};
@@ -69,13 +81,13 @@ const Repo = styled.li`
   border-radius: ${spacing.small};
   // language colours
   border-top: ${spacing.large} solid
-    ${props => (props.lang.color ? props.lang.color : "white")};
+    ${props => (props.langColor ? props.langColor : "white")};
   .language {
     padding: ${spacing.xSmall} ${spacing.small};
     background-color: ${props =>
-      props.lang.color ? props.lang.color : colors.grey};
+      props.langColor ? props.langColor : colors.grey};
     color: ${props =>
-      props.lang.name === "JavaScript" ? colors.black : colors.white};
+      props.langName === "JavaScript" ? colors.black : colors.white};
   }
 `;
 
@@ -141,7 +153,7 @@ const BasicRepo = styled.div`
   }
 `;
 
-export { SmallText, SmallHeaderText, HeaderLabel, Repo, BasicRepo };
+export { SmallText, SmallHeaderText, HeaderLabel, Stats, Repo, BasicRepo };
 
 // .repo {
 //   &-container {

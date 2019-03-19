@@ -12,7 +12,7 @@ import Header from "./Header";
 import Login from "./Login";
 import Search from "./Search";
 import { UserDetails } from "./UserDetails";
-import { UserRepos } from "./UserRepos";
+import UserRepos from "./UserRepos";
 import Repository from "./Repository";
 
 // colour - for background
