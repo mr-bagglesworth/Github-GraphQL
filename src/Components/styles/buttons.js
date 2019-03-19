@@ -7,6 +7,7 @@ import styleVars from "./styleVars";
 const { colors, spacing, fontName, fontSize } = styleVars;
 
 // input type = text
+// - takes login prop
 const Button = styled.input`
   cursor: pointer;
   font-family: ${fontName.main};
@@ -29,6 +30,7 @@ const Button = styled.input`
 `;
 
 // button
+// - used for search toggle
 const SmallButton = styled.button`
   cursor: pointer;
   font-family: ${fontName.main};
@@ -47,6 +49,7 @@ const SmallButton = styled.button`
 `;
 
 // button that looks like text
+// - in header
 const TextButton = styled.button`
   cursor: pointer;
   font-family: ${fontName.main};
