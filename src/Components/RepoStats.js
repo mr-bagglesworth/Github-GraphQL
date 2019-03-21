@@ -30,8 +30,8 @@ const REPO_STATS_QUERY = gql`
 const RepoStats = ({ login }) => (
   <Query query={REPO_STATS_QUERY} variables={{ login }}>
     {({ loading, error, data }) => {
-      if (loading) return <>Loading user's statistics...</>;
-      if (error) return <>Statistics not found</>;
+      if (loading) return <div>Loading user's statistics...</div>;
+      if (error) return <div>Statistics not found</div>;
 
       // get the different repo types
       const { repositories, repositoriesContributedTo } = data.user;
