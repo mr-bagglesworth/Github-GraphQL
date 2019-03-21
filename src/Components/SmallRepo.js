@@ -47,7 +47,7 @@ const SmallRepo = props => {
     watchers
   } = props;
 
-  console.log(props);
+  // console.log(props);
 
   //   primaryLanguage can be null
   const langColor = primaryLanguage ? primaryLanguage.color : null;

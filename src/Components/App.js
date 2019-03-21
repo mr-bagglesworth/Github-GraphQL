@@ -21,7 +21,7 @@ const { colors } = styleVars;
 
 /*
 todo
-- restructure to not render header twice..
+- restructure to not render header twice.. (after a search)
   - it needs to re-render to add github logout link
   - PureComponent and shouldComponentUpdate() to check if props have changed
 - encrypt login token

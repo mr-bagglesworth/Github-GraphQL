@@ -62,6 +62,8 @@ it("render RepoStats component using REPO_STATS_QUERY,  without error", () => {
   );
 });
 
+// expecting an object as the return type, not a string
+
 // loading
 it("RepoStats component without mocks returns loading state", () => {
   const loadingComponent = create(
@@ -72,7 +74,7 @@ it("RepoStats component without mocks returns loading state", () => {
 
   // use tree.children if searching child elements
   const tree = loadingComponent.toJSON();
-  expect(tree).toContain("Loading user's statistics...");
+  expect(tree.children).toContain("Loading user's statistics...");
 });
 
 // error message
@@ -99,26 +101,5 @@ it("RepoStats should show error message", async () => {
   await wait(0);
 
   const tree = component.toJSON();
-  expect(tree).toContain("Statistics not found");
+  expect(tree.children[0]).toContain("Statistics not found");
 });
-
-// success message
-// it("RepoStats should shows wrapping div and stats from mocked request", async () => {
-//   const component = create(
-//     <MockedProvider mocks={mocks} addTypename={false}>
-//       <RepoStats login="mr-bagglesworth" />
-//     </MockedProvider>
-//   );
-
-//   // wait for response
-//   await wait(0);
-
-//   const tree = component.toJSON();
-//   const results = {
-//     a:
-//       "<div>20 repositories authored, 1 repositories forked, and 26 repositories contributed to<div>"
-//   };
-//   expect(tree).toContain(
-//     "<div>20 repositories authored, 1 repositories forked, and 26 repositories contributed to<div>".toJSON()
-//   );
-// });

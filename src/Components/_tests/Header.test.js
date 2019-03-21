@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Header.js";
-import { render, fireEvent, cleanup } from "react-testing-library";
+import { render, cleanup } from "react-testing-library";
 
 // jest dom - for style
 import "jest-dom/extend-expect";

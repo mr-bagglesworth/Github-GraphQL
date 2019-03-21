@@ -3,36 +3,50 @@ import React from "react";
 // Components
 import { RepoStats } from "./RepoStats";
 import { RepoList } from "./RepoList";
+import RepoToggle from "./RepoToggle";
 
 // styles
-import { SmallButton } from "./styles/buttons";
 import { Stats } from "./styles/containers";
 
 export default class UserRepos extends React.Component {
   state = {
-    search: "authored"
+    search: [
+      { text: "Authored or Forked", type: "authored", active: true },
+      { text: "Group Contributions", type: "contributed", active: false }
+    ]
   };
 
   searchToggle = e => {
+    // get id of clicked
     const searchType = e.target.id;
-    this.setState({ search: searchType });
+    const stateCopy = JSON.parse(JSON.stringify(this.state.search));
+    // update the search property of the state
+    const newState = stateCopy.map(item => {
+      item.active = false;
+      if (item.type === searchType) {
+        item.active = true;
+      }
+      return item;
+    });
+    this.setState({ search: newState });
   };
 
   render() {
     const { login } = this.props;
     const { search } = this.state;
+
+    // get active search to pass to repo list
+    const activeSearch = search.filter(item => item.active === true)[0].type;
+
     return (
       <>
         <Stats>
           <RepoStats login={login} />
-          <SmallButton id="authored" onClick={this.searchToggle}>
-            Authored or Forked
-          </SmallButton>
-          <SmallButton id="contributed" onClick={this.searchToggle}>
-            Group Contributions
-          </SmallButton>
+          {search.map(item => (
+            <RepoToggle key={item.type} {...item} onClick={this.searchToggle} />
+          ))}
         </Stats>
-        <RepoList login={login} search={search} />
+        <RepoList login={login} search={activeSearch} />
       </>
     );
   }

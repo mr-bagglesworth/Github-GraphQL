@@ -31,12 +31,13 @@ const Button = styled.input`
 
 // button
 // - used for search toggle
-const SmallButton = styled.button`
+const ToggleButton = styled.button`
   cursor: pointer;
   font-family: ${fontName.main};
-  font-size: ${fontSize.xSmall};
-  padding: ${spacing.small} ${spacing.med};
-  background-color: ${colors.red};
+  font-size: ${fontSize.small};
+  padding: ${spacing.med} ${spacing.large};
+  background-color: ${props =>
+    props.isActive ? colors.lightBlue : colors.grey};
   color: ${colors.white};
   border: 0;
   border-radius: ${spacing.small};
@@ -44,7 +45,8 @@ const SmallButton = styled.button`
   &:hover,
   &:focus {
     outline: none;
-    background-color: ${colors.darkRed};
+    background-color: ${props =>
+      props.isActive ? colors.blue : colors.darkGrey};
   }
 `;
 
@@ -69,4 +71,4 @@ const TextButton = styled.button`
   }
 `;
 
-export { Button, SmallButton, TextButton };
+export { Button, ToggleButton, TextButton };
