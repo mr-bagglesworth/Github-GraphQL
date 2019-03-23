@@ -11,7 +11,7 @@ import { graphqlClient } from "../utils/graphqlClient";
 import Header from "./Header";
 import Login from "./Login";
 import Search from "./Search";
-import { UserDetails } from "./UserDetails";
+import UserDetails from "./UserDetails";
 import UserRepos from "./UserRepos";
 import Repository from "./Repository";
 

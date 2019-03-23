@@ -6,7 +6,7 @@ import { RepoList } from "./RepoList";
 import RepoToggle from "./RepoToggle";
 
 // styles
-import { Stats } from "./styles/containers";
+import { Stats } from "./styles/text";
 
 export default class UserRepos extends React.Component {
   state = {

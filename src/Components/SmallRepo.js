@@ -1,12 +1,15 @@
 // shown in user's repo list
+// - may have to refactor in a similar way to SmallUser.js
 import React from "react";
+
+// Components
+// import { SmallButton } from "./styles/buttons";
 
 // utils
 import { dateFormat } from "../utils/utils";
 
 // styles
 import { Repo } from "./styles/containers";
-// import { SmallButton } from "./styles/buttons";
 
 /* 
 

@@ -28,7 +28,8 @@ const styleVars = {
     small: "0.25rem",
     med: "0.5rem",
     large: "1rem",
-    xLarge: "2rem"
+    xLarge: "2rem",
+    xxLarge: "5rem"
   },
   fontSize: {
     xxSmall: "0.95rem",

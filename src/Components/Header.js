@@ -1,7 +1,7 @@
 import React from "react";
 
 // styles
-import { SmallHeaderText, HeaderLabel } from "./styles/containers";
+import { SmallHeaderText, HeaderLabel } from "./styles/text";
 import { TextButton } from "./styles/buttons";
 
 const Header = props => {

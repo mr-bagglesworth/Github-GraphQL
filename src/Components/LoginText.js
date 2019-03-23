@@ -1,5 +1,5 @@
 import React from "react";
-import { SmallText } from "./styles/containers";
+import { SmallText } from "./styles/text";
 
 const LoginText = props => {
   const { loginStatus } = props;

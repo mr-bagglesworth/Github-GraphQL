@@ -50,6 +50,29 @@ const ToggleButton = styled.button`
   }
 `;
 
+// user profile expand button
+// expanded : not expanded
+const ExpandButton = styled.button`
+  cursor: pointer;
+  font-family: ${fontName.main};
+  font-size: ${fontSize.small};
+  padding: ${spacing.med} ${spacing.large};
+  background-color: ${props => (props.expanded ? colors.blue : colors.white)};
+  color: ${props => (props.expanded ? colors.white : colors.blue)};
+  border: 0.2rem solid ${colors.blue};
+  border-radius: ${spacing.small};
+  transition: all ease-in-out 0.3s;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: ${props =>
+      props.expanded ? colors.lightBlue : colors.blue};
+    border-color: ${props => (props.expanded ? colors.lightBlue : colors.blue)};
+    color: ${props => (props.expanded ? colors.white : colors.white)};
+  }
+`;
+
 // button that looks like text
 // - in header
 const TextButton = styled.button`
@@ -71,4 +94,4 @@ const TextButton = styled.button`
   }
 `;
 
-export { Button, ToggleButton, TextButton };
+export { Button, ToggleButton, ExpandButton, TextButton };
