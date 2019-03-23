@@ -4,75 +4,142 @@ import styleVars from "./styleVars";
 
 const { colors, spacing, fontSize, boxShadow, border } = styleVars;
 
-// small text
-// - footer on login screen
-const SmallText = styled.div`
-  font-size: ${fontSize.xSmall};
-  color: ${colors.grey};
-  p {
-    margin-bottom: ${spacing.large};
-  }
-  a {
-    display: inline-block;
-    text-decoration: none;
-    margin-right: ${spacing.xLarge};
-    margin-bottom: ${spacing.large};
-    cursor: pointer;
-    transition: all ease-in-out 0.3s;
-    border-bottom: 0.1rem solid;
-    color: ${props => (props.loginStatus ? colors.blue : colors.pink)};
-    &:hover {
-      color: ${props =>
-        props.loginStatus ? colors.lightBlue : colors.lightPink};
-    }
-    &:focus {
-      color: ${colors.red};
-    }
-    &:nth-child(2) {
-      margin-right: 0;
-    }
-  }
-`;
-
-// header when logged in
-const SmallHeaderText = styled(SmallText)`
-  p {
-    text-align: center;
-    @media screen and (min-width: 35rem) {
-      text-align: right;
-    }
-  }
-`;
+// 1. universal
+// 2. users
+// 3. repos
 
 // - - - - - - - - - - -
-// header label
-const HeaderLabel = styled.h1`
-  line-height: 1;
-  display: inline-block;
+// 1.
+// user thumbnail
+const Thumb = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: ${spacing.large};
   margin-bottom: ${spacing.large};
-  padding: ${spacing.med} ${spacing.large};
+  a {
+    width: ${spacing.xxLarge};
+    height: ${spacing.xxLarge};
+    border-radius: 2.5rem;
+    border: 0.2rem solid ${colors.white};
+    overflow: hidden;
+    &:hover ~ p {
+      display: block;
+      padding: ${spacing.xSmall} ${spacing.small};
+      border-radius: ${spacing.xSmall};
+      background-color: ${colors.blue};
+      color: ${colors.white};
+    }
+    &:hover {
+      border: 0.2rem solid ${colors.blue};
+    }
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  p {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: -${spacing.xLarge};
+    white-space: nowrap;
+    pointer-events: none;
+    font-size: ${fontSize.xSmall};
+  }
+`;
+
+// - - - - - - - - - - -
+// 2.
+const User = styled.div`
+  // outer container
+  background-color: ${colors.white};
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 40rem) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  width: 100%;
+  overflow: hidden;
   border-radius: ${spacing.small};
-  transform: skew(-10deg);
-  background-color: white;
-  color: ${props => (props.loginStatus ? colors.blue : colors.pink)};
-  box-shadow: 0.15rem 0.15rem 0.3rem
-    ${props => (props.loginStatus ? colors.blue : colors.pink)};
+  box-shadow: ${boxShadow.out};
+  // image header
+  .user-header {
+    position: relative;
+    overflow: hidden;
+    max-height: 18.25rem;
+    border-bottom: ${border.black};
+    @media screen and (min-width: 40rem) {
+      max-width: 15rem;
+      border-bottom: 0;
+      border-right: ${border.black};
+    }
+    img {
+      width: 100%;
+      display: inherit;
+      @media screen and (min-width: 40rem) {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+
+  // content section
+  .user-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: ${spacing.large};
+    @media screen and (min-width: 40rem) {
+      width: calc(100% - 15rem);
+    }
+    h2 a {
+      font-size: ${fontSize.large};
+      text-decoration: none;
+      color: ${colors.black};
+      &:hover {
+        color: ${colors.blue};
+      }
+    }
+    p {
+      margin-top: ${spacing.med};
+      color: ${colors.grey};
+      font-size: $font-xSmall;
+    }
+    // button container
+    .user-button {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: ${spacing.large};
+      @media screen and (min-width: 40rem) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  // extra section
+  .user-extra {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: ${spacing.large};
+    h3 {
+      font-size: ${fontSize.med};
+      margin-bottom: ${spacing.med};
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 `;
 
 // - - - - - - - - - - -
-// repo stats
-const Stats = styled.div`
-  margin-bottom: ${spacing.xLarge};
-  > div {
-    margin-bottom: ${spacing.large};
-  }
-  > button {
-    margin-right: ${spacing.xLarge};
-  }
-`;
-
-// - - - - - - - - - - -
-// blueprint for other repos - perhaps
+// 3.
+// simple repo with coloured border at the top
 const Repo = styled.li`
   margin-bottom: ${spacing.xLarge};
   padding: ${spacing.large};
@@ -91,6 +158,10 @@ const Repo = styled.li`
   }
 `;
 
+// - - - - - - - - - - -
+// - - - - - - - - - - -
+// - - - - - - - - - - -
+// - - - - - - - - - - -
 // - - - - - - - - - - -
 // not basic repo though
 // - basic repo will be one column, and will not change depending upon size
@@ -153,65 +224,4 @@ const BasicRepo = styled.div`
   }
 `;
 
-export { SmallText, SmallHeaderText, HeaderLabel, Stats, Repo, BasicRepo };
-
-// .repo {
-//   &-container {
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-content: space-between;
-//     margin: 2rem 0;
-//     padding: 1rem 0;
-//   }
-//   &-item {
-//     background-color: $white;
-//     display: block;
-//     width: 100%;
-//     margin-bottom: 2rem;
-//     @media screen and (min-width: 40rem) {
-//       width: 45%;
-//       margin-right: 10%;
-//       &:nth-child(even) {
-//         margin-right: 0;
-//       }
-//     }
-//     overflow: hidden;
-// border-radius: 0.25rem;
-// box-shadow: $shadow-out;
-//   }
-//   // image
-//   &-header {
-//     overflow: hidden;
-//     max-height: 15rem;
-//     border-bottom: $border-black;
-//     position: relative;
-//     img {
-//       width: 100%;
-//     }
-//     .rank {
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       background-color: $black;
-//       color: $white;
-//       height: 2.5rem;
-//       padding: 0.5rem;
-//       border-bottom-right-radius: 0.25rem;
-//     }
-//   }
-//   // content
-//   &-content {
-//     padding: 1rem;
-//     display: flex;
-//     flex-direction: column;
-//     p {
-//       margin-top: 0.5rem;
-//       color: $grey;
-//       font-size: $font-xSmall;
-//     }
-//     button {
-//       margin-top: 1rem;
-//       align-self: flex-end;
-//     }
-//   }
-// }
+export { Thumb, Repo, User, BasicRepo };
