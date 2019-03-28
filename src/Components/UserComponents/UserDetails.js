@@ -4,7 +4,6 @@ import { SmallUser } from "./SmallUser";
 
 // - default show small user
 // - on click expand user details (with LargeUser component)
-
 export default class UserDetails extends React.Component {
   state = {
     expanded: false

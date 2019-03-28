@@ -1,10 +1,10 @@
 import React from "react";
 
 // styles
-import { ToggleButton } from "./styles/buttons";
+import { ToggleButton } from "../styles/buttons";
 
 // works with user repo search types in UserRepos.js
-const RepoToggle = props => {
+const RepoSearchToggle = props => {
   const { text, type, active, onClick } = props;
 
   return (
@@ -14,4 +14,4 @@ const RepoToggle = props => {
   );
 };
 
-export default RepoToggle;
+export default RepoSearchToggle;

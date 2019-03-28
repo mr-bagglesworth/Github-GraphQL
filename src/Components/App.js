@@ -11,21 +11,12 @@ import { graphqlClient } from "../utils/graphqlClient";
 import Header from "./Header";
 import Login from "./Login";
 import Search from "./Search";
-import UserDetails from "./UserDetails";
-import UserRepos from "./UserRepos";
-import Repository from "./Repository";
+import UserDetails from "./UserComponents/UserDetails";
+import UserRepos from "./RepoComponents/UserRepos";
 
 // colour - for background
 import styleVars from "./styles/styleVars";
 const { colors } = styleVars;
-
-/*
-todo
-- restructure to not render header twice.. (after a search)
-  - it needs to re-render to add github logout link
-  - PureComponent and shouldComponentUpdate() to check if props have changed
-- encrypt login token
-*/
 
 // App
 export default class App extends React.Component {
@@ -34,8 +25,7 @@ export default class App extends React.Component {
     token: "", // from local env variable, or from github login
     username: "",
     searchType: "userdetails", // default search for a user
-    suggestions: [], // autocomplete
-    selectedRepo: ""
+    suggestions: [] // autocomplete
   };
 
   // check the environment, and set the token when component mounts
@@ -54,15 +44,6 @@ export default class App extends React.Component {
       if (token) this.setState({ login: true, token });
     }
   }
-
-  // routes - to be removed and replaced by graphql query components
-  // routeForRepository(login, name) {
-  //   return {
-  //     title: `${login}/${name}`,
-  //     login,
-  //     name
-  //   };
-  // }
 
   // logout
   // - remove token from sessionStorage
@@ -90,7 +71,7 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { login, username, searchType, selectedRepo, token } = this.state;
+    const { login, username, searchType, token } = this.state;
 
     // logged out
     // - set background gradient to pink
@@ -101,12 +82,10 @@ export default class App extends React.Component {
     // - convert token to graphql client
     const client = token ? graphqlClient(token) : "";
 
-    // conditional rendering
-    // - based on login status
+    // conditional rendering, based on login status
     // - if logged in, render result components based on state:
     // 1. UserDetails.js
     // 2. UserRepos.js
-    // 3. Repository.js - might get controlled by UserRepos.js instead
     const pageContent = !login ? (
       <>
         <p>Enter your Github username and password to start searching.</p>
@@ -121,16 +100,12 @@ export default class App extends React.Component {
           loginStatus={login}
         />
         <ApolloProvider client={client}>
-          {username && searchType === "userdetails" && !selectedRepo && (
+          {username && searchType === "userdetails" && (
             <UserDetails login={username} />
           )}
 
-          {username && searchType === "repodetails" && !selectedRepo && (
+          {username && searchType === "repodetails" && (
             <UserRepos login={username} />
-          )}
-
-          {username && selectedRepo && (
-            <Repository {...this.routeForRepository(username, selectedRepo)} />
           )}
         </ApolloProvider>
       </>

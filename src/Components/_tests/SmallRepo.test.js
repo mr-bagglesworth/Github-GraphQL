@@ -1,5 +1,5 @@
 import React from "react";
-import SmallRepo from "../SmallRepo.js";
+import { SmallRepo } from "../RepoComponents/SmallRepo.js";
 import { render, fireEvent, cleanup } from "react-testing-library";
 
 describe("SmallRepo Component", () => {
@@ -14,11 +14,14 @@ describe("SmallRepo Component", () => {
       id: "MDEwOlJlcG9zaXRvcnk4OTcwNzAxMQ==",
       isFork: false,
       name: "MBGravSite",
+      owner: {
+        login: "mr-bagglesworth"
+      },
       primaryLanguage: {
         name: "CSS",
         color: "#563d7c"
       },
-      pushedAt: "2017-05-16T10:17:44Z",
+      updatedAt: "2017-05-16T10:17:44Z",
       stargazers: {
         totalCount: 0
       },

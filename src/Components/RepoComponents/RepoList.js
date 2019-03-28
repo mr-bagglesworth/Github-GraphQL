@@ -3,15 +3,17 @@
 // - has a graphql query
 import React from "react";
 
+// Components
+import { SmallRepo } from "./SmallRepo";
+
 // GraphQL
 // - pairs a query with a component
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-import SmallRepo from "./SmallRepo";
-
 // repo list queries
 // - load repos OR repos contributed to, based on props
+// - can cut down on these queries, just totalCount stuff
 const REPOS_AUTHORED_QUERY = gql`
   query ReposAuthoredQuery($login: String!) {
     user(login: $login) {
@@ -24,27 +26,20 @@ const REPOS_AUTHORED_QUERY = gql`
             url
             description
             createdAt
+            updatedAt
             isFork
-            pushedAt
             primaryLanguage {
               name
               color
             }
+            owner {
+              login
+            }
             stargazers(first: 100) {
               totalCount
-              nodes {
-                name
-                login
-                url
-              }
             }
             watchers(first: 100) {
               totalCount
-              nodes {
-                name
-                login
-                url
-              }
             }
           }
         }
@@ -66,33 +61,19 @@ const REPOS_CONTRIBUTED_QUERY = gql`
             description
             createdAt
             isFork
-            pushedAt
+            updatedAt
             primaryLanguage {
               name
               color
             }
             owner {
-              url
+              login
             }
             stargazers(first: 100) {
               totalCount
-              edges {
-                node {
-                  name
-                  login
-                  url
-                }
-              }
             }
             watchers(first: 100) {
               totalCount
-              edges {
-                node {
-                  name
-                  login
-                  url
-                }
-              }
             }
           }
         }
@@ -107,7 +88,7 @@ const obj = {
   contributed: REPOS_CONTRIBUTED_QUERY
 };
 
-const RepoList = ({ login, search }) => (
+const RepoList = ({ login, search, onClick }) => (
   //   console.log(search);
   <Query query={obj[search]} variables={{ login }}>
     {({ loading, error, data }) => {
@@ -115,19 +96,20 @@ const RepoList = ({ login, search }) => (
       if (error) return <>Repositories not found</>;
 
       // get key of repo list to render
+      // - authored or contributed to
       const listKey = Object.keys(data.user)[0];
       const repoList = data.user[listKey].edges;
-
-      // separate component for authored by repo?
-      // - or pass in a prop that says so
-      // + author thumbnails
 
       return (
         <>
           {repoList.length > 0 && (
             <ul>
               {repoList.map(item => (
-                <SmallRepo key={item.node.id} {...item.node} />
+                <SmallRepo
+                  key={item.node.id}
+                  {...item.node}
+                  onClick={onClick}
+                />
               ))}
             </ul>
           )}
