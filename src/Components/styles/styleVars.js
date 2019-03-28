@@ -47,7 +47,7 @@ const styleVars = {
     main: '"Signika Negative", sans-serif'
   },
   boxShadow: {
-    out: "-0.125rem 0.25rem 1.5rem rgba(0, 0, 0, 0.25)",
+    out: "-0.125rem 0.25rem 0.35rem rgba(0,0,0,0.15)", // -0.125rem 0.25rem 1.5rem rgba(0, 0, 0, 0.25)
     in: "-0.125rem 0.25rem 1.5rem inset rgba(0, 0, 0, 0.25)"
   },
   border: {

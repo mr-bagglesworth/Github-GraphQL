@@ -29,6 +29,27 @@ const Button = styled.input`
   }
 `;
 
+// button that looks like text
+// - in header
+const TextButton = styled.button`
+  cursor: pointer;
+  font-family: ${fontName.main};
+  font-size: ${fontSize.xSmall};
+  padding: 0;
+  margin-left: ${spacing.med};
+  background-color: transparent;
+  border: 0;
+  transition: all ease-in-out 0.3s;
+  color: ${colors.blue};
+  border-bottom: 0.1rem solid;
+  &:hover {
+    color: ${colors.lightBlue};
+  }
+  &:focus {
+    color: ${colors.red};
+  }
+`;
+
 // button
 // - used for search toggle
 const ToggleButton = styled.button`
@@ -73,25 +94,28 @@ const ExpandButton = styled.button`
   }
 `;
 
-// button that looks like text
-// - in header
-const TextButton = styled.button`
+// user repos arrow button
+// - make a different view to show LargeRepo card
+// - contains an svg
+// - make arrow left as well
+// - add disabled attr for expanded
+const ArrowButton = styled.button`
   cursor: pointer;
-  font-family: ${fontName.main};
-  font-size: ${fontSize.xSmall};
   padding: 0;
-  margin-left: ${spacing.med};
   background-color: transparent;
   border: 0;
   transition: all ease-in-out 0.3s;
-  color: ${colors.blue};
-  border-bottom: 0.1rem solid;
-  &:hover {
-    color: ${colors.lightBlue};
-  }
+
+  width: 4rem;
+  height: 4rem;
+  border-radius: ${spacing.xLarge};
+  color: ${colors.darkGrey};
   &:focus {
-    color: ${colors.red};
+    outline: none;
+  }
+  &:hover {
+    background-color: ${colors.off_white};
   }
 `;
 
-export { Button, ToggleButton, ExpandButton, TextButton };
+export { Button, TextButton, ToggleButton, ExpandButton, ArrowButton };

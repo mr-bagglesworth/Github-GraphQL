@@ -10,10 +10,16 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 // utils
-import { dateFormat } from "../utils/utils";
+import { dateFormat } from "../../utils/utils";
 
 // styles
-import { User } from "./styles/containers";
+import {
+  Container,
+  Header,
+  Content,
+  Button,
+  Extra
+} from "../styles/headerContainer";
 
 // create username query
 // - make this more basic
@@ -60,11 +66,11 @@ const SmallUser = ({ login, expanded, btnClick }) => (
       // - cut off after x number of characters (32) (+40rem)
 
       return (
-        <User>
-          <header className="user-header">
+        <Container>
+          <Header className="user-header">
             <img src={avatarUrl} alt={name} />
-          </header>
-          <section className="user-content">
+          </Header>
+          <Content>
             <h2>
               <a href={url}>{login}</a>
             </h2>
@@ -79,12 +85,16 @@ const SmallUser = ({ login, expanded, btnClick }) => (
                   ` ${following.totalCount} following`}
               </p>
             )}
-            <div className="user-button">
+            <Button>
               <UserToggle onClick={btnClick} expanded={expanded} />
-            </div>
-          </section>
-          {expanded && <LargeUser login={login} />}
-        </User>
+            </Button>
+          </Content>
+          {expanded && (
+            <Extra>
+              <LargeUser login={login} />
+            </Extra>
+          )}
+        </Container>
       );
     }}
   </Query>

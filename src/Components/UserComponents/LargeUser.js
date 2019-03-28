@@ -5,11 +5,8 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-// utils
-// import { dateFormat } from "../utils/utils";
-
 // components
-import UserThumb from "./UserThumb";
+import UserThumb from "../UserThumb";
 
 // large user query
 const LARGE_USER_QUERY = gql`
@@ -29,6 +26,7 @@ const LARGE_USER_QUERY = gql`
         totalCount
         nodes {
           avatarUrl(size: 80)
+          id
           login
           name
           url
@@ -51,7 +49,7 @@ const LargeUser = ({ login }) => (
       const { email, url, websiteUrl, followers, following } = data.user;
 
       return (
-        <section className="user-extra">
+        <>
           {followers.totalCount > 0 && <h3>Followers:</h3>}
           {followers.totalCount > 0 && (
             <ul>
@@ -79,7 +77,7 @@ const LargeUser = ({ login }) => (
           <p>
             <a href={url}>Link to Profile ></a>
           </p>
-        </section>
+        </>
       );
     }}
   </Query>
