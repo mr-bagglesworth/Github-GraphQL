@@ -40,12 +40,13 @@ export default class UserRepos extends React.Component {
   // - slide in effect
   // - show in viewport
   detailsToggle = (details, e) => {
-    // compose an object for the state only on LargeRepo click
-    if (!this.state.selected.owner) {
-      // get the difference in top offset of parent and parent container
-      // - want to fit the card in the viewport though, so this isn't quite what I want
-      const li = e.target.closest("button").offsetParent;
-      const offset = li.offsetTop - li.parentNode.offsetTop;
+    // offset of parent container
+    const divOff = e.target.closest("div").parentNode.offsetTop;
+
+    // set offset only if scrolled
+    if (!this.state.selected.owner && window.pageYOffset > divOff) {
+      // total offset
+      const offset = window.pageYOffset - divOff + 32;
       // combine details and offset in a new object
       const newDetails = { ...details, offset };
       this.setState({ selected: newDetails });
