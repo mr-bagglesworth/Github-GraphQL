@@ -6,10 +6,9 @@ import { ArrowButton } from "../styles/buttons";
 // slides between SmallRepo and LargeRepo
 const RepoDetailToggle = props => {
   const { owner, name, direction, onClick } = props;
-  // console.log(props);
-
+  // pass in e for the offset position
   return (
-    <ArrowButton onClick={() => onClick({ owner, name })}>
+    <ArrowButton onClick={e => onClick({ owner, name }, e)}>
       <svg
         aria-labelledby={name}
         xmlns="http://www.w3.org/2000/svg"

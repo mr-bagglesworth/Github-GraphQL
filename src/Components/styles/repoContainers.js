@@ -63,9 +63,6 @@ const Repo = styled(RepoBase)`
       top: calc(50% - ${spacing.xLarge});
     }
   }
-  // expanded styles
-  // ${props =>
-    props.expanded ? `filter: brightness(0.9) grayscale(0.35)` : ""};
 `;
 
 // 2. more detailed repo with a thumbnail at the top

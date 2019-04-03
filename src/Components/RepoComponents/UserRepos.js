@@ -36,18 +36,28 @@ export default class UserRepos extends React.Component {
     this.setState({ search: newState });
   };
 
-  // get owner and repo name with onClick, then render selected repo as sibling of the ul
-  // show the selected repo, and trigger slide in effect
-  // - get element position on the page, and render larger repo further down the page if required
-  detailsToggle = details => {
-    // console.log(e);
-    this.setState({ selected: details });
+  // get owner and repo name with onClick to render LargeRepo.js as sibling of ul
+  // - slide in effect
+  // - show in viewport
+  detailsToggle = (details, e) => {
+    // compose an object for the state only on LargeRepo click
+    if (!this.state.selected.owner) {
+      // get the difference in top offset of parent and parent container
+      // - want to fit the card in the viewport though, so this isn't quite what I want
+      const li = e.target.closest("button").offsetParent;
+      const offset = li.offsetTop - li.parentNode.offsetTop;
+      // combine details and offset in a new object
+      const newDetails = { ...details, offset };
+      this.setState({ selected: newDetails });
+    } else {
+      this.setState({ selected: details });
+    }
   };
 
   render() {
     const { login } = this.props;
     const { search, selected } = this.state;
-    const { owner, name } = selected;
+    const { owner, name, offset } = selected;
 
     // for RepoContainer styling
     const expanded = owner ? true : false;
@@ -78,6 +88,7 @@ export default class UserRepos extends React.Component {
               <LargeRepo
                 owner={owner}
                 name={name}
+                offset={offset}
                 onClick={this.detailsToggle}
               />
             )}

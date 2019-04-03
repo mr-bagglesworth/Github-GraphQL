@@ -20,33 +20,21 @@ View the live app here:
 - `npm start` to view the app locally at [http://localhost:3000/](http://localhost:3000/)
 
 
-![](https://i.imgur.com/IPVxZ7I.png)
-> main search form
-
-![](https://i.imgur.com/bM19p43.png)
+![](https://i.imgur.com/nIclOvg.png)
 > sample result: user details
 
 
 ### Using this app:
-1. Enter a valid github **Username** in the text input field, then...
-- Search for **User Details** by toggling 'Get User Details' and pressing 'Submit'
-- Search for **User's Repositories** by toggling 'Get User's Repositories' and pressing 'Submit'
+**If Viewing on Github Pages:**
+- Enter your Github username and password to access the search engine, then...
 
-2. **In Progress:** Get more details about a **User's Repository**
-- With a list of a user's repositories showing, click on a single repository
-- More information on the clicked repository then displays
-- Option to star the repository
+1. Search for a **User's Details**
+- a) Enter a valid github **Username** in the text input field
+- b) Press 'Submit' (with **Get User's Details** toggled)
+- c) Press 'Show More' to view more details
 
-#### Todo:
-- show single repo information (on repo click)
-- more styling
-- autocomplete (for user name. Look into the feasibility of this more)
-- linting (customise the setup a little bit more)
-- testing (unit, then integration)
-- ~~code coverage (with Jest, Codecov, and commands in .travis.yml)~~
-- ~~CI pipeline (Travis)~~
-- ~~deploy on github pages~~ (making search function work properly on gh-pages is tricky)
-    - Deploying while keeping personal access token out of bundle seems to be impossible
-    - Github sees this and immediately revokes the token
-    - Solution: make the user log in to Github, app creates an access token, which allows them to search
-    - [issue #17 with more details](https://github.com/mr-bagglesworth/Github-GraphQL/issues/17)
+2. Search for a **User's Repositories**
+- a) Toggle **Get User's Repositories** (with a valid username entered)
+- b) Use the filter buttons to see repositories the user has authored, forked, and contributed to
+- c) Press on a right arrow '>' from a repository to view more details about it
+- d) Press on a left arrow '<' to go back to the list of results
