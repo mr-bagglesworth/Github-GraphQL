@@ -81,7 +81,7 @@ const LARGE_REPO_QUERY = gql`
   }
 `;
 
-const LargeRepo = ({ owner, name, onClick }) => (
+const LargeRepo = ({ owner, name, offset, onClick }) => (
   <Query query={LARGE_REPO_QUERY} variables={{ owner, name }}>
     {({ loading, error, data }) => {
       // return loading and error first
@@ -105,7 +105,7 @@ const LargeRepo = ({ owner, name, onClick }) => (
 
       // if not authored search, use header container
       return (
-        <Container>
+        <Container offSet={offset}>
           <Header>
             <img src={avatarUrl} alt={name} />
           </Header>

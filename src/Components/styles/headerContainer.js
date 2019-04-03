@@ -7,6 +7,8 @@ const { colors, spacing, fontSize, boxShadow, border } = styleVars;
 
 // outer container
 const Container = styled.div`
+  // top margin - large repo offset
+  margin-top: ${props => (props.offSet ? `${props.offSet}px` : 0)};
   // outer container
   background-color: ${colors.white};
   display: flex;
