@@ -2,14 +2,12 @@
 import styled from "styled-components";
 import styleVars from "./styleVars";
 
-const { colors, spacing, fontSize } = styleVars;
+const { colors, spacing, fontSize, fontName } = styleVars;
 
 // universal containers
 // - used by both user search, repo search, and anything else
 
-// 1.
-// user thumbnail
-const Thumb = styled.div`
+const ThumbBase = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,6 +15,11 @@ const Thumb = styled.div`
   justify-content: center;
   margin-right: ${spacing.large};
   margin-bottom: ${spacing.large};
+`;
+
+// 1.
+// user thumbnail
+const Thumb = styled(ThumbBase)`
   a {
     width: ${spacing.xxLarge};
     height: ${spacing.xxLarge};
@@ -49,4 +52,36 @@ const Thumb = styled.div`
   }
 `;
 
-export { Thumb };
+// 2.
+// expand button is here rather than in buttons
+const ThumbButton = styled(ThumbBase)`
+  button {
+    // resets
+    border: 0;
+    cursor: pointer;
+    // styling
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: ${spacing.xxLarge};
+    height: ${spacing.xxLarge};
+    border-radius: 2.5rem;
+    padding: ${spacing.med};
+    font-family: ${fontName.main};
+    font-size: ${fontSize.xSmall};
+    transition: all ease-in-out 0.3s;
+    background-color: ${colors.blue};
+    color: ${colors.white};
+    &:hover {
+      background-color: ${colors.lightBlue};
+    }
+    &:focus {
+      outline: none;
+    }
+    svg {
+      fill: ${colors.white};
+      margin-right: -${spacing.med};
+    }
+  }
+`;
+export { Thumb, ThumbButton };

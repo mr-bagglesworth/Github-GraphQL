@@ -23,7 +23,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 // Components
-import UserThumb from "../UserThumb";
+import UserThumbList from "../UserThumbList";
 import RepoDetailToggle from "./RepoDetailToggle";
 
 // utils
@@ -120,21 +120,11 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
           <Extra>
             {stargazers.totalCount > 0 && <h3>Stargazers:</h3>}
             {stargazers.totalCount > 0 && (
-              <ul>
-                {" "}
-                {stargazers.nodes.map(item => (
-                  <UserThumb key={item.id} {...item} />
-                ))}
-              </ul>
+              <UserThumbList thumbs={stargazers.nodes} />
             )}
             {watchers.totalCount > 0 && <h3>Watchers:</h3>}
             {watchers.totalCount > 0 && (
-              <ul>
-                {" "}
-                {watchers.nodes.map(item => (
-                  <UserThumb key={item.id} {...item} />
-                ))}
-              </ul>
+              <UserThumbList thumbs={watchers.nodes} />
             )}
             <RepoDetailToggle onClick={onClick} direction={"backwards"} />
           </Extra>

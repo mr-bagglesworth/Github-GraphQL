@@ -6,7 +6,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 // components
-import UserThumb from "../UserThumb";
+import UserThumbList from "../UserThumbList";
 
 // large user query
 const LARGE_USER_QUERY = gql`
@@ -52,21 +52,11 @@ const LargeUser = ({ login }) => (
         <>
           {followers.totalCount > 0 && <h3>Followers:</h3>}
           {followers.totalCount > 0 && (
-            <ul>
-              {" "}
-              {followers.nodes.map(item => (
-                <UserThumb key={item.id} {...item} />
-              ))}
-            </ul>
+            <UserThumbList thumbs={followers.nodes} />
           )}
           {following.totalCount > 0 && <h3>Following:</h3>}
           {following.totalCount > 0 && (
-            <ul>
-              {" "}
-              {following.nodes.map(item => (
-                <UserThumb key={item.id} {...item} />
-              ))}
-            </ul>
+            <UserThumbList thumbs={following.nodes} />
           )}
           {email && <li>Contact this user on: {email}</li>}
           {websiteUrl && (

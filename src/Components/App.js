@@ -76,7 +76,7 @@ export default class App extends React.Component {
     // logged out
     // - set background gradient to pink
     const bgGrad = !login ? colors.bgPink : colors.bgBlue;
-    document.body.style.background = `linear-gradient(212deg, ${bgGrad}, white)`;
+    document.body.style.background = `linear-gradient(215deg, ${bgGrad}, rgba(255, 255, 255, 0.65)), linear-gradient(65deg, ${bgGrad}, rgba(255, 255, 255, 0.35))`;
 
     // logged in
     // - convert token to graphql client
