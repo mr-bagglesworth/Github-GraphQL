@@ -14,25 +14,26 @@ export default class UserThumbList extends React.Component {
     this.setState({ expanded: true });
   };
   render() {
-    const { thumbs } = this.props;
+    const { thumbs, collaborators } = this.props;
     const { expanded } = this.state;
 
-    // expand button
-    const expandThumb = { more: thumbs.length - 9 };
-    // thumbnail list
-    const thumbList =
-      thumbs.length > 9 && !expanded ? thumbs.slice(0, 9) : thumbs;
+    // thumbs from mentionable users to be parsed differently
+    // - this removes a layer of nesting
+    const users = collaborators ? Object.keys(thumbs).map((v, i) => Object.assign({}, thumbs[i].node)) : thumbs;
 
-    const showToggle = !expanded && thumbs.length > 9;
+    // expand button
+    const expandThumb = { more: users.length - 9 };
+    // thumbnail list
+    const thumbList = users.length > 9 && !expanded ? users.slice(0, 9) : users;
+    // display toggle button or not
+    const showToggle = !expanded && users.length > 9;
 
     return (
       <ul>
         {thumbList.map(item => (
           <UserThumb key={item.id} {...item} />
         ))}
-        {showToggle && (
-          <UserThumbToggle {...expandThumb} onClick={this.handleExpand} />
-        )}
+        {showToggle && <UserThumbToggle {...expandThumb} onClick={this.handleExpand} />}
       </ul>
     );
   }
