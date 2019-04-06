@@ -23,6 +23,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 // Components
+import RepoFileData from "./RepoFileData";
 import UserThumbList from "../UserThumbList";
 import RepoDetailToggle from "./RepoDetailToggle";
 
@@ -30,11 +31,7 @@ import RepoDetailToggle from "./RepoDetailToggle";
 // import { dateFormat } from "../../utils/utils";
 
 // styles
-// import { RepoDetail, RepoHeader } from "../styles/repoContainers";
 import { Container, Header, Content, Extra } from "../styles/headerContainer";
-// Content,
-//   Button,
-//   Extra
 
 const LARGE_REPO_QUERY = gql`
   query LargeRepoQuery($owner: String!, $name: String!) {
@@ -48,13 +45,24 @@ const LARGE_REPO_QUERY = gql`
       }
       url
       forkCount
-      isPrivate
       languages(first: 50) {
         totalCount
         totalSize
         nodes {
           color
           name
+        }
+      }
+      mentionableUsers(first: 100) {
+        totalCount
+        edges {
+          node {
+            avatarUrl(size: 80)
+            id
+            login
+            name
+            url
+          }
         }
       }
       stargazers(first: 100) {
@@ -88,20 +96,11 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
       if (loading) return <>Loading extra repo details...</>;
       if (error) return <>Extra repo details not found</>;
 
-      const {
-        name,
-        description,
-        owner,
-        // url,
-        forkCount,
-        // isPrivate,
-        // languages,
-        stargazers,
-        watchers
-      } = data.repository;
+      const { name, description, owner, url, forkCount, mentionableUsers, languages, stargazers, watchers } = data.repository;
 
-      // console.log(data.repository);
       const { avatarUrl } = owner;
+      // console.log(mentionableUsers, stargazers);
+      // - mentionable users to be treated differently
 
       // if not authored search, use header container
       return (
@@ -112,20 +111,22 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
           <Content>
             <h3>{name}</h3>
             <p>{description}</p>
+            <RepoFileData {...languages} />
             <p>
               {forkCount > 0 && forkCount}
               {forkCount > 0 && " Forks of this repository"}
             </p>
           </Content>
           <Extra>
+            {mentionableUsers.totalCount > 0 && <h3>Contributors:</h3>}
+            {mentionableUsers.totalCount > 0 && <UserThumbList thumbs={mentionableUsers.edges} collaborators={true} />}
             {stargazers.totalCount > 0 && <h3>Stargazers:</h3>}
-            {stargazers.totalCount > 0 && (
-              <UserThumbList thumbs={stargazers.nodes} />
-            )}
+            {stargazers.totalCount > 0 && <UserThumbList thumbs={stargazers.nodes} />}
             {watchers.totalCount > 0 && <h3>Watchers:</h3>}
-            {watchers.totalCount > 0 && (
-              <UserThumbList thumbs={watchers.nodes} />
-            )}
+            {watchers.totalCount > 0 && <UserThumbList thumbs={watchers.nodes} />}
+            <p>
+              <a href={url}>Link to Repo ></a>
+            </p>
             <RepoDetailToggle onClick={onClick} direction={"backwards"} />
           </Extra>
         </Container>
