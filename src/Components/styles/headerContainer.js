@@ -61,6 +61,9 @@ const Content = styled.section`
       color: ${colors.blue};
     }
   }
+  h3 {
+    font-size: ${fontSize.large};
+  }
   p {
     margin-top: ${spacing.med};
     color: ${colors.grey};
@@ -85,8 +88,9 @@ const Extra = styled.div`
   width: 100%;
   justify-content: space-around;
   padding: ${spacing.large};
-  h3 {
-    font-size: ${fontSize.med};
+  h3,
+  h4 {
+    // font-size: ${fontSize.med};
     margin-bottom: ${spacing.med};
   }
   ul {

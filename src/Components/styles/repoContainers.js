@@ -78,7 +78,7 @@ const RepoData = styled.div`
   }
 `;
 
-// 3.
+// 3. language and colour dot
 const RepoLang = styled.li`
   display: flex;
   align-items: center;
@@ -89,8 +89,25 @@ const RepoLang = styled.li`
     width: ${spacing.large};
     height: ${spacing.large};
     border-radius: ${spacing.med};
-    background-color: ${props => (props.color ? props.color : "white")};
+    background-color: ${props => (props.colorHex ? props.colorHex : "white")};
+    // add a border if colour is null
+    ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
   }
 `;
 
-export { RepoContainer, Repo, RepoData, RepoLang };
+// 4. chart and cells
+const RepoChart = styled.div`
+  display: flex;
+  height: ${spacing.xLarge};
+  margin-bottom: ${spacing.large};
+`;
+
+const ChartCell = styled.div`
+  cursor: pointer;
+  width: ${props => (props.cellWidth ? `${props.cellWidth}%` : "auto")};
+  background-color: ${props => (props.colorHex ? props.colorHex : "white")};
+  // add a border if colour is null
+  ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
+`;
+
+export { RepoContainer, Repo, RepoData, RepoLang, RepoChart, ChartCell };

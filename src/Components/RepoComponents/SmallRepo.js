@@ -13,16 +13,7 @@ import { dateFormat } from "../../utils/utils";
 import { Repo } from "../styles/repoContainers";
 
 const SmallRepo = props => {
-  const {
-    onClick,
-    createdAt,
-    isFork,
-    name,
-    primaryLanguage,
-    updatedAt,
-    stargazers,
-    watchers
-  } = props;
+  const { onClick, createdAt, isFork, name, primaryLanguage, updatedAt, stargazers, watchers } = props;
 
   // pass owner and name into RepoDetailToggle
   // - toggle LargeRepo
@@ -38,8 +29,7 @@ const SmallRepo = props => {
       <Repo langColor={langColor} langName={langName}>
         <h3>{name}</h3>
         <p>
-          Created: {dateFormat(createdAt)} | Last Updated:{" "}
-          {dateFormat(updatedAt)} {isFork && "| Forked"}
+          Created: {dateFormat(createdAt)} | Last Updated: {dateFormat(updatedAt)} {isFork && "| Forked"}
         </p>
         <p>
           Main Language: <span className="language">{langName}</span>
@@ -47,12 +37,7 @@ const SmallRepo = props => {
         <p>
           {stargazers.totalCount} Stargazers | {watchers.totalCount} Watchers
         </p>
-        <RepoDetailToggle
-          onClick={onClick}
-          owner={owner}
-          name={name}
-          direction={"forwards"}
-        />
+        <RepoDetailToggle onClick={onClick} owner={owner} name={name} direction={"forwards"} />
       </Repo>
     </>
   );
