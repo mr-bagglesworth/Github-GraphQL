@@ -14,12 +14,17 @@ export default class UserThumbList extends React.Component {
     this.setState({ expanded: true });
   };
   render() {
-    const { thumbs, collaborators } = this.props;
+    const { thumbs, type } = this.props;
     const { expanded } = this.state;
 
-    // thumbs from mentionable users to be parsed differently
-    // - this removes a layer of nesting
-    const users = collaborators ? Object.keys(thumbs).map((v, i) => Object.assign({}, thumbs[i].node)) : thumbs;
+    // thumbs parsed differently for the following (remove a layer of nesting):
+    // - mentionable users (collaborators), key = node
+    // - forks, key = owner
+    const keys = {
+      collaborators: "node",
+      forks: "owner"
+    };
+    const users = type ? Object.keys(thumbs).map((v, i) => Object.assign({}, thumbs[i][keys[type]])) : thumbs;
 
     // expand button
     const expandThumb = { more: users.length - 9 };

@@ -10,16 +10,10 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 // utils
-import { dateFormat } from "../../utils/utils";
+import { dateFormat, abbrev } from "../../utils/utils";
 
 // styles
-import {
-  Container,
-  Header,
-  Content,
-  Button,
-  Extra
-} from "../styles/headerContainer";
+import { Container, Header, Content, Button, Extra } from "../styles/headerContainer";
 
 // create username query
 // - make this more basic
@@ -49,21 +43,7 @@ const SmallUser = ({ login, expanded, btnClick }) => (
       if (loading) return <>Loading user details...</>;
       if (error) return <>Username not found</>;
 
-      const {
-        avatarUrl,
-        bio,
-        createdAt,
-        login,
-        name,
-        url,
-        followers,
-        following
-      } = data.user;
-
-      // pick out nicer values here...
-      // description component
-      // - can be a util, requires a prop
-      // - cut off after x number of characters (32) (+40rem)
+      const { avatarUrl, bio, createdAt, login, name, url, followers, following } = data.user;
 
       return (
         <Container>
@@ -75,14 +55,12 @@ const SmallUser = ({ login, expanded, btnClick }) => (
               <a href={url}>{login}</a>
             </h2>
             {name && <p>a.k.a. {name}</p>}
-            {bio && <p>{bio}</p>}
+            {bio && <p>{!expanded ? abbrev(bio, 90) : bio}</p>}
             <p>Created account on: {dateFormat(createdAt)}</p>
             {(followers.totalCount > 0 || following.totalCount > 0) && (
               <p>
-                {followers.totalCount > 0 &&
-                  `${followers.totalCount} followers`}
-                {following.totalCount > 0 &&
-                  ` ${following.totalCount} following`}
+                {followers.totalCount > 0 && `${followers.totalCount} followers`}
+                {following.totalCount > 0 && ` ${following.totalCount} following`}
               </p>
             )}
             <Button>

@@ -1,22 +1,6 @@
 // large repo
 // - shows more details when a small repo has been clicked on
-// - not quite the same as users, want the card to slide in to view
 import React from "react";
-
-// - name
-// - link
-// - created and updated
-// - languages and colours
-// - contributors (mentionableUsers)
-// - stargazers and watchers
-// - forks
-
-// worth noting that:
-// - languages only look at file extensions
-
-// RepoDetailToggle
-// - pass in a prop to show the position on the page
-// - large repo renders at the top of the page, needs to render beside clicked repo
 
 // GraphQL
 import { Query } from "react-apollo";
@@ -24,11 +8,9 @@ import gql from "graphql-tag";
 
 // Components
 import RepoFileData from "./RepoFileData";
+import RepoLangChart from "./RepoLangChart";
 import UserThumbList from "../UserThumbList";
 import RepoDetailToggle from "./RepoDetailToggle";
-
-// utils
-// import { dateFormat } from "../../utils/utils";
 
 // styles
 import { Container, Header, Content, Extra } from "../styles/headerContainer";
@@ -51,6 +33,13 @@ const LARGE_REPO_QUERY = gql`
         nodes {
           color
           name
+        }
+        edges {
+          node {
+            color
+            name
+          }
+          size
         }
       }
       mentionableUsers(first: 100) {
@@ -85,6 +74,17 @@ const LARGE_REPO_QUERY = gql`
           url
         }
       }
+      forks(first: 100) {
+        totalCount
+        nodes {
+          owner {
+            avatarUrl(size: 80)
+            id
+            login
+            url
+          }
+        }
+      }
     }
   }
 `;
@@ -96,13 +96,27 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
       if (loading) return <>Loading extra repo details...</>;
       if (error) return <>Extra repo details not found</>;
 
-      const { name, description, owner, url, forkCount, mentionableUsers, languages, stargazers, watchers } = data.repository;
+      const { name, description, owner, url, forkCount, languages, mentionableUsers, stargazers, watchers, forks } = data.repository;
 
       const { avatarUrl } = owner;
-      // console.log(mentionableUsers, stargazers);
-      // - mentionable users to be treated differently
 
-      // if not authored search, use header container
+      // - name
+      // - link
+      // - created and updated
+      // - languages and colours
+      // - contributors (mentionableUsers)
+      // - stargazers and watchers
+      // - forks
+
+      // worth noting that:
+      // - languages only look at file extensions
+      // - contributors = mentionable users includes people who have commented or code reviewed, as well as written code
+      // - unlike authors view, this one is already expanded
+      // - thumbnails only really relevant for repos the user didn't author
+      //    - thumbs get repeated
+      //    - may want to rethink layout - can look awkward with a long description
+
+      console.log(languages);
       return (
         <Container offSet={offset}>
           <Header>
@@ -110,20 +124,40 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
           </Header>
           <Content>
             <h3>{name}</h3>
-            <p>{description}</p>
-            <RepoFileData {...languages} />
-            <p>
-              {forkCount > 0 && forkCount}
-              {forkCount > 0 && " Forks of this repository"}
-            </p>
+            {description && <p>{description}</p>}
+            {languages.totalSize > 0 && <RepoFileData {...languages} />}
+            {forkCount > 0 && (
+              <p>
+                {forkCount} {forkCount === 1 ? "Fork" : "Forks"} of this repository
+              </p>
+            )}
           </Content>
           <Extra>
-            {mentionableUsers.totalCount > 0 && <h3>Contributors:</h3>}
-            {mentionableUsers.totalCount > 0 && <UserThumbList thumbs={mentionableUsers.edges} collaborators={true} />}
-            {stargazers.totalCount > 0 && <h3>Stargazers:</h3>}
-            {stargazers.totalCount > 0 && <UserThumbList thumbs={stargazers.nodes} />}
-            {watchers.totalCount > 0 && <h3>Watchers:</h3>}
-            {watchers.totalCount > 0 && <UserThumbList thumbs={watchers.nodes} />}
+            {languages.totalSize > 0 && <RepoLangChart {...languages.edges} />}
+            {mentionableUsers.totalCount > 0 && (
+              <>
+                <h4>Contributors:</h4>
+                <UserThumbList thumbs={mentionableUsers.edges} type={"collaborators"} />
+              </>
+            )}
+            {stargazers.totalCount > 0 && (
+              <>
+                <h4>Stargazers:</h4>
+                <UserThumbList thumbs={stargazers.nodes} />
+              </>
+            )}
+            {watchers.totalCount > 0 && (
+              <>
+                <h4>Watchers:</h4>
+                <UserThumbList thumbs={watchers.nodes} />
+              </>
+            )}
+            {forks.totalCount > 0 && (
+              <>
+                <h4>Forked by:</h4>
+                <UserThumbList thumbs={forks.nodes} type={"forks"} />
+              </>
+            )}
             <p>
               <a href={url}>Link to Repo ></a>
             </p>
