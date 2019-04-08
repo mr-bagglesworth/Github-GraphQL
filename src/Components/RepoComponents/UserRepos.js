@@ -45,7 +45,7 @@ export default class UserRepos extends React.Component {
 
     // set offset only if scrolled
     if (!this.state.selected.owner && window.pageYOffset > divOff) {
-      // total offset
+      // total offset (32 is body top padding)
       const offset = window.pageYOffset - divOff + 32;
       // combine details and offset in a new object
       const newDetails = { ...details, offset };
@@ -71,28 +71,13 @@ export default class UserRepos extends React.Component {
         <Stats>
           <RepoStats login={login} />
           {search.map(item => (
-            <RepoSearchToggle
-              key={item.type}
-              {...item}
-              onClick={this.searchToggle}
-            />
+            <RepoSearchToggle key={item.type} {...item} onClick={this.searchToggle} />
           ))}
         </Stats>
         <RepoContainer expanded={expanded}>
           <div>
-            <RepoList
-              login={login}
-              search={activeSearch}
-              onClick={this.detailsToggle}
-            />
-            {selected.owner && (
-              <LargeRepo
-                owner={owner}
-                name={name}
-                offset={offset}
-                onClick={this.detailsToggle}
-              />
-            )}
+            <RepoList login={login} search={activeSearch} onClick={this.detailsToggle} />
+            {selected.owner && <LargeRepo owner={owner} name={name} offset={offset} onClick={this.detailsToggle} />}
           </div>
         </RepoContainer>
       </>

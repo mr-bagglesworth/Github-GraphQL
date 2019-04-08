@@ -1,10 +1,13 @@
+// repoContainers - anything specific to repos
+
 // get variables
 import styled from "styled-components";
 import styleVars from "./styleVars";
-
 const { colors, spacing, fontSize, boxShadow } = styleVars;
 
-// repo list item
+// - - - - - - - - - - -
+// repo sliding container
+// - contains <ul> and LargeRepo.js
 // - takes props to transform left
 // - change to div container, ul and div as siblings
 const RepoContainer = styled.div`
@@ -64,26 +67,51 @@ const Repo = styled(RepoBase)`
 // - - - - - - - - - - -
 // repo features
 
-// 2.
-const RepoData = styled.div`
-  margin-top: ${spacing.small};
-  padding-top: ${spacing.large};
-  border-top: ${spacing.xSmall} solid ${colors.grey};
-  h4:nth-child(2) {
-    margin-top: ${spacing.small};
-  }
-  ul {
-    display: flex;
-    flex-wrap: wrap;
+// - generic section
+const RepoSection = styled.section`
+  margin-top: ${spacing.large};
+  ${props =>
+    props.borderTop
+      ? `margin-top: ${spacing.med};
+    padding-top: ${spacing.large};
+    border-top: ${spacing.xSmall} solid ${colors.grey};`
+      : ""};
+  // spans for stats
+  span {
+    margin-left: ${spacing.small};
+    color: ${colors.darkGrey};
   }
 `;
 
-// 3. language and colour dot
-const RepoLang = styled.li`
+// - - - - - - - - - - -
+// 2.
+// - filesize data
+
+// - - - - - - - - - - -
+// 3. language chart and data
+// - language chart
+const LangChart = styled.div`
+  display: flex;
+  height: ${spacing.xLarge};
+  margin-bottom: ${spacing.med};
+`;
+
+// - language cells
+const LangCell = styled.div`
+  cursor: pointer;
+  width: ${props => (props.cellWidth ? `${props.cellWidth}%` : "auto")};
+  background-color: ${props => (props.colorHex ? props.colorHex : "white")};
+  // add a border if colour is null
+  ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
+`;
+
+// - language labels
+const LangLabel = styled.li`
   display: flex;
   align-items: center;
   margin-right: ${spacing.large};
-  span {
+  margin-bottom: ${spacing.small};
+  .dot {
     display: inline-block;
     margin-right: ${spacing.small};
     width: ${spacing.large};
@@ -93,21 +121,12 @@ const RepoLang = styled.li`
     // add a border if colour is null
     ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
   }
+  span {
+    margin-left: ${spacing.small};
+    color: ${colors.darkGrey};
+  }
 `;
 
-// 4. chart and cells
-const RepoChart = styled.div`
-  display: flex;
-  height: ${spacing.xLarge};
-  margin-bottom: ${spacing.large};
-`;
-
-const ChartCell = styled.div`
-  cursor: pointer;
-  width: ${props => (props.cellWidth ? `${props.cellWidth}%` : "auto")};
-  background-color: ${props => (props.colorHex ? props.colorHex : "white")};
-  // add a border if colour is null
-  ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
-`;
-
-export { RepoContainer, Repo, RepoData, RepoLang, RepoChart, ChartCell };
+// - - - - - - - - - - -
+// 4. commit chart
+export { RepoContainer, Repo, RepoSection, LangChart, LangCell, LangLabel };
