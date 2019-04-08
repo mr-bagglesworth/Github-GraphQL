@@ -82,15 +82,21 @@ const Button = styled.div`
 `;
 
 // extra
+// - default content area for LargeRepo.js
 const Extra = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
   padding: ${spacing.large};
+  h2 {
+    font-size: ${fontSize.large};
+  }
+  h3 {
+    font-size: ${fontSize.med};
+  }
   h3,
   h4 {
-    // font-size: ${fontSize.med};
     margin-bottom: ${spacing.med};
   }
   ul {

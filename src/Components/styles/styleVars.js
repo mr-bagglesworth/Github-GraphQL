@@ -7,7 +7,7 @@ const styleVars = {
     lightGrey: "#f7f7f7",
     midGrey: "#d8d8d8",
     grey: "grey",
-    darkGrey: "darkgrey",
+    darkGrey: "dimgrey",
     // blues
     blue: "#0348a3",
     lightBlue: "#0469ee",
@@ -35,7 +35,7 @@ const styleVars = {
     xxSmall: "0.95rem",
     xSmall: "1.125rem",
     small: "1.25rem",
-    med: "1.625rem",
+    med: "1.525rem",
     large: "1.875rem",
     xLarge: "2.5rem"
   },
