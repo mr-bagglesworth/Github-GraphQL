@@ -1,7 +1,8 @@
 // date functions
 // - date format
 const dateFormat = string => {
-  return new Date(string).toLocaleDateString("en-GB");
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  return new Date(string).toLocaleDateString("en-GB", options);
 };
 
 // - get days between two dates
@@ -16,7 +17,10 @@ const dateDiff = (newest, oldest) => {
 
 // date creation function
 // - creates a date based on the item index and staring date in array
-const arrDate = (start, index) => new Date(new Date(start).getTime() + 60 * 60 * (24 * index) * 1000).toLocaleDateString("en-GB");
+const arrDate = (start, index) => {
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  return new Date(new Date(start).getTime() + 60 * 60 * (24 * index) * 1000).toLocaleDateString("en-GB", options);
+};
 
 // - - - - - - - - -
 // abbreviate function
