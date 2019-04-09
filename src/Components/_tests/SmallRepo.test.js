@@ -1,12 +1,9 @@
 import React from "react";
 import { SmallRepo } from "../RepoComponents/SmallRepo.js";
-import { render, fireEvent, cleanup } from "react-testing-library";
+import { render } from "react-testing-library";
 
 describe("SmallRepo Component", () => {
-  // automatically unmount and cleanup DOM after the test is finished.
-  // afterEach(cleanup);
-
-  // submit button click
+  // render with props
   test("SmallRepo loads h3 with props as expected", () => {
     const props = {
       createdAt: "2017-04-28T13:08:53Z",

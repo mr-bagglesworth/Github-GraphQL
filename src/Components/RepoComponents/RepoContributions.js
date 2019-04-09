@@ -1,37 +1,38 @@
 // RepoContributions.js
-// - get a user's contibutions to different repositories
+// - get a user's contributions to their repositories
+// - excludes repos that are forked, or user has not contributions for
 import React from "react";
 
 // GraphQL
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
+// Components
+import RepoContChart from "./RepoContChart";
+
 // utils and styles
 import { dateFormat } from "../../utils/utils";
 import { RepoSection } from "../styles/repoContainers";
 
 // pass in timestamp of repo update
-// - will get commits in a one year bracket from the date given
+// - will get commits in a one year bracket (up to one year ago) from the date given
 const CONTRIBUTIONS_QUERY = gql`
   query ContributionsQuery($login: String!, $updatedAt: DateTime!) {
     user(login: $login) {
       # id
       # name
       contributionsCollection(to: $updatedAt) {
-        commitContributionsByRepository(maxRepositories: 100) {
+        commitContributionsByRepository(maxRepositories: 25) {
           repository {
             name
             id
+            isFork
           }
-          contributions(first: 100) {
+          contributions(first: 100, orderBy: { field: OCCURRED_AT, direction: ASC }) {
             totalCount
             nodes {
               commitCount
               occurredAt
-              # repository{
-              #   id
-              #   name
-              # }
             }
           }
         }
@@ -40,13 +41,12 @@ const CONTRIBUTIONS_QUERY = gql`
   }
 `;
 
-const RepoContributions = ({ login, repoId, createdAt, updatedAt, pushedAt }) => (
-  <Query query={CONTRIBUTIONS_QUERY} variables={{ login, repoId, updatedAt }}>
+const RepoContributions = ({ login, repoId, createdAt, updatedAt, pushedAt, isFork }) => (
+  <Query query={CONTRIBUTIONS_QUERY} variables={{ login, repoId, updatedAt, isFork }}>
     {({ loading, error, data }) => {
       // return loading and error first
       if (loading) return <>Loading contributions...</>;
       if (error) return <>Contribution details not found</>;
-
       // get data for all repos user contributed to
       const {
         user: {
@@ -54,36 +54,56 @@ const RepoContributions = ({ login, repoId, createdAt, updatedAt, pushedAt }) =>
         }
       } = data;
 
-      // if user has actually contributed to the repo in question
-      const hasContrib = commitContributionsByRepository.length > 0;
-
+      // initiate content variable
       let info;
-      if (!hasContrib) {
-        info = "No User Contributions";
+
+      // user has contributed to the repo
+      const noContrib = commitContributionsByRepository.length === 0;
+      if (noContrib) {
+        info = <p>No User Contributions</p>;
       }
-      // repoId to match passed in as a prop
-      // - plot out the commit chart here
-      // - take into account spacing of dates + commit counts
-      else {
-        const {
-          contributions: { nodes }
-        } = commitContributionsByRepository.find(item => item.repository.id === repoId);
-        info = (
-          <ul>
-            {nodes.map(item => (
-              <li key={item.occurredAt}>{item.commitCount}</li>
-            ))}
-          </ul>
-        );
+
+      // no data for forked repos
+      if (isFork) {
+        info = <p>No User Contributions are logged for forked repos</p>;
+      }
+
+      if (!noContrib && !isFork) {
+        // catch all other cases where contributions can't be found
+        if (commitContributionsByRepository.find(item => item.repository.id === repoId) === undefined) {
+          info = <p>No User Contributions</p>;
+        }
+        // show the repo if it isn't forked
+        // - repoId to match passed in as a prop
+        else {
+          const {
+            contributions: { nodes, totalCount }
+          } = commitContributionsByRepository.find(item => item.repository.id === repoId);
+
+          info = (
+            <div>
+              {/* old tags for dates:
+            <ul>
+              {nodes.map(item => (
+                <li key={item.occurredAt}>
+                  {dateFormat(item.occurredAt)}
+                  <span>{item.commitCount} commits</span>
+                </li>
+              ))}
+            </ul> */}
+              <RepoContChart repos={nodes} totalCount={totalCount} />
+            </div>
+          );
+        }
       }
 
       return (
         <RepoSection>
-          <h3>Contributions to this repo</h3>
+          <h3>Contribution Stats:</h3>
           <p>
-            {dateFormat(createdAt)} to {dateFormat(updatedAt)}
+            Worked on from: <span>{dateFormat(createdAt)}</span> to <span>{dateFormat(updatedAt)}</span>. Last Push on:{" "}
+            <span>{dateFormat(pushedAt)}</span>
           </p>
-          <p>Last Push: {dateFormat(pushedAt)}</p>
           {info}
         </RepoSection>
       );

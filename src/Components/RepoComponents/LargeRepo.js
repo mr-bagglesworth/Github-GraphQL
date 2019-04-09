@@ -1,5 +1,13 @@
 // large repo
 // - shows more details when a small repo has been clicked on
+
+/*
+notes / todos:
+- languages only look at file extensions, not including markdown
+- contributors = mentionable users.
+  - This includes people who have commented or code reviewed, as well as written code
+- need to parse out links in descriptions function required (utils)
+*/
 import React from "react";
 
 // GraphQL
@@ -43,20 +51,16 @@ const LARGE_REPO_QUERY = gql`
       }
       url
       forkCount
+      isFork
 
       createdAt
       updatedAt
       pushedAt
-
       diskUsage
 
       languages(first: 50) {
         totalCount
         totalSize
-        nodes {
-          color
-          name
-        }
         edges {
           node {
             color
@@ -125,30 +129,19 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
         description,
         owner,
         url,
-
         //
         createdAt,
         updatedAt,
         pushedAt,
-
         //
         diskUsage,
         languages,
         mentionableUsers,
         stargazers,
         watchers,
-        forks
+        forks,
+        isFork
       } = data.repository;
-
-      // worth noting that:
-      // - languages only look at file extensions, not including markdown
-      // - contributors = mentionable users includes people who have commented or code reviewed, as well as written code
-
-      // - thumbnails only really relevant for repos the user didn't author
-      //    - thumbs get repeated
-      //    - may want to rethink layout - can look awkward with a long description
-
-      // - parse out links in descriptions function required (utils)
 
       // RepoSizeData.js
       // - language file size + space on disk
@@ -157,9 +150,10 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
 
       // RepoContributions.js
       // - gets contributions to the repo within the past year
+      // - no contributions are logged on forked repos, or group repos
       const { login } = owner;
       const repoId = id;
-      const contribData = { login, repoId, createdAt, updatedAt, pushedAt };
+      const contribData = { login, repoId, createdAt, updatedAt, pushedAt, isFork };
 
       return (
         <Container offSet={offset}>
