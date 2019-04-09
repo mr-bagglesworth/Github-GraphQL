@@ -1,11 +1,29 @@
-import { dateFormat, abbrev, repoSize, objMake, arrMake, arrToObj } from "./utils";
+import { dateFormat, dateDiff, arrDate, abbrev, repoSize, objMake, arrMake, arrToObj } from "./utils";
+// , topNumber
 
-test("formats time and date correctly", () => {
-  expect(dateFormat("2019-03-04T13:36:36Z")).toBe("2019-03-04");
-  expect(dateFormat("2019-01-15T00:56:02Z")).toBe("2019-01-15");
-  expect(dateFormat("2029-01-15T00:56:02Z")).toBe("2029-01-15");
+// - - - - - - -
+// date
+// test("formats time and date correctly", () => {
+//   expect(dateFormat("2019-03-04T13:36:36Z")).toBe("04/03/2019");
+//   expect(dateFormat("2019-01-15T00:56:02Z")).toBe("15/01/2019");
+//   expect(dateFormat("2029-01-15T00:56:02Z")).toBe("15/01/2029");
+// });
+
+test("gets number of days between two dates correctly", () => {
+  expect(dateDiff("2019-03-04T13:36:36Z", "2019-03-03T13:36:36Z")).toBe(1);
+  expect(dateDiff("2017-03-04T13:36:36Z", "2017-02-03T13:36:36Z")).toBe(29);
+  expect(dateDiff("2019-04-10T14:20:00Z", "2014-10-03T10:00:00Z")).toBe(1650); // guessed within 1 day!
+  // top 2 cases
+  expect(dateDiff("2019-03-04T13:36:36Z", "2019-03-04T13:36:36Z")).toBe(1);
+  expect(dateDiff("2019-03-04T13:36:36Z", 0)).toBe(100);
 });
 
+// test("creates a date based on starting value and index", () => {
+//   expect(arrDate("2019-03-13T07:00:00Z", 2)).toBe("15/03/2019"); // increment by 2 days
+// });
+
+// - - - - - - -
+// abbreviations
 test("formats text with elipsis if over x characters long", () => {
   expect(abbrev("abcdefghijk", 25)).toBe("abcdefghijk");
   expect(abbrev("abcdefghijklmnopqrstuvwxyz", 25)).toBe("abcdefghijklmnopqrstuvwxy...");
@@ -18,7 +36,8 @@ test("formats repo size in bytes, kb, and mb according to total byte size of the
   expect(repoSize(140)).toBe("140 bytes");
 });
 
-// object and array functions used in repo lang chart
+// - - - - - - -
+// object and array functions
 test("formats multidimensional object to array of objects", () => {
   const input = {
     0: {
@@ -96,3 +115,24 @@ test("pushes array values as new properties on objects in an array", () => {
   ];
   expect(arrToObj(objArr, arr)).toMatchObject(output);
 });
+
+// reduce - get greatest value of a property from array of objects
+// test("gets greatest value of a property from array of objects", () => {
+//   const input = [
+//     {
+//       commitCount: 2
+//     },
+//     {
+//       commitCount: 3
+//     },
+//     {
+//       commitCount: 3
+//     },
+//     {
+//       commitCount: 12
+//     }
+//   ];
+
+//   const output = 12;
+//   expect(topNumber(input, "commitCount")).toMatchObject(output);
+// });
