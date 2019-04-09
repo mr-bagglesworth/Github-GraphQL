@@ -18,7 +18,7 @@ test("gets number of days between two dates correctly", () => {
   expect(dateDiff("2019-03-04T13:36:36Z", 0)).toBe(100);
 });
 
-test("creates a date based on staring value and index", () => {
+test("creates a date based on starting value and index", () => {
   expect(arrDate("2019-03-13T07:00:00Z", 2)).toBe("15/03/2019"); // increment by 2 days
 });
 
