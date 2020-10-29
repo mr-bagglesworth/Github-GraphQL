@@ -11,6 +11,8 @@ View the live app here:
 [https://martinbagshaw.github.io/Github-GraphQL/](https://martinbagshaw.github.io/Github-GraphQL/)
 > please note that to use the live version of the app, you must login with your Github account details. This generates a temporary personal access token. See [Todo](#todo)
 
+<img width="757" alt="Screenshot 2020-10-27 at 22 52 03" src="https://user-images.githubusercontent.com/28146666/97509951-8b14cc80-197b-11eb-9f3a-4db19f42a959.png">
+
 ## To get running locally:
 - clone the repository
 - `npm install`
