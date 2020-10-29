@@ -2,7 +2,7 @@
 import React from "react";
 
 // styles
-import { ThumbButton } from "./styles/containers";
+import { ThumbButton } from "../styles/containers";
 
 const UserThumbToggle = props => {
   const { more, onClick } = props;

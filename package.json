@@ -14,25 +14,34 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
-    "apollo-cache-inmemory": "^1.5.1",
-    "apollo-client": "^2.5.1",
-    "apollo-link-http": "^1.5.12",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
     "base-64": "^0.1.0",
-    "gh-pages": "^2.0.1",
-    "graphql": "^14.1.1",
-    "graphql-tag": "^2.10.1",
+    "gh-pages": "^2.2.0",
+    "graphql": "^14.7.0",
+    "graphql-tag": "^2.11.0",
     "react": "next",
-    "react-apollo": "^2.5.2",
+    "react-apollo": "^2.5.8",
     "react-dom": "next",
-    "styled-components": "^4.1.3"
+    "styled-components": "^4.4.1",
+    "typescript": "^4.0.5"
   },
   "devDependencies": {
-    "jest": "23.6.0",
-    "jest-dom": "^3.1.3",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.6",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "@types/styled-components": "^5.1.4",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "eslint": "^7.12.1",
+    "jest": "^26.6.1",
+    "jest-dom": "^3.5.0",
     "react-scripts": "^2.1.8",
-    "react-test-renderer": "^16.8.4",
+    "react-test-renderer": "^16.14.0",
     "react-testing-library": "^5.4.4",
-    "waait": "^1.0.4"
+    "waait": "^1.0.5"
   },
   "jest": {
     "verbose": true,

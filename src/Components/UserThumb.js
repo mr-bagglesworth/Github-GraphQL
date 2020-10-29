@@ -1,9 +1,6 @@
-// round user thumbnails
 import React from "react";
 
-// styles
-import { Thumb } from "./styles/containers";
-
+import { Thumb } from "../styles/containers";
 const UserThumb = props => {
   const { avatarUrl, login, name, url } = props;
   const displayName = name ? name : login;

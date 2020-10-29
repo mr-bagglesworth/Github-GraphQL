@@ -1,15 +1,8 @@
-// child component of UserRepos.js
-// - shows list of repos authored (inc. forked), OR contributed to
-// - has a graphql query
 import React from "react";
-
-// Components
-import { SmallRepo } from "./SmallRepo";
-
-// GraphQL
-// - pairs a query with a component
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+
+import { SmallRepo } from "./SmallRepo";
 
 // repo list queries
 // - load repos OR repos contributed to, based on props

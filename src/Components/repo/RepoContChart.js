@@ -1,5 +1,8 @@
-// RepoContChart.js
-// - contribution chart
+import React from "react";
+
+import { dateDiff, arrMake, arrDate } from "../../utils/utils";
+import { CommitChart, CommitCol } from "../../styles/repoContainers";
+
 /*
 
 how it works:
@@ -27,11 +30,7 @@ todos:
 - getting some infinties with calculations of chartColumns
 
 */
-import React from "react";
 
-// utils and styles
-import { dateDiff, arrMake, arrDate } from "../../utils/utils";
-import { CommitChart, CommitCol } from "../styles/repoContainers";
 
 const RepoContChart = props => {
   const { repos, totalCount } = props;

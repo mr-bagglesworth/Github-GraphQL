@@ -1,9 +1,7 @@
-// React
 import React from "react";
 
-// styles
-import { SearchForm, TextInput, CustomRadio } from "./styles/forms";
-import { Button } from "./styles/buttons";
+import { SearchForm, TextInput, CustomRadio } from "../styles/forms";
+import { Button } from "../styles/buttons";
 
 // Search.js triggers api calls, and populates components, based on its state:
 // - Repository

@@ -1,10 +1,5 @@
-// buttons
-// - including form input[type=submit], and buttons that look like text
-// - props colour the buttons
-
 import styled from "styled-components";
-import styleVars from "./styleVars";
-const { colors, spacing, fontName, fontSize } = styleVars;
+import { colors, fontName, fontSize } from "./styleVars";
 
 // input type = text
 // - takes login prop
@@ -12,9 +7,9 @@ const Button = styled.input`
   cursor: pointer;
   font-family: ${fontName.main};
   font-size: ${fontSize.small};
-  padding: ${spacing.med} ${spacing.large};
+  padding: 0.5rem 1rem;
   border: 0;
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   transition: all ease-in-out 0.3s;
   color: ${colors.white};
   background-color: ${props => (props.loginStatus ? colors.blue : colors.pink)};
@@ -36,7 +31,7 @@ const TextButton = styled.button`
   font-family: ${fontName.main};
   font-size: ${fontSize.xSmall};
   padding: 0;
-  margin-left: ${spacing.med};
+  margin-left: 0.5rem;
   background-color: transparent;
   border: 0;
   transition: all ease-in-out 0.3s;
@@ -56,12 +51,12 @@ const ToggleButton = styled.button`
   cursor: pointer;
   font-family: ${fontName.main};
   font-size: ${fontSize.small};
-  padding: ${spacing.med} ${spacing.large};
+  padding: 0.5rem 1rem;
   background-color: ${props =>
     props.isActive ? colors.lightBlue : colors.grey};
   color: ${colors.white};
   border: 0;
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   transition: all ease-in-out 0.3s;
   &:hover,
   &:focus {
@@ -77,11 +72,11 @@ const ExpandButton = styled.button`
   cursor: pointer;
   font-family: ${fontName.main};
   font-size: ${fontSize.small};
-  padding: ${spacing.med} ${spacing.large};
+  padding: 0.5rem 1rem;
   background-color: ${props => (props.expanded ? colors.blue : colors.white)};
   color: ${props => (props.expanded ? colors.white : colors.blue)};
   border: 0.2rem solid ${colors.blue};
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   transition: all ease-in-out 0.3s;
   &:focus {
     outline: none;
@@ -108,7 +103,7 @@ const ArrowButton = styled.button`
 
   width: 4rem;
   height: 4rem;
-  border-radius: ${spacing.xLarge};
+  border-radius: 2rem;
   color: ${colors.darkGrey};
   &:focus {
     outline: none;

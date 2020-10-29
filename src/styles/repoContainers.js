@@ -1,9 +1,5 @@
-// repoContainers - anything specific to repos
-
-// get variables
 import styled from "styled-components";
-import styleVars from "./styleVars";
-const { colors, spacing, fontSize, boxShadow } = styleVars;
+import { colors, fontSize, boxShadow } from "./styleVars";
 
 // - - - - - - - - - - -
 // repo sliding container
@@ -17,12 +13,12 @@ const RepoContainer = styled.div`
     align-items: flex-start;
     width: 200%;
     transition: transform ease-in-out 0.75s;
-    ${props => (props.expanded ? `transform: translateX(-50%)` : "")};
+    ${(props) => (props.expanded ? `transform: translateX(-50%)` : "")};
     > ul,
     > div {
       width: 50%;
     }
-    ${props => (props.expanded ? `li{box-shadow: none;}` : "")};
+    ${(props) => (props.expanded ? `li{box-shadow: none;}` : "")};
   }
 `;
 
@@ -33,10 +29,10 @@ const RepoBase = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: ${spacing.xLarge};
+  margin-bottom: 2rem;
   background-color: ${colors.white};
   box-shadow: ${boxShadow.out};
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   // heading
   h3 {
     font-size: ${fontSize.med};
@@ -46,20 +42,20 @@ const RepoBase = styled.li`
 // 1.
 // - simple repo with coloured border at the top
 const Repo = styled(RepoBase)`
-  padding: ${spacing.large};
+  padding: 1rem;
   // language colours
-  border-top: ${spacing.large} solid ${props => (props.langColor ? props.langColor : "white")};
+  border-top: 1rem solid ${(props) => (props.langColor ? props.langColor : "white")};
   .language {
-    padding: ${spacing.xSmall} ${spacing.small};
-    background-color: ${props => (props.langColor ? props.langColor : colors.grey)};
-    color: ${props => (props.langName === "JavaScript" ? colors.black : colors.white)};
+    padding: 0.125rem 0.25rem;
+    background-color: ${(props) => (props.langColor ? props.langColor : colors.grey)};
+    color: ${(props) => (props.langName === "JavaScript" ? colors.black : colors.white)};
   }
   // button position
   button {
     align-self: flex-end;
     @media screen and (min-width: 35rem) {
       position: absolute;
-      top: calc(50% - ${spacing.xLarge});
+      top: calc(50% - 2rem);
     }
   }
 `;
@@ -69,16 +65,16 @@ const Repo = styled(RepoBase)`
 
 // - generic section
 const RepoSection = styled.section`
-  margin-top: ${spacing.large};
-  ${props =>
+  margin-top: 1rem;
+  ${(props) =>
     props.borderTop
-      ? `margin-top: ${spacing.med};
-    padding-top: ${spacing.large};
-    border-top: ${spacing.xSmall} solid ${colors.grey};`
+      ? `margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 0.125rem solid ${colors.grey};`
       : ""};
   // spans for stats
   span {
-    margin: 0 ${spacing.xSmall};
+    margin: 0 0.125rem;
     color: ${colors.darkGrey};
   }
 `;
@@ -92,37 +88,37 @@ const RepoSection = styled.section`
 // - language chart
 const LangChart = styled.div`
   display: flex;
-  height: ${spacing.xLarge};
-  margin-bottom: ${spacing.med};
+  height: 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 // - language cells
 const LangCell = styled.div`
   cursor: pointer;
-  width: ${props => (props.cellWidth ? `${props.cellWidth}%` : "auto")};
-  background-color: ${props => (props.colorHex ? props.colorHex : "white")};
+  width: ${(props) => (props.cellWidth ? `${props.cellWidth}%` : "auto")};
+  background-color: ${(props) => (props.colorHex ? props.colorHex : "white")};
   // add a border if colour is null
-  ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
+  ${(props) => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
 `;
 
 // - language labels
 const LangLabel = styled.li`
   display: flex;
   align-items: center;
-  margin-right: ${spacing.small};
-  margin-bottom: ${spacing.small};
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
   .dot {
     display: inline-block;
-    margin-right: ${spacing.small};
-    width: ${spacing.large};
-    height: ${spacing.large};
-    border-radius: ${spacing.med};
-    background-color: ${props => (props.colorHex ? props.colorHex : "white")};
+    margin-right: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    background-color: ${(props) => (props.colorHex ? props.colorHex : "white")};
     // add a border if colour is null
-    ${props => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
+    ${(props) => (props.colorHex ? "" : `border: 0.05rem solid ${colors.black}`)};
   }
   span {
-    margin-left: ${spacing.small};
+    margin-left: 0.25rem;
     color: ${colors.darkGrey};
   }
 `;
@@ -132,22 +128,22 @@ const LangLabel = styled.li`
 const CommitChart = styled.div`
   display: flex;
   align-items: flex-end;
-  height: calc(6 * ${spacing.xLarge});
-  margin: ${spacing.med} 0;
-  padding: ${spacing.xSmall} ${spacing.med};
+  height: calc(6 * 2rem);
+  margin: 0.5rem 0;
+  padding: 0.125rem 0.5rem;
   border-bottom: 0.05rem solid ${colors.midGrey};
   > div {
-    width: ${props => (props.barWidth ? `${props.barWidth}%` : "auto")};
+    width: ${(props) => (props.barWidth ? `${props.barWidth}%` : "auto")};
   }
 `;
 
 // set the height, border, and background colour
 const CommitCol = styled.div`
-  height: ${props => (props.barHeight ? `${props.barHeight}%` : 0)};
+  height: ${(props) => (props.barHeight ? `${props.barHeight}%` : 0)};
   // no colour, border or cursor if no prop
-  ${props => (props.barHeight ? `border: 0.05rem solid ${colors.white}` : "")};
-  ${props => (props.barHeight ? `background-color: rgba(3, 72, 163, ${props.barColour})` : "")};
-  ${props => (props.barHeight ? `cursor: pointer` : "")};
+  ${(props) => (props.barHeight ? `border: 0.05rem solid ${colors.white}` : "")};
+  ${(props) => (props.barHeight ? `background-color: rgba(3, 72, 163, ${props.barColour})` : "")};
+  ${(props) => (props.barHeight ? `cursor: pointer` : "")};
 `;
 
 export { RepoContainer, Repo, RepoSection, LangChart, LangCell, LangLabel, CommitChart, CommitCol };

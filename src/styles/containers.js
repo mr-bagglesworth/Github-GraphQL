@@ -1,11 +1,6 @@
-// get variables
 import styled from "styled-components";
-import styleVars from "./styleVars";
+import { colors, fontSize, fontName } from "./styleVars";
 
-const { colors, spacing, fontSize, fontName } = styleVars;
-
-// universal containers
-// - used by both user search, repo search, and anything else
 
 const ThumbBase = styled.li`
   position: relative;
@@ -13,23 +8,21 @@ const ThumbBase = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: ${spacing.large};
-  margin-bottom: ${spacing.large};
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 `;
 
-// 1.
-// user thumbnail
 const Thumb = styled(ThumbBase)`
   a {
-    width: ${spacing.xxLarge};
-    height: ${spacing.xxLarge};
+    width: 5rem;
+    height: 5rem;
     border-radius: 2.5rem;
     border: 0.2rem solid ${colors.white};
     overflow: hidden;
     &:hover ~ p {
       display: block;
-      padding: ${spacing.xSmall} ${spacing.small};
-      border-radius: ${spacing.xSmall};
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.125rem;
       background-color: ${colors.blue};
       color: ${colors.white};
     }
@@ -45,7 +38,7 @@ const Thumb = styled(ThumbBase)`
     display: none;
     position: absolute;
     left: 0;
-    top: -${spacing.xLarge};
+    top: -2rem;
     white-space: nowrap;
     pointer-events: none;
     font-size: ${fontSize.xSmall};
@@ -63,10 +56,10 @@ const ThumbButton = styled(ThumbBase)`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: ${spacing.xxLarge};
-    height: ${spacing.xxLarge};
+    width: 5rem;
+    height: 5rem;
     border-radius: 2.5rem;
-    padding: ${spacing.med};
+    padding: 0.5rem;
     font-family: ${fontName.main};
     font-size: ${fontSize.xSmall};
     transition: all ease-in-out 0.3s;
@@ -80,7 +73,7 @@ const ThumbButton = styled(ThumbBase)`
     }
     svg {
       fill: ${colors.white};
-      margin-right: -${spacing.med};
+      margin-right: -0.5rem;
     }
   }
 `;

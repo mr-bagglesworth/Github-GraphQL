@@ -22,8 +22,8 @@ import UserThumbList from "../UserThumbList";
 import RepoDetailToggle from "./RepoDetailToggle";
 
 // styles
-import { Container, Extra } from "../styles/headerContainer";
-import { RepoSection } from "../styles/repoContainers";
+import { Container, Extra } from "../../styles/headerContainer";
+import { RepoSection } from "../../styles/repoContainers";
 
 /*
 query notes
@@ -191,7 +191,7 @@ const LargeRepo = ({ owner, name, offset, onClick }) => (
               )}
             </RepoSection>
             <p>
-              <a href={url}>Link to Repo ></a>
+              <a href={url}>Link to Repo &gt;</a>
             </p>
             <RepoDetailToggle onClick={onClick} direction={"backwards"} />
           </Extra>
