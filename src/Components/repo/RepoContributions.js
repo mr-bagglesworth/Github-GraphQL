@@ -1,18 +1,10 @@
-// RepoContributions.js
-// - get a user's contributions to their repositories
-// - excludes repos that are forked, or user has not contributions for
 import React from "react";
-
-// GraphQL
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-// Components
 import RepoContChart from "./RepoContChart";
-
-// utils and styles
 import { dateFormat } from "../../utils/utils";
-import { RepoSection } from "../styles/repoContainers";
+import { RepoSection } from "../../styles/repoContainers";
 
 // pass in timestamp of repo update
 // - will get commits in a one year bracket (up to one year ago) from the date given

@@ -1,16 +1,8 @@
-// small repo
-// - child component of RepoList.js, a <li> element
-// - works with authored/forked and contibuted queries in RepoList
 import React from "react";
 
-// Components
 import RepoDetailToggle from "./RepoDetailToggle";
-
-// utils
 import { dateFormat } from "../../utils/utils";
-
-// styles
-import { Repo } from "../styles/repoContainers";
+import { Repo } from "../../styles/repoContainers";
 
 const SmallRepo = props => {
   const { onClick, createdAt, isFork, name, primaryLanguage, updatedAt, stargazers, watchers } = props;

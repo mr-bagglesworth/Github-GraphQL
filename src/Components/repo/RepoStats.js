@@ -1,10 +1,4 @@
-// child component of UserRepos.js
-// - shows repos created, forked and contributed to
-// - has a graphql query
 import React from "react";
-
-// GraphQL
-// - pairs a query with a component
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 

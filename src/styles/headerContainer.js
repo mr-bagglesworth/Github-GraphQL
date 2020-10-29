@@ -1,9 +1,5 @@
-// container with image header / thumbnail
-// get variables
 import styled from "styled-components";
-import styleVars from "./styleVars";
-
-const { colors, spacing, fontSize, boxShadow, border } = styleVars;
+import { colors, fontSize, boxShadow, border } from "./styleVars";
 
 // outer container
 const Container = styled.div`
@@ -19,7 +15,7 @@ const Container = styled.div`
   }
   width: 100%;
   overflow: hidden;
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   box-shadow: ${boxShadow.out};
 `;
 
@@ -49,7 +45,7 @@ const Content = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: ${spacing.large};
+  padding: 1rem;
   @media screen and (min-width: 40rem) {
     width: calc(100% - 15rem);
   }
@@ -65,7 +61,7 @@ const Content = styled.section`
     font-size: ${fontSize.large};
   }
   p {
-    margin-top: ${spacing.med};
+    margin-top: 0.5rem;
     color: ${colors.grey};
     font-size: $font-xSmall;
   }
@@ -75,7 +71,7 @@ const Content = styled.section`
 const Button = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: ${spacing.large};
+  margin-top: 1rem;
   @media screen and (min-width: 40rem) {
     margin-top: 0;
   }
@@ -88,7 +84,7 @@ const Extra = styled.div`
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
-  padding: ${spacing.large};
+  padding: 1rem;
   h2 {
     font-size: ${fontSize.large};
   }
@@ -97,7 +93,7 @@ const Extra = styled.div`
   }
   h3,
   h4 {
-    margin-bottom: ${spacing.med};
+    margin-bottom: 0.5rem;
   }
   ul {
     display: flex;

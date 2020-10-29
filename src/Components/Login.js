@@ -1,15 +1,10 @@
-// React
 import React from "react";
 
-// login and authentication
-import { githubLogin } from "../utils/githubLogin";
+import { githubLogin } from "../apis/githubLogin";
 
-// components
 import LoginText from "./LoginText";
-
-// styles
-import { LoginForm, TextInput } from "./styles/forms";
-import { Button } from "./styles/buttons";
+import { LoginForm, TextInput } from "../styles/forms";
+import { Button } from "../styles/buttons";
 
 // convert a username and password into a token
 // - use this token to log the user in in app.js

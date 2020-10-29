@@ -5,7 +5,7 @@ import React from "react";
 
 // utils and styles
 import { repoSize } from "../../utils/utils";
-import { RepoSection } from "../styles/repoContainers";
+import { RepoSection } from "../../styles/repoContainers";
 
 const RepoSizeData = props => {
   const { disk, size } = props;

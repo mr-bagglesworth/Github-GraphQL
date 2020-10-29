@@ -1,10 +1,8 @@
-// RepoLangChart.js
-// - language chart and % data
 import React from "react";
 
 // utils and styles
 import { objMake, arrMake, arrToObj } from "../../utils/utils";
-import { RepoSection, LangChart, LangCell, LangLabel } from "../styles/repoContainers";
+import { RepoSection, LangChart, LangCell, LangLabel } from "../../styles/repoContainers";
 
 const RepoLangChart = props => {
   const { edges } = props;

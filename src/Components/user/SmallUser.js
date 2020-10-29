@@ -1,19 +1,12 @@
 import React from "react";
-
-// if a click event occurs, trigger LargeUser.js
-import { LargeUser } from "./LargeUser";
-import UserToggle from "./UserToggle";
-
-// GraphQL
-// - pairs a query with a component
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-// utils
-import { dateFormat, abbrev } from "../../utils/utils";
+import { LargeUser } from "./LargeUser";
+import UserToggle from "./UserToggle";
 
-// styles
-import { Container, Header, Content, Button, Extra } from "../styles/headerContainer";
+import { dateFormat, abbrev } from "../../utils/utils";
+import { Container, Header, Content, Button, Extra } from "../../styles/headerContainer";
 
 // create username query
 // - make this more basic

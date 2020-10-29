@@ -1,11 +1,7 @@
-// show more user details
 import React from "react";
-
-// GraphQL
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-// components
 import UserThumbList from "../UserThumbList";
 
 // large user query
@@ -65,7 +61,7 @@ const LargeUser = ({ login }) => (
             </p>
           )}
           <p>
-            <a href={url}>Link to Profile ></a>
+            <a href={url}>Link to Profile &gt;</a>
           </p>
         </>
       );

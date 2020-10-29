@@ -1,25 +1,20 @@
-// forms
-// - form containers, text input, and radios
-// - not including buttons
-
 import styled from "styled-components";
-import styleVars from "./styleVars";
-const { colors, spacing, fontName, fontSize, boxShadow } = styleVars;
+import { colors, fontName, fontSize, boxShadow } from "./styleVars";
 
 // all forms contain inputs wrapped in divs
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin: ${spacing.xLarge} 0;
-  padding: ${spacing.large};
+  margin: 2rem 0;
+  padding: 1rem;
   background-color: ${colors.lightGrey};
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   box-shadow: ${boxShadow.out};
   // rows
   > div {
     display: flex;
     flex-direction: column;
-    margin-top: ${spacing.large};
+    margin-top: 1rem;
   }
   > div:nth-child(1) {
     margin-top: 0;
@@ -41,7 +36,7 @@ const SearchForm = styled(Form)`
     > div:nth-child(1) {
       display: flex;
       flex-direction: column;
-      margin-bottom: ${spacing.large};
+      margin-bottom: 1rem;
       @media screen and (min-width: 30rem) {
         flex-direction: row;
       }
@@ -57,10 +52,10 @@ const SearchForm = styled(Form)`
   // labels on radios
   label {
     margin-left: 0;
-    margin-bottom: ${spacing.med};
+    margin-bottom: 0.5rem;
     @media screen and (min-width: 30rem) {
       &[for="repodetails"] {
-        margin-left: ${spacing.large};
+        margin-left: 1rem;
         margin-bottom: 0;
       }
     }
@@ -80,9 +75,9 @@ const LoginForm = styled(Form)`
 const TextInput = styled.input`
   font-family: ${fontName.main};
   font-size: ${fontSize.small};
-  padding: ${spacing.med};
+  padding: 0.5rem;
   border: 0.2rem solid ${colors.grey};
-  border-radius: ${spacing.small};
+  border-radius: 0.25rem;
   &:focus {
     outline: none;
     background-color: ${props =>
@@ -99,9 +94,9 @@ const CustomRadio = styled.label`
   display: flex;
   align-items: center;
   position: relative;
-  height: ${spacing.xLarge};
+  height: 2rem;
   padding-left: 2.5rem;
-  margin-left: ${spacing.large};
+  margin-left: 1rem;
   cursor: pointer;
   user-select: none;
   // default radio input
@@ -125,8 +120,8 @@ const CustomRadio = styled.label`
     position: absolute;
     top: 0;
     left: 0;
-    height: ${spacing.xLarge};
-    width: ${spacing.xLarge};
+    height: 2rem;
+    width: 2rem;
     border-radius: 50%;
     background-color: ${colors.midGrey};
     &:after {

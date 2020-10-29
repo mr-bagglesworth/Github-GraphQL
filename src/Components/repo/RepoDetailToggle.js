@@ -1,7 +1,6 @@
 import React from "react";
 
-// styles
-import { ArrowButton } from "../styles/buttons";
+import { ArrowButton } from "../../styles/buttons";
 
 // slides between SmallRepo and LargeRepo
 const RepoDetailToggle = props => {

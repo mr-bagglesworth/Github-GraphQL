@@ -1,14 +1,14 @@
 # Github GraphQL
 
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
-[![Build Status](https://travis-ci.org/mr-bagglesworth/Github-GraphQL.svg?branch=master)](https://travis-ci.org/mr-bagglesworth/Github-GraphQL)
-[![codecov](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL/branch/master/graph/badge.svg)](https://codecov.io/gh/mr-bagglesworth/Github-GraphQL)
+[![Build Status](https://travis-ci.org/martinbagshaw/Github-GraphQL.svg?branch=master)](https://travis-ci.org/martinbagshaw/Github-GraphQL)
+[![codecov](https://codecov.io/gh/martinbagshaw/Github-GraphQL/branch/master/graph/badge.svg)](https://codecov.io/gh/martinbagshaw/Github-GraphQL)
 
 A first foray into using Github GraphQL API with React Apollo.
 
 View the live app here:
 
-[https://mr-bagglesworth.github.io/Github-GraphQL/](https://mr-bagglesworth.github.io/Github-GraphQL/)
+[https://martinbagshaw.github.io/Github-GraphQL/](https://martinbagshaw.github.io/Github-GraphQL/)
 > please note that to use the live version of the app, you must login with your Github account details. This generates a temporary personal access token. See [Todo](#todo)
 
 ## To get running locally:
@@ -16,13 +16,8 @@ View the live app here:
 - `npm install`
 - go to your github account and [generate a personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 - create an `.env.local` file in the root, with your access token in the following format:  
-  `REACT_APP_GET_ME_IN=your-token-here`. Note that your token does not require quotes around it
+  `REACT_APP_TOKEN=your-token-here`. Note that your token does not require quotes around it
 - `npm start` to view the app locally at [http://localhost:3000/](http://localhost:3000/)
-
-
-![](https://i.imgur.com/nIclOvg.png)
-> sample result: user details
-
 
 ### Using this app:
 **If Viewing on Github Pages:**

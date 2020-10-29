@@ -1,12 +1,9 @@
 import React from "react";
 
-// styles
-import { SmallHeaderText, HeaderLabel } from "./styles/text";
-import { TextButton } from "./styles/buttons";
+import { SmallHeaderText, HeaderLabel } from "../styles/text";
+import { TextButton } from "../styles/buttons";
 
-const Header = props => {
-  // logoutSubmit could be an optional prop. Look into testing with this
-  const { loginStatus, logoutSubmit } = props;
+const Header = ({ loginStatus, logoutSubmit }) => {
 
   // This is used to show / hide a logout button for those on github pages
   const showLogout = loginStatus && process.env.NODE_ENV !== "development";

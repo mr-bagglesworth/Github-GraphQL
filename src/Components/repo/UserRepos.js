@@ -7,8 +7,8 @@ import RepoSearchToggle from "./RepoSearchToggle";
 import { LargeRepo } from "./LargeRepo";
 
 // styles
-import { Stats } from "../styles/text";
-import { RepoContainer } from "../styles/repoContainers";
+import { Stats } from "../../styles/text";
+import { RepoContainer } from "../../styles/repoContainers";
 
 export default class UserRepos extends React.Component {
   // active repo id could be added here (for slide in repo expand)
