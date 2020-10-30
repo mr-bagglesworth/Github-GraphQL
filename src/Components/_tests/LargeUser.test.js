@@ -2,7 +2,7 @@ import React from "react";
 
 import { create } from "react-test-renderer";
 import { MockedProvider } from "react-apollo/test-utils";
-import { LARGE_USER_QUERY, LargeUser } from "../UserComponents/LargeUser.js";
+import { LARGE_USER_QUERY, LargeUser } from "../user/LargeUser.js";
 
 const wait = require("waait");
 

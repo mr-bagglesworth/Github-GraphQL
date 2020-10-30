@@ -2,7 +2,8 @@ import React from "react";
 
 import { create } from "react-test-renderer";
 import { MockedProvider } from "react-apollo/test-utils";
-import { LARGE_REPO_QUERY, LargeRepo } from "../RepoComponents/LargeRepo.js";
+
+import { LARGE_REPO_QUERY, LargeRepo } from "../repo/LargeRepo.js";
 
 const wait = require("waait");
 

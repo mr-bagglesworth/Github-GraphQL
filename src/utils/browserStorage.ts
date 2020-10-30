@@ -1,4 +1,4 @@
-export const useStorage = (action: string, token?: string): string | undefined => {
+export const browserStorage = (action: string, token?: string): string | undefined => {
   if (action === "set" && token) {
     sessionStorage.setItem(`githubGraphQL`, token);
   }

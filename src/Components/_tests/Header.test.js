@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "../Header.js";
-import { render, cleanup } from "react-testing-library";
+import { render, cleanup } from "@testing-library/react";
 
 // jest dom - for style
-import "jest-dom/extend-expect";
-import { toHaveStyle } from "jest-dom";
+import "@testing-library/jest-dom/extend-expect";
+import { toHaveStyle } from "@testing-library/jest-dom";
 
 describe("Header component", () => {
   // unmount and cleanup DOM after each test is finished

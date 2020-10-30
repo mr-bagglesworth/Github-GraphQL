@@ -10,7 +10,7 @@ integration tests - how they affect other components - e.g. failure message in t
 // addTypename - graphql expects a type, set to false as default
 import { create } from "react-test-renderer";
 import { MockedProvider } from "react-apollo/test-utils";
-import { SMALL_USER_QUERY, SmallUser } from "../UserComponents/SmallUser.js";
+import { SMALL_USER_QUERY, SmallUser } from "../user/SmallUser.js";
 
 const wait = require("waait");
 

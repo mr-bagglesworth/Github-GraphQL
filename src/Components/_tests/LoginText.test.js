@@ -1,6 +1,6 @@
 import React from "react";
 import LoginText from "../LoginText.js";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 
 describe("LoginText component", () => {
   // renders if a github user is not logged in

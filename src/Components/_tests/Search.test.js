@@ -5,7 +5,7 @@ import {
   fireEvent,
   cleanup
   // waitForElement
-} from "react-testing-library";
+} from "@testing-library/react";
 
 describe("Search Component", () => {
   // automatically unmount and cleanup DOM after the test is finished.

@@ -3,7 +3,7 @@ import React from "react";
 // repo stats component tests
 import { create } from "react-test-renderer";
 import { MockedProvider } from "react-apollo/test-utils";
-import { REPO_STATS_QUERY, RepoStats } from "../RepoComponents/RepoStats.js";
+import { REPO_STATS_QUERY, RepoStats } from "../repo/RepoStats.js";
 
 const wait = require("waait");
 

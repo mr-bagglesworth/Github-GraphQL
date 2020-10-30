@@ -1,6 +1,6 @@
 import React from "react";
 import UserThumb from "../UserThumb.js";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 
 describe("UserThumb Component", () => {
   // render with props as expected

@@ -1,6 +1,6 @@
 import React from "react";
 import UserThumbToggle from "../UserThumbToggle.js";
-import { render, cleanup } from "react-testing-library";
+import { render, cleanup } from "@testing-library/react";
 
 describe("UserThumbToggle Component", () => {
   afterEach(cleanup);

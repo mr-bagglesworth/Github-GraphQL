@@ -1,6 +1,6 @@
 import React from "react";
-import RepoLangChart from "../RepoComponents/RepoLangChart.js";
-import { render } from "react-testing-library";
+import RepoLangChart from "../repo/RepoLangChart.js";
+import { render } from "@testing-library/react";
 
 describe("RepoLangChart Component", () => {
   // render with props

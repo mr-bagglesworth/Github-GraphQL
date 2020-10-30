@@ -1,10 +1,10 @@
 import React from "react";
-import RepoSearchToggle from "../RepoComponents/RepoSearchToggle.js";
-import { render, cleanup } from "react-testing-library";
+import RepoSearchToggle from "../repo/RepoSearchToggle.js";
+import { render, cleanup } from "@testing-library/react";
 
 // jest dom - for style
-import "jest-dom/extend-expect";
-import { toHaveStyle } from "jest-dom";
+import "@testing-library/jest-dom/extend-expect";
+import { toHaveStyle } from "@testing-library/jest-dom";
 
 describe("RepoSearchToggle component", () => {
   afterEach(cleanup);

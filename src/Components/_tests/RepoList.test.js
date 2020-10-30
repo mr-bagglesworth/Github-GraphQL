@@ -8,7 +8,7 @@ import {
   REPOS_AUTHORED_QUERY,
   REPOS_CONTRIBUTED_QUERY,
   RepoList
-} from "../RepoComponents/RepoList.js";
+} from "../repo/RepoList.js";
 
 const wait = require("waait");
 

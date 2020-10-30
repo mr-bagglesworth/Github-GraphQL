@@ -1,16 +1,12 @@
 const base64 = require('base-64');
 
-const config = {
-  GITHUB_CLIENT_ID: 'e0b1671ff764de482212',
-  GITHUB_CLIENT_SECRET: '8f77dcfd6a807cff38ac558400c859f240806071',
-};
-const AUTH_URL_PATH = 'https://api.github.com/authorizations';
-
-const githubLogin = (name, pwd) => {
+// this is why this no longer works:
+// https://developer.github.com/changes/2020-02-14-deprecating-password-auth/
+const githubLogin = (name, pwd, clientId, clientSecret) => {
   const bytes = name.trim() + ':' + pwd.trim();
   const encoded = base64.encode(bytes);
 
-  return fetch(AUTH_URL_PATH, {
+  return fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
       Authorization: 'Basic ' + encoded,
@@ -19,8 +15,8 @@ const githubLogin = (name, pwd) => {
       Accept: 'application/vnd.github.inertia-preview+json',
     },
     body: JSON.stringify({
-      client_id: config.GITHUB_CLIENT_ID,
-      client_secret: config.GITHUB_CLIENT_SECRET,
+      client_id: clientId,
+      client_secret: clientSecret,
       scopes: ['user', 'repo'],
       note: 'not abuse',
     }),
