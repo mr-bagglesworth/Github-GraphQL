@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "../Login.js";
-import { render, fireEvent, cleanup } from "react-testing-library";
+import { render, fireEvent, cleanup } from "@testing-library/react";
 
 describe("Login component", () => {
   // unmount and cleanup DOM after each test is finished
@@ -30,7 +30,7 @@ describe("Login component", () => {
   });
 
   // login submit button click - faulty details
-  test("login button click with no username or password = failure message", () => {
+  test("login button click incorrect username or password = failure message", () => {
     const state = {
       username: "dave",
       password: "$%T",

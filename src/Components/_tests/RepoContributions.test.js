@@ -2,7 +2,7 @@ import React from "react";
 
 import { create } from "react-test-renderer";
 import { MockedProvider } from "react-apollo/test-utils";
-import { CONTRIBUTIONS_QUERY, RepoContributions } from "../RepoComponents/RepoContributions.js";
+import { CONTRIBUTIONS_QUERY, RepoContributions } from "../repo/RepoContributions.js";
 
 const wait = require("waait");
 

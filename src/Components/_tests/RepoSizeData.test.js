@@ -1,6 +1,6 @@
 import React from "react";
-import RepoSizeData from "../RepoComponents/RepoSizeData.js";
-import { render, cleanup } from "react-testing-library";
+import RepoSizeData from "../repo/RepoSizeData.js";
+import { render, cleanup } from "@testing-library/react";
 
 // jest dom - for style
 // import "jest-dom/extend-expect";

@@ -6,6 +6,9 @@ import LoginText from "./LoginText";
 import { LoginForm, TextInput } from "../styles/forms";
 import { Button } from "../styles/buttons";
 
+const clientId = process.env.REACT_APP_CLIENT_ID;
+const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+
 // convert a username and password into a token
 // - use this token to log the user in in app.js
 export default class Login extends React.Component {
@@ -33,7 +36,7 @@ export default class Login extends React.Component {
     // lazy check
     // - need an error message if token fails
     if (username.length > 2 && password.length > 4) {
-      githubLogin(username, password)
+      githubLogin(username, password, clientId, clientSecret)
         .then(token => {
           this.props.loginSubmit(token);
         })

@@ -9,7 +9,7 @@ import UserDetails from './components/user/UserDetails';
 import UserRepos from './components/repo/UserRepos';
 
 import { colors, gradient } from './styles/styleVars';
-import { useStorage } from './utils/useStorage';
+import { browserStorage } from './utils/browserStorage';
 
 const apiToken = process.env.REACT_APP_TOKEN;
 const isLocal = process.env.NODE_ENV === 'development';
@@ -24,11 +24,13 @@ const App = () => {
     searchType: string | undefined;
   }>({ username: '', searchType: 'userdetails' });
 
+  console.log('apiToken', apiToken);
+
   useEffect(() => {
     if (isLocal) {
       setAuth({ login: true, token: apiToken });
     } else {
-      const token = useStorage('get');
+      const token = browserStorage('get');
       if (token) {
         setAuth({ login: true, token });
       }
@@ -41,12 +43,12 @@ const App = () => {
   }, [auth.login]);
 
   const logoutSubmit = () => {
-    useStorage('remove');
+    browserStorage('remove');
     setAuth({ login: false, token: '' });
   };
 
   const loginSubmit = (accessToken: string) => {
-    useStorage('set', accessToken);
+    browserStorage('set', accessToken);
     setAuth({ login: true, token: accessToken });
   };
 

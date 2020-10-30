@@ -1,6 +1,6 @@
 import React from "react";
-import { SmallRepo } from "../RepoComponents/SmallRepo.js";
-import { render } from "react-testing-library";
+import { SmallRepo } from "../repo/SmallRepo.js";
+import { render } from "@testing-library/react";
 
 describe("SmallRepo Component", () => {
   // render with props
